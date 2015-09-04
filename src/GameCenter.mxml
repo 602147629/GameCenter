@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+        项目名称：游戏中心
+        开始时间：2015/7/20
+	   作者：        James
+-->
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" xmlns:mx="library://ns.adobe.com/flex/mx" creationComplete="init()">
+	
+	<fx:Script>
+		<![CDATA[
+			import assets.ImageLoader;
+			
+			import business.UserLogin;
+			
+			import vo.Connection;
+			
+			private var connection:Connection = new Connection();
+			private var las:ImageLoader = new ImageLoader();
+			private var userlogin:UserLogin = new UserLogin();
+			
+			private function init():void
+			{
+			}
+			
+			private function shows():void
+			{
+				trace(userlogin.getUrl());
+				trace(las.assetsObject);
+				img.source = las.assetsObject.news;
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<s:HGroup id="warp">
+		<s:Button click="shows()" label="btn"/>
+		<s:Image id="img" width="200" height="200" />
+	</s:HGroup>
+</s:Application>
