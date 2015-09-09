@@ -19,15 +19,15 @@ package business
 		
 		/**
 		 * 获取浏览器URL的KEY值
-		 * 返回值 浏览器？之后的内容
+		 * 返回值 浏览器参数之后的内容
 		 */
-		public function getUrl():String
+		public function getUrl(vars:String):String
 		{
 			browser = BrowserManager.getInstance();
 			browser.init(); 
 			var str:String = browser.url;
 			var index:int;
-			index = str.indexOf("?");
+			index = str.indexOf(vars);
 			if(index == -1) return null;
 			else
 			{

@@ -26,7 +26,8 @@ package assets
 			assetsObject = new Object();
 			assestObjList = new Array();
 			
-			loaderList("http://10.60.18.67/game/assetsList.xml");
+			loaderList("assetsList.xml");
+			trace("开始加载素材包-->");
 		}
 		
 		/**
@@ -48,7 +49,7 @@ package assets
 		{
 			var xml:XML=XML(event.target.data);
 			assetslength = xml.object.length();
-			trace("素材包的长度为："+assetslength);
+			trace("当前加载素材包的长度为："+assetslength);
 			
 			for each( var x:XML in xml.object )
 			{
@@ -82,6 +83,7 @@ package assets
 			loader.name = name;
 			loader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, progressHandler); 
 			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, completeHandler); 
+			loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, loadImageError);
 			loader.load(new URLRequest(url)); 
 		}
 		
@@ -92,7 +94,7 @@ package assets
 		{ 
 			var progress:String = e.bytesLoaded + "/" + e.bytesTotal;
 			//可加触发事件
-			trace(progress);
+			//trace(progress);
 		} 
 		
 		/**
@@ -105,6 +107,17 @@ package assets
 			bitmap = Bitmap(loader.content); 
 			
 			assetsObject[loader.name] = bitmap;
+			assetslength --;
+			if(assetslength > 0){loadNewImg(assetslength);}
+			//可加触发事件
+		}
+		
+		/**
+		 * 加载素材错误事件
+		 */
+		private function loadImageError(event:IOErrorEvent):void
+		{
+			trace("ioError:" + event.text);
 			assetslength --;
 			if(assetslength > 0){loadNewImg(assetslength);}
 			//可加触发事件
