@@ -8,33 +8,26 @@
 	
 	<fx:Script>
 		<![CDATA[
-			import assets.ImageLoader;
+			import business.Main;
 			
-			import business.UserLogin;
-			
-			import vo.Connection;
-			
-			private var connection:Connection = new Connection();
-			private var las:ImageLoader = new ImageLoader();
-			private var userlogin:UserLogin = new UserLogin();
+			private var main:Main = new Main();
 			
 			private function init():void
 			{
-			}
-			
-			private function shows():void
-			{
-				trace(userlogin.getUrl());
-				trace(las.assetsObject);
-				img.source = las.assetsObject.news;
+				
 			}
 		]]>
 	</fx:Script>
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
-	</fx:Declarations>
-	<s:HGroup id="warp">
-		<s:Button click="shows()" label="btn"/>
-		<s:Image id="img" width="200" height="200" />
-	</s:HGroup>
+	</fx:Declarations> 
+	
+	<s:VGroup id="warp" width="100%" height="100%">
+		<!--头部模块-->
+		<s:ModuleLoader url="view/GameHead.swf" autoLayout="true" width="100%" height="100"/>
+		<!--核心游戏模块-->
+		<s:ModuleLoader id="MainGame" autoLayout="true" width="100%" height="100%"/>
+		<!--脚部模块-->
+		<s:ModuleLoader url="view/GameFoot.swf" autoLayout="true" width="100%" height="50"/>
+	</s:VGroup>
 </s:Application>

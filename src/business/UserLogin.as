@@ -1,7 +1,9 @@
 package business
 {
-	import mx.managers.BrowserManager;
-	import mx.managers.IBrowserManager;
+	import events.UserEvent;
+	
+	import model.EventModel;
+	import model.UserInfo;
 
 	/**
 	 * 用户登录授权类
@@ -10,29 +12,36 @@ package business
 	 */
 	public class UserLogin
 	{
-		private var browser:IBrowserManager;
+		private var userInfo:UserInfo;
+		private var userEvent:UserEvent;
 		
-		public function UserLogin()
+		public function UserLogin():void
 		{
-			
+			userEvent = new UserEvent();
+			EventModel.dis.addEventListener(EventModel.USER_LOGIN,	userLoginEvent);
 		}
 		
 		/**
-		 * 获取浏览器URL的KEY值
-		 * 返回值 浏览器参数之后的内容
+		 * 用户登录事件
 		 */
-		public function getUrl(vars:String):String
+		public function userLogin(username:String,userpwd:String):void
 		{
-			browser = BrowserManager.getInstance();
-			browser.init(); 
-			var str:String = browser.url;
-			var index:int;
-			index = str.indexOf(vars);
-			if(index == -1) return null;
-			else
-			{
-				return str.substr(index+1,str.length);
-			}
+			userInfo = new UserInfo();
+			userInfo.GAMEID = 1;
+			userInfo.PROTOCOL = 13107900;
+			userInfo.SSHKEY = "123";
+			userInfo.USERNAME = username;
+			userInfo.PASSWORD = userpwd;
+			
+			userEvent.userLoginEvent(userInfo);
+		}
+		
+		/**
+		 * 用户登录事件回调
+		 */
+		private function userLoginEvent(event:EventModel):void
+		{
+			
 		}
 	}
 }
