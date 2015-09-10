@@ -26,8 +26,10 @@ package events
 		/**
 		 * 启动Socket链接
 		 */
-		public function initSocket():void
+		public function initSocket(host:String,port:int):void
 		{
+			connection._HOST = host;
+			connection._PORT = port;
 			connection.conn(); //开始链接数据库
 		}
 		

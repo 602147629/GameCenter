@@ -1,10 +1,8 @@
 package events
 {
 	import flash.utils.ByteArray;
-	
 	import model.EventModel;
 	import model.UserInfo;
-	
 	import vo.json.MYJSON;
 
 	/**
@@ -21,7 +19,7 @@ package events
 		}
 		
 		/**
-		 * 监听登录事件
+		 * 授权事件
 		 */
 		public function userLoginEvent(user:UserInfo):void
 		{
@@ -31,7 +29,7 @@ package events
 		}
 		
 		/**
-		 * 用户类专用写入方法
+		 * 用户类专用写入事件
 		 * 参数：ByteArray
 		 */
 		private function writeSocket(data:ByteArray):void

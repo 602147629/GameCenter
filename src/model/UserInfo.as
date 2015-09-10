@@ -7,7 +7,7 @@ package model
 	 */
 	public class UserInfo
 	{
-		public var PROTOCOL:int;   //接口ID
+		public var PROTOCOL:int;   //接口方法ID
 		
 		public var SSHKEY:String;   //平台密匙
 		

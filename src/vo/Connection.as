@@ -19,8 +19,8 @@ package vo
 	 */
 	public class Connection
 	{
-		private var _HOST:String = "10.60.22.39";             //服务器地址
-		private var _PORT:int = 1234;                                //端口
+		public var _HOST:String;                                      //服务器地址
+		public var _PORT:int;                                           //端口
 		private var _SOCKET:Socket;                                 //socket
 		private var _Timer:Timer;
 		
