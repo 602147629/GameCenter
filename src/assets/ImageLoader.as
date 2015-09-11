@@ -118,7 +118,7 @@ package assets
 		private function loadImageError(event:IOErrorEvent):void
 		{
 			trace("ioError:" + event.text);
-			assetslength --;
+			assetslength --;  //加载错误 跳过操作
 			if(assetslength > 0){loadNewImg(assetslength);}
 			//可加触发事件
 		}
