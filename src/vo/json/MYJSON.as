@@ -16,7 +16,7 @@ package vo.json
 	public final class MYJSON
 	{
 		/**
-		 * Encodes a object into a JSON string.
+		 * 编码 a object into a JSON string.
 		 *
 		 * @param o The object to create a JSON string for
 		 * @return the JSON string representing o
@@ -30,7 +30,7 @@ package vo.json
 		}
 		
 		/**
-		 * Decodes a JSON string into a native object.
+		 * 解码 a JSON string into a native object.
 		 *
 		 * @param s The JSON string representing the object
 		 * @param strict Flag indicating if the decoder should strictly adhere

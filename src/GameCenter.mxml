@@ -8,14 +8,32 @@
 	
 	<fx:Script>
 		<![CDATA[
+			import mx.events.ModuleEvent;
 			import business.Main;
 			
 			private var main:Main = new Main();
+			public var assetsObject:Object;
 			
+			/**
+			 * 初始化加载方法
+			 */
 			private function init():void
 			{
-				
+				main.init();
 			}
+			
+			/**
+			 * 素材加载器完成
+			 */
+			public function ImageLoadDone(assObj:Object):void
+			{
+				assetsObject = new Object();
+				assetsObject = assObj;
+				
+				HeadModule.url = "view/GameHead.swf";
+				FootModule.url = "view/GameFoot.swf";
+			}
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -23,11 +41,24 @@
 	</fx:Declarations> 
 	
 	<s:VGroup id="warp" width="100%" height="100%">
-		<!--头部模块-->
-		<s:ModuleLoader url="view/GameHead.swf" autoLayout="true" width="100%" height="100"/>
-		<!--核心游戏模块-->
-		<s:ModuleLoader id="MainGame" autoLayout="true" width="100%" height="100%"/>
-		<!--脚部模块-->
-		<s:ModuleLoader url="view/GameFoot.swf" autoLayout="true" width="100%" height="50"/>
+		<!--模块页面切换器-->
+		<mx:ViewStack width="100%" height="100%" selectedIndex="0" creationPolicy="all">
+		<s:NavigatorContent >
+			<s:VGroup id="loadPage" width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
+				<s:Label id="msg" fontSize="20" />
+			</s:VGroup>
+		</s:NavigatorContent>
+		<s:NavigatorContent >
+			<s:VGroup id="gamePage" width="100%" height="100%">
+				<!--头部模块-->
+				<s:ModuleLoader id="HeadModule" autoLayout="true" width="100%" height="100" progress="main.Module_progressHandler(event)" ready="main.Module_readyHandler(event)"/>
+				<!--核心游戏模块-->
+				<s:ModuleLoader id="MainModule" autoLayout="true" width="100%" height="100%" progress="main.Module_progressHandler(event)" ready="main.Module_readyHandler(event)"/>
+				<!--脚部模块-->
+				<s:ModuleLoader id="FootModule" autoLayout="true" width="100%" height="50" progress="main.Module_progressHandler(event)" ready="main.Module_readyHandler(event)"/>
+			</s:VGroup>
+		</s:NavigatorContent>
+			
+		</mx:ViewStack>
 	</s:VGroup>
 </s:Application>

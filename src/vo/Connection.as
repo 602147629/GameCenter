@@ -29,10 +29,11 @@ package vo
 		public function Connection()
 		{
 			_SOCKET = new Socket();
+			_SOCKET.timeout = 10000;                                                                              //链接超时10秒
 			_SOCKET.addEventListener(Event.CONNECT, SocketConnectEvent);                       //监听是否连接
 			_SOCKET.addEventListener(Event.CLOSE, SocketCloseEvent);                               //监听连接关闭
-			_SOCKET.addEventListener(IOErrorEvent.IO_ERROR, ioError);                              //监听连接关闭  
-			_SOCKET.addEventListener(SecurityErrorEvent.SECURITY_ERROR, SecurityError);    //监听连接关闭
+			_SOCKET.addEventListener(IOErrorEvent.IO_ERROR, ioError);                              //出现输入/输出错误并由此导致连接失败
+			_SOCKET.addEventListener(SecurityErrorEvent.SECURITY_ERROR, SecurityError);    //连接目标服务器失败
 			_SOCKET.addEventListener(ProgressEvent.SOCKET_DATA,SocketDataEvent);          //监听接收数据
 		}
 		
@@ -81,7 +82,6 @@ package vo
 			eventModel = new EventModel(EventModel.SOCKETCLOSE,false,false, null);
 			EventModel.dis.dispatchEvent(eventModel);
 			_Timer.stop();
-			trace("链接关闭");
 		}
 		
 		/**
@@ -103,10 +103,9 @@ package vo
 		 */
 		private function SecurityError(event:SecurityErrorEvent):void
 		{
-			eventModel = new EventModel(EventModel.SOCKETERROR,false,false, event.text);
+			eventModel = new EventModel(EventModel.SOCKETERROR,false,false, event.text + "-" + event.type);
 			EventModel.dis.dispatchEvent(eventModel);
 			_Timer.start();
-			trace("securityError:" + event.text);
 		}
 		
 		/**
@@ -114,10 +113,9 @@ package vo
 		 */
 		private function ioError(event:IOErrorEvent):void
 		{
-			eventModel = new EventModel(EventModel.SOCKETERROR,false,false, event.text);
+			eventModel = new EventModel(EventModel.SOCKETERROR,false,false, event.text + "-" + event.type);
 			EventModel.dis.dispatchEvent(eventModel);
 			_Timer.start();
-			trace("ioError:" + event.text);
 		}
 		
 		/**

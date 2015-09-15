@@ -8,6 +8,8 @@ package assets
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	
+	import mx.core.FlexGlobals;
+	
 	/**
 	 * 素材加载器
 	 * 2015/7/21
@@ -15,19 +17,19 @@ package assets
 	 */
 	public class ImageLoader
 	{
+		private var assetsObject:Object;
 		private var loader:Loader;
 		private var loaderXml:URLLoader;
-		public var assetsObject:Object;
-		public var assetslength:int;
+		private var assetslength:int;
 		private var assestObjList:Array;
 		
-		public function ImageLoader()
+		public function ImageLoader(xmlName:String)
 		{
 			assetsObject = new Object();
 			assestObjList = new Array();
 			
-			loaderList("assetsList.xml");
-			trace("开始加载素材包-->");
+			loaderList(xmlName);
+			trace("开始加载素材包-->assetsList");
 		}
 		
 		/**
@@ -108,8 +110,13 @@ package assets
 			
 			assetsObject[loader.name] = bitmap;
 			assetslength --;
-			if(assetslength > 0){loadNewImg(assetslength);}
+			if(assetslength > 0){
+				loadNewImg(assetslength);
+			}else{
+				FlexGlobals.topLevelApplication.ImageLoadDone(assetsObject);
+			}
 			//可加触发事件
+			
 		}
 		
 		/**

@@ -2,9 +2,12 @@ package events
 {
 	import flash.utils.ByteArray;
 	
+	import mx.utils.ObjectUtil;
+	
 	import model.EventModel;
 	
 	import vo.Connection;
+	import vo.json.MYJSON;
 
 	/**
 	 * 事件主类
@@ -14,6 +17,7 @@ package events
 	public class MainEvent
 	{
 		private var connection:Connection = new Connection();
+		private var eventModel:EventModel;                        //事件
 		
 		public function MainEvent()
 		{
@@ -34,11 +38,28 @@ package events
 		}
 		
 		/**
+		 * 断开Socket链接
+		 */
+		public function closeSocket():void
+		{
+			connection.SocketClose();
+		}
+		
+		/**
 		 * Socket链接数据返回
 		 */
 		private function socketDataEvent(event:EventModel):void
 		{
-			trace(event.data);
+			var dataReust:Object = new Object();
+			dataReust = MYJSON.decode(event.data as String);
+			
+			trace(ObjectUtil.toString(dataReust));
+			switch(dataReust.potocol){
+				case "6619736":
+					eventModel = new EventModel(EventModel.USERSOCKETDATA,false,false,dataReust);
+					break;
+			}
+			EventModel.dis.dispatchEvent(eventModel);
 		}
 		
 		/**
@@ -46,7 +67,7 @@ package events
 		 */
 		private function socketErrorEvent(event:EventModel):void
 		{
-			
+			trace(event.data);
 		}
 		
 		/**
@@ -54,7 +75,7 @@ package events
 		 */
 		private function socketCloseEvent(event:EventModel):void
 		{
-			
+			trace("链接关闭");
 		}
 		
 		/**

@@ -31,10 +31,14 @@ package model
 		public static const USER_LOGIN:String = "UserLogin"; 
 		
 		/**
-		 * 登录事件
+		 * 写入事件
 		 */
 		public static const WRITESOCKET:String = "WriteSocket"; 
 		
+		/**
+		 * 用户事件数据返回
+		 */
+		public static const USERSOCKETDATA:String = "UserSocketData"; 
 		
 		/**
 		 * 派发器
