@@ -59,7 +59,6 @@ package vo
 		 */
 		private function SocketConnectEvent(event:Event):void
 		{
-			trace("链接成功");
 			_Timer.stop();
 		}
 		

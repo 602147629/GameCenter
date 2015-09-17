@@ -1,5 +1,7 @@
 package business
 {
+	import mx.utils.ObjectUtil;
+	
 	import events.MainEvent;
 	import events.UserEvent;
 	
@@ -24,7 +26,6 @@ package business
 			userEvent = new UserEvent();
 			tool = new Tools();
 			
-			EventModel.dis.addEventListener(EventModel.USER_LOGIN,	userLoginEvent);
 			EventModel.dis.addEventListener(EventModel.USERSOCKETDATA,socketDataEvent);
 			
 			mainEvent.initSocket("10.60.22.39",8090);
@@ -42,7 +43,20 @@ package business
 			{
 				case "6619736":
 				{
+					//域登录信息发送
 					userLogin("kim","123qwe");
+					break;
+				}
+				case "13173436":
+				{
+					//授权成功连接线路
+					userSuccessful(dataReust.data);
+					break;
+				}
+				case "6685272":
+				{
+					//成功连接游戏线路
+					trace("成功连接游戏线路");
 					break;
 				}
 				default:
@@ -59,7 +73,7 @@ package business
 		public function userLogin(username:String,userpwd:String):void
 		{
 			userInfo = new UserInfo();
-			userInfo.GAMEID = 1;
+			userInfo.GAMEID = 2;
 			userInfo.PROTOCOL = 13107900;
 			userInfo.SSHKEY = "123";
 			userInfo.USERNAME = username;
@@ -69,11 +83,18 @@ package business
 		}
 		
 		/**
-		 * 用户授权事件回调
+		 * 用户授权成功连接
 		 */
-		private function userLoginEvent(event:EventModel):void
+		public function userSuccessful(user:Object):void
 		{
+			userInfo.USERID = user.userid;
+			userInfo.USERPORT = user.port;
+			userInfo.USERIP = user.sip;
+			userInfo.USERKEY = user.userkey;
 			
+			mainEvent.closeSocket();
+			mainEvent.initSocket(userInfo.USERIP,userInfo.USERPORT);
 		}
+		
 	}
 }

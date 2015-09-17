@@ -26,11 +26,6 @@ package model
 		public static const SOCKETCLOSE:String = "SocketClose";  
 		
 		/**
-		 * 登录事件
-		 */
-		public static const USER_LOGIN:String = "UserLogin"; 
-		
-		/**
 		 * 写入事件
 		 */
 		public static const WRITESOCKET:String = "WriteSocket"; 

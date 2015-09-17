@@ -4,6 +4,8 @@ package events
 	
 	import mx.utils.ObjectUtil;
 	
+	import business.Tools;
+	
 	import model.EventModel;
 	
 	import vo.Connection;
@@ -18,6 +20,7 @@ package events
 	{
 		private var connection:Connection = new Connection();
 		private var eventModel:EventModel;                        //事件
+		private var tool:Tools = new Tools;
 		
 		public function MainEvent()
 		{
@@ -53,9 +56,11 @@ package events
 			var dataReust:Object = new Object();
 			dataReust = MYJSON.decode(event.data as String);
 			
+			var potcol:int = tool.getCode(dataReust.potocol,"L");
 			trace(ObjectUtil.toString(dataReust));
-			switch(dataReust.potocol){
-				case "6619736":
+			switch(potcol){
+				case 600:
+				case 700:
 					eventModel = new EventModel(EventModel.USERSOCKETDATA,false,false,dataReust);
 					break;
 			}
