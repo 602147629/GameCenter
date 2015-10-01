@@ -7,9 +7,11 @@ package business
 	 */
 	import mx.core.FlexGlobals;
 	import mx.events.ModuleEvent;
+	
 	import spark.modules.ModuleLoader;
+	
 	import assets.ImageLoader;
-
+	
 	public class Main
 	{
 		
@@ -19,6 +21,7 @@ package business
 		private var bytesTotalObj:Object;
 		private var loadedLength:int;
 		private var userLogin:UserLogin;
+		private var tool:Tools =  new Tools;
 		
 		/**
 		 * 初始化
@@ -34,10 +37,24 @@ package business
 		/**
 		 * 初始化素材类
 		 */
-		public function init():void
+		public function init(urlName:String):void
 		{
-			IL = new ImageLoader("assetsList.xml");
-			updateLoadMsg("加载UI素材中..");
+			FlexGlobals.topLevelApplication.pageView.selectedIndex = 0;
+			FlexGlobals.topLevelApplication.HeadModule.unloadModule();
+			FlexGlobals.topLevelApplication.FootModule.unloadModule();
+			
+			IL = new ImageLoader(urlName);
+			tool.updateLoadMsg("加载UI素材中..");
+		}
+		
+		/**
+		 * 素材加载器完成
+		 */
+		public function ImageLoadDone(assObj:Object):void
+		{
+			FlexGlobals.topLevelApplication.assetsObject = assObj;
+			FlexGlobals.topLevelApplication.HeadModule.loadModule("view/GameHead.swf");
+			FlexGlobals.topLevelApplication.FootModule.loadModule("view/GameFoot.swf");
 		}
 		
 		/**
@@ -46,11 +63,14 @@ package business
 		public function Module_readyHandler(event:ModuleEvent):void
 		{
 			var loadID:String = (event.currentTarget as ModuleLoader).id;
-			trace(loadID + "模块加载完成！" + event.bytesTotal + "字节");
+			tool.updateLoadMsg(loadID + "模块加载完成！" + event.bytesTotal + "字节");
 			
 			loadedLength ++;
+			trace(loadID + "模块加载完成！" + event.bytesTotal + "字节" + "*" + loadedLength);
 			if(loadedLength == 2){
 				initSocket();
+				tool.updateLoadMsg("正在连接游戏服务器...");
+				loadedLength = 0;
 			}
 		}
 		
@@ -73,15 +93,7 @@ package business
 			
 			var bytesLoaded:Number = Math.ceil((bytesLoadedObj.HeadModule  + bytesLoadedObj.FootModule)/1024);
 			var bytesTotal:Number = Math.ceil((bytesTotalObj.HeadModule + bytesTotalObj.FootModule)/1024);
-			updateLoadMsg("加载模块中.." + bytesLoaded + "Kb / " + bytesTotal + "Kb");
-		}
-		
-		/**
-		 * 修改加载消息
-		 */
-		private function updateLoadMsg(strMsg:String):void
-		{
-			FlexGlobals.topLevelApplication.msg.text = strMsg;
+			tool.updateLoadMsg("加载模块中.." + bytesLoaded + "Kb / " + bytesTotal + "Kb");
 		}
 	}
 }

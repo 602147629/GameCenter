@@ -1,10 +1,8 @@
 package business
 {
-	import mx.utils.ObjectUtil;
-	
+	import mx.core.FlexGlobals;
 	import events.MainEvent;
 	import events.UserEvent;
-	
 	import model.EventModel;
 	import model.UserInfo;
 
@@ -39,7 +37,7 @@ package business
 			var dataReust:Object = new Object();
 			dataReust = event.data;
 			
-			switch(dataReust.potocol)
+			switch(dataReust.protocol)
 			{
 				case "6619736":
 				{
@@ -57,6 +55,8 @@ package business
 				{
 					//成功连接游戏线路
 					trace("成功连接游戏线路");
+					getUserInfo();
+					FlexGlobals.topLevelApplication.pageView.selectedIndex = 1;
 					break;
 				}
 				default:
@@ -73,7 +73,7 @@ package business
 		public function userLogin(username:String,userpwd:String):void
 		{
 			userInfo = new UserInfo();
-			userInfo.GAMEID = 2;
+			userInfo.GAMEID = 2; 
 			userInfo.PROTOCOL = 13107900;
 			userInfo.SSHKEY = "123";
 			userInfo.USERNAME = username;
@@ -96,5 +96,13 @@ package business
 			mainEvent.initSocket(userInfo.USERIP,userInfo.USERPORT);
 		}
 		
+		/**
+		 * 初次登陆用户信息
+		 */
+		private function getUserInfo():void
+		{
+			userInfo.PROTOCOL = 19661500;
+			userEvent.userInfoEvent(userInfo);
+		}
 	}
 }

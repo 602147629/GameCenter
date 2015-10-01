@@ -1,5 +1,6 @@
 package business
 {
+	import mx.core.FlexGlobals;
 	import mx.managers.BrowserManager;
 	import mx.managers.IBrowserManager;
 
@@ -60,6 +61,14 @@ package business
 		{
 			md5 = new MD5();
 			return md5.getMD5(vars);
+		}
+		
+		/**
+		 * 修改加载消息
+		 */
+		public function updateLoadMsg(strMsg:String):void
+		{
+			FlexGlobals.topLevelApplication.msg.text = strMsg;
 		}
 	}
 }

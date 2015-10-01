@@ -54,11 +54,12 @@ package events
 		private function socketDataEvent(event:EventModel):void
 		{
 			var dataReust:Object = new Object();
+			trace(ObjectUtil.toString(event.data));
 			dataReust = MYJSON.decode(event.data as String);
 			
-			var potcol:int = tool.getCode(dataReust.potocol,"L");
-			trace(ObjectUtil.toString(dataReust));
-			switch(potcol){
+			var prtcol:int = tool.getCode(dataReust.protocol,"L");
+			trace(ObjectUtil.toString(dataReust) + "-" + prtcol);
+			switch(prtcol){
 				case 600:
 				case 700:
 					eventModel = new EventModel(EventModel.USERSOCKETDATA,false,false,dataReust);
@@ -81,6 +82,7 @@ package events
 		private function socketCloseEvent(event:EventModel):void
 		{
 			trace("链接关闭");
+			tool.updateLoadMsg("游戏服务器已经关闭！");
 		}
 		
 		/**

@@ -29,6 +29,16 @@ package events
 		}
 		
 		/**
+		 * 初次登陆获取信息
+		 */
+		public function userInfoEvent(user:UserInfo):void
+		{
+			var message:ByteArray=new ByteArray(); 
+			message.writeUTFBytes(MYJSON.encode(user));
+			writeSocket(message);
+		}
+		
+		/**
 		 * 用户类专用写入事件
 		 * 参数：ByteArray
 		 */

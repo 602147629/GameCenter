@@ -7,8 +7,7 @@ package assets
 	import flash.events.ProgressEvent;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
-	
-	import mx.core.FlexGlobals;
+	import business.Main;
 	
 	/**
 	 * 素材加载器
@@ -22,6 +21,7 @@ package assets
 		private var loaderXml:URLLoader;
 		private var assetslength:int;
 		private var assestObjList:Array;
+		private var main:Main;
 		
 		public function ImageLoader(xmlName:String)
 		{
@@ -113,7 +113,8 @@ package assets
 			if(assetslength > 0){
 				loadNewImg(assetslength);
 			}else{
-				FlexGlobals.topLevelApplication.ImageLoadDone(assetsObject);
+				main = new Main();
+				main.ImageLoadDone(assetsObject);
 			}
 			//可加触发事件
 			
