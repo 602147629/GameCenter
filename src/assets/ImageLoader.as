@@ -116,8 +116,6 @@ package assets
 				main = new Main();
 				main.ImageLoadDone(assetsObject);
 			}
-			//可加触发事件
-			
 		}
 		
 		/**

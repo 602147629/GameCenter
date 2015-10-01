@@ -21,6 +21,7 @@ package business
 		private var bytesTotalObj:Object;
 		private var loadedLength:int;
 		private var userLogin:UserLogin;
+		private var gameID:int;
 		private var tool:Tools =  new Tools;
 		
 		/**
@@ -32,6 +33,7 @@ package business
 			bytesTotalObj = new Object();
 			
 			loadedLength = 0;                   //已加载模块数量
+			gameID = 2;                            //游戏ID  斗地主
 		}
 		
 		/**
@@ -53,8 +55,12 @@ package business
 		public function ImageLoadDone(assObj:Object):void
 		{
 			FlexGlobals.topLevelApplication.assetsObject = assObj;
-			FlexGlobals.topLevelApplication.HeadModule.loadModule("view/GameHead.swf");
-			FlexGlobals.topLevelApplication.FootModule.loadModule("view/GameFoot.swf");
+			switch(gameID){
+				case 2:
+					FlexGlobals.topLevelApplication.HeadModule.loadModule("view/ddz/GameHead.swf");
+					FlexGlobals.topLevelApplication.FootModule.loadModule("view/ddz/GameFoot.swf");
+				break;
+			}
 		}
 		
 		/**
