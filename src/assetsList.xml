@@ -27,5 +27,10 @@
 	<object assetsName = "battle" assetsUrl ="image/battle.png" />
 	<object assetsName = "battle_hover" assetsUrl ="image/battle_hover.png" />
 	<object assetsName = "game_start" assetsUrl ="image/game_start.png" />
+	<object assetsName = "rank_bg" assetsUrl ="image/rank_bg.jpg" />
+	<object assetsName = "day_rank" assetsUrl ="image/day_rank.jpg" />
+	<object assetsName = "day_rank_hover" assetsUrl ="image/day_rank_hover.jpg" />
+	<object assetsName = "week_rank" assetsUrl ="image/week_rank.jpg" />
+	<object assetsName = "week_rank_hover" assetsUrl ="image/week_rank_hover.jpg" />
 	
 </data>
