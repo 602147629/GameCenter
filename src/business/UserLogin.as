@@ -53,8 +53,16 @@ package business
 				{
 					trace("成功连接游戏线路");
 					getUserInfo();
-					FlexGlobals.topLevelApplication.pageView.selectedIndex = 1;
 					break;
+				}
+				case "19727036": //用户信息返回
+				{
+					userInfo.PROTOCOL = 19727036;
+					userInfo.USERNAME = dataReust.userinfo[0].name;
+					userInfo.USERMONEY = dataReust.userinfo[0].money;
+					userInfo.USERRATE = dataReust.userinfo[0].rate;
+					(FlexGlobals.topLevelApplication.HeadModule.child).setUserParam(userInfo);
+					FlexGlobals.topLevelApplication.pageView.selectedIndex = 1;
 				}
 				default:
 				{
@@ -99,7 +107,7 @@ package business
 		private function getUserInfo():void
 		{
 			userInfo.PROTOCOL = 19661500;
-			userEvent.userInfoEvent(userInfo);
+			userEvent.userLoginEvent(userInfo);
 		}
 	}
 }

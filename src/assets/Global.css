@@ -11,3 +11,33 @@
 	fontFamily: "微软雅黑";
 	fontSize: 12;
 }
+
+.loadMsg{
+	color: #ffffff;
+	fontSize: 15;
+}
+
+.gonggao{
+	color: #ffffff;
+	fontSize: 15;
+	fontWeight:bold;
+}
+.amount{
+	color: #ffe4a2;
+	fontSize: 15;
+}
+
+.username{
+	color: #ffffff;
+	fontSize: 20;
+}
+
+.shenglv{
+	color: #ffe4a2;
+	fontSize: 15;
+}
+
+.zaixian{
+	color: #ffe4a2;
+	fontSize: 12;
+}

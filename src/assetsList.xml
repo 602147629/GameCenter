@@ -1,8 +1,31 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <data>
-	<object assetsName = "name2" assetsUrl ="http://ww2.sinaimg.cn/bmiddle/65a92dc9jw1eu9dchturej20dc0hs40k.jpg" />
-	<object assetsName = "name3" assetsUrl ="http://ww3.sinaimg.cn/bmiddle/65a92dc9jw1eu7el2oh3dj219c19cqo7.jpg" />
-	<object assetsName = "name1" assetsUrl ="http://ww1.sinaimg.cn/bmiddle/65a92dc9jw1eu4cxj9thgj20rw0rw79w.jpg" />
-	<object assetsName = "name6" assetsUrl ="http://ww4.sinaimg.cn/bmiddle/65a92dc9jw1ety64qsdt0j218g0tm11i.jpg" />
-	<object assetsName = "name5" assetsUrl ="http://p8.sinaimg.cn/1618041375/180/40211269955903.png" />
+	<object assetsName = "game_bg" assetsUrl ="image/game_bg.jpg" />
+	
+	<!--头部 -->
+	<object assetsName = "top_bg" assetsUrl ="image/top-bg.png" />
+	<object assetsName = "feedback_icon" assetsUrl ="image/feedback_icon.png" />
+	<object assetsName = "voice_icon" assetsUrl ="image/voice_icon.png" />
+	<object assetsName = "message_icon" assetsUrl ="image/message_icon.png" />
+	<object assetsName = "help_icon" assetsUrl ="image/help_icon.png" />
+	<object assetsName = "amount_bg" assetsUrl ="image/amount_bg.png" />
+	<object assetsName = "btn_exchange_hover" assetsUrl ="image/btn_exchange_hover.png" />
+	<object assetsName = "btn_exchange" assetsUrl ="image/btn_exchange.png" />
+	<object assetsName = "record" assetsUrl ="image/record.png" />
+	
+	<!--房间 -->
+	<object assetsName = "right_side_bg" assetsUrl ="image/right_side_bg.png" />
+	<object assetsName = "room_bg" assetsUrl ="image/room_bg.jpg" />
+	<object assetsName = "trys" assetsUrl ="image/try.png" />
+	<object assetsName = "try_hover" assetsUrl ="image/try_hover.png" />
+	<object assetsName = "primary" assetsUrl ="image/primary.png" />
+	<object assetsName = "primary_hover" assetsUrl ="image/primary_hover.png" />
+	<object assetsName = "intermediate" assetsUrl ="image/intermediate.png" />
+	<object assetsName = "intermediate_hover" assetsUrl ="image/intermediate_hover.png" />
+	<object assetsName = "senior" assetsUrl ="image/senior.png" />
+	<object assetsName = "senior_hover" assetsUrl ="image/senior_hover.png" />
+	<object assetsName = "battle" assetsUrl ="image/battle.png" />
+	<object assetsName = "battle_hover" assetsUrl ="image/battle_hover.png" />
+	<object assetsName = "game_start" assetsUrl ="image/game_start.png" />
+	
 </data>

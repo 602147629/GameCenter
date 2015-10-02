@@ -54,11 +54,10 @@ package events
 		private function socketDataEvent(event:EventModel):void
 		{
 			var dataReust:Object = new Object();
-//			trace(ObjectUtil.toString(event.data));
+			trace(ObjectUtil.toString(event.data));
 			dataReust = MYJSON.decode(event.data as String);
 			
 			var prtcol:int = tool.getCode(dataReust.protocol,"L");
-			//trace(ObjectUtil.toString(dataReust) + "-" + prtcol);
 			switch(prtcol){
 				case 600:
 				case 700:

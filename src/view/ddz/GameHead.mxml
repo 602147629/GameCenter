@@ -6,12 +6,13 @@
 -->
 <s:Module xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		  xmlns:s="library://ns.adobe.com/flex/spark" 
-		  xmlns:mx="library://ns.adobe.com/flex/mx" initialize="initView()" creationComplete="init()">
+		  xmlns:mx="library://ns.adobe.com/flex/mx" initialize="initView()" creationComplete="init()" width="1024" height="117">
 	
 	<fx:Script>
 		<![CDATA[
 			import mx.core.FlexGlobals;
 			import mx.events.FlexEvent;
+			import model.UserInfo;
 			
 			[Bindable]
 			private var assetsObj:Object;
@@ -26,36 +27,36 @@
 			/*组件加载完成触发*/
 			private function init():void
 			{
-			}
-			
-			/*登录按钮*/
-			private function loginEvent():void
-			{
-				/*var main:Main = new Main();
-				main.init("assetsList2.xml");*/
-			}
-			
-			public function setParam(obj:String):void
-			{
 				
+			}
+			
+			//事件获取参数
+			public function setUserParam(user:UserInfo):void
+			{
+				nameTxt.text = user.USERNAME;
+				slTxt.text = "胜率："+ user.USERRATE + "%";
+				amountTxt.text = user.USERMONEY.toFixed(2);
 			}
 		]]>
 	</fx:Script>
 	
-	<fx:Declarations>
-		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
-	</fx:Declarations>
+	<fx:Style source="assets/Global.css" />
 	
-	<s:VGroup width="100%" height="100%" >
-		<s:HGroup width="100%" height="100%" verticalAlign="middle">
-			<s:Label text="用户名：" />
-			<s:TextInput id="userName" text="kim"/>
-			<s:Label text="密码：" />
-			<s:TextInput id="userPwd" text="123qwe"/>
-			<s:Button label="登录" click="loginEvent()"/>
-			
-			<s:Image id="img" width="100" height="100" source="{assetsObj.name1}"/>
-		</s:HGroup>
+	<s:Group width="100%" height="100%">
+		<s:Image source="{assetsObj.top_bg}" />
 		
-	</s:VGroup>
+		<s:Label id="zxTxt" text="在线人数：5000人" styleName="zaixian" x="70" y="85"/>
+		
+		<s:Label id="nameTxt" x="280" y="25" styleName="username" width="160"/>
+		<s:Image source="{assetsObj.amount_bg}"  x="280" y="60"/>
+		<s:Label id="amountTxt" x="320" y="71" width="90" styleName="amount"/> 
+		<s:Image id="czBtn" source="{assetsObj.btn_exchange}" mouseOver="{czBtn.source = assetsObj.btn_exchange_hover}" mouseOut="{czBtn.source = assetsObj.btn_exchange}" x="422" y="66" buttonMode="true"/>
+		<s:Label id="slTxt" x="480" y="70" styleName="shenglv"/>
+		<s:Image source="{assetsObj.record}" x="570" y="65" buttonMode="true"/>
+		
+		<s:Image source="{assetsObj.feedback_icon}" x="725" y="17" buttonMode="true"/>
+		<s:Image source="{assetsObj.help_icon}" x="785" y="17" buttonMode="true"/>
+		<s:Image source="{assetsObj.voice_icon}" x="845" y="17" buttonMode="true"/>
+		<s:Image source="{assetsObj.message_icon}" x="915" y="17" buttonMode="true"/>
+	</s:Group>
 </s:Module>

@@ -1,8 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Module xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		  xmlns:s="library://ns.adobe.com/flex/spark" 
-		  xmlns:mx="library://ns.adobe.com/flex/mx">
-	<fx:Declarations>
-		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
-	</fx:Declarations>
+<s:Module xmlns:fx="http://ns.adobe.com/mxml/2009"  xmlns:s="library://ns.adobe.com/flex/spark" xmlns:mx="library://ns.adobe.com/flex/mx" 
+		  creationComplete="init()"  initialize="initView()">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.core.FlexGlobals;
+			
+			[Bindable]
+			private var assetsObj:Object;
+			
+			/*组件加载之前触发*/
+			private function initView():void
+			{
+				assetsObj = new Object();
+				assetsObj = FlexGlobals.topLevelApplication.assetsObject;
+			}
+			
+			/*组件加载完成触发*/
+			private function init():void
+			{
+			}
+		]]>
+	</fx:Script>
+	<fx:Style source="assets/Global.css" />
+	
+	<s:VGroup width="100%" height="100%">
+		<s:Group width="100%" height="60" >
+			<s:Label text="S5 世界总决赛开启了！" x="400" y="10" styleName="gonggao"/>
+		</s:Group>
+		
+		<s:Group width="100%" height="100%">
+			<s:Image id="bsBtn" source="{assetsObj.battle}" mouseOut="{bsBtn.source=assetsObj.battle}" mouseOver="{bsBtn.source=assetsObj.battle_hover}"  x="575" y="0" buttonMode="true"/>
+			<s:Image id="gjBtn" source="{assetsObj.senior}" mouseOut="{gjBtn.source=assetsObj.senior}" mouseOver="{gjBtn.source=assetsObj.senior_hover}" x="435" y="0" buttonMode="true"/>
+			<s:Image id="zjBtn" source="{assetsObj.intermediate}" mouseOut="{zjBtn.source=assetsObj.intermediate}" mouseOver="{zjBtn.source=assetsObj.intermediate_hover}" x="295" y="0" buttonMode="true"/>
+			<s:Image id="cjBtn" source="{assetsObj.primary}" mouseOut="{cjBtn.source=assetsObj.primary}" mouseOver="{cjBtn.source=assetsObj.primary_hover}" x="155" y="0" buttonMode="true"/>
+			<s:Image id="swbtn" source="{assetsObj.trys}" mouseOut="{swbtn.source=assetsObj.trys}" mouseOver="{swbtn.source=assetsObj.try_hover}" x="15" y="0" buttonMode="true"/>
+			
+			<s:Image source="{assetsObj.room_bg}"  x="15" y="48"/>
+			<s:Image source="{assetsObj.right_side_bg}"  x="737" y="60"/>
+			<s:Image source="{assetsObj.game_start}"  x="710" y="0"/>
+			
+		</s:Group>
+	</s:VGroup>
+	<!--<s:BorderContainer width="200" height="300" borderVisible="false" styleName="myCustomScrollBarStyleName">
+		<s:Scroller width="100%" height="100%">
+			<s:TileGroup horizontalGap="10" verticalGap="10" id="room"
+						 paddingTop="5" paddingBottom="5" paddingLeft="5" paddingRight="5" />
+		</s:Scroller>
+	</s:BorderContainer>-->
 </s:Module>

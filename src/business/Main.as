@@ -46,7 +46,7 @@ package business
 		{
 			FlexGlobals.topLevelApplication.pageView.selectedIndex = 0;
 			FlexGlobals.topLevelApplication.HeadModule.unloadModule();
-			FlexGlobals.topLevelApplication.FootModule.unloadModule();
+			FlexGlobals.topLevelApplication.MainModule.unloadModule();
 			
 			IL = new ImageLoader(urlName);
 			tool.updateLoadMsg("加载UI素材中..");
@@ -60,8 +60,9 @@ package business
 			FlexGlobals.topLevelApplication.assetsObject = assObj;
 			switch(gameID){
 				case 2: //加载斗地主游戏
+					FlexGlobals.topLevelApplication.gameBg.source = assObj.game_bg;
 					FlexGlobals.topLevelApplication.HeadModule.loadModule("view/ddz/GameHead.swf");
-					FlexGlobals.topLevelApplication.FootModule.loadModule("view/ddz/GameFoot.swf");
+					FlexGlobals.topLevelApplication.MainModule.loadModule("view/ddz/GameRoom.swf");
 					var ddz:GameInfo = new GameInfo();
 					ddz.addEventGAME();
 				break;
@@ -102,8 +103,8 @@ package business
 			bytesLoadedObj[Mid] = event.bytesLoaded;
 			bytesTotalObj[Mid] = event.bytesTotal;
 			
-			var bytesLoaded:Number = Math.ceil((bytesLoadedObj.HeadModule  + bytesLoadedObj.FootModule)/1024);
-			var bytesTotal:Number = Math.ceil((bytesTotalObj.HeadModule + bytesTotalObj.FootModule)/1024);
+			var bytesLoaded:Number = Math.ceil((bytesLoadedObj.HeadModule  + bytesLoadedObj.MainModule)/1024);
+			var bytesTotal:Number = Math.ceil((bytesTotalObj.HeadModule + bytesTotalObj.MainModule)/1024);
 			tool.updateLoadMsg("加载模块中.." + bytesLoaded + "Kb / " + bytesTotal + "Kb");
 		}
 		

@@ -23,6 +23,10 @@ package model
 		
 		public var USERNAME:String;
 		
+		public var USERMONEY:Number;
+		
+		public var USERRATE:int;  //胜率
+		
 		public var PASSWORD:String;
 	}
 }

@@ -14,24 +14,10 @@ package events
 	{
 		private var eventModel:EventModel;
 		
-		public function UserEvent()
-		{
-		}
-		
 		/**
-		 * 授权事件
+		 * 用户逻辑使用的事件
 		 */
 		public function userLoginEvent(user:UserInfo):void
-		{
-			var message:ByteArray=new ByteArray(); 
-			message.writeUTFBytes(MYJSON.encode(user));
-			writeSocket(message);
-		}
-		
-		/**
-		 * 初次登陆获取信息
-		 */
-		public function userInfoEvent(user:UserInfo):void
 		{
 			var message:ByteArray=new ByteArray(); 
 			message.writeUTFBytes(MYJSON.encode(user));

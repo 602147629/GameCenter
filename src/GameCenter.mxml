@@ -33,18 +33,21 @@
 		<mx:ViewStack id="pageView" width="100%" height="100%" selectedIndex="0" creationPolicy="all">
 		<s:NavigatorContent >
 			<s:VGroup id="loadPage" width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
-				<s:Label id="msg" fontSize="20" />
+				<s:Label id="msg" fontSize="20" styleName="loadMsg"/>
 			</s:VGroup>
 		</s:NavigatorContent>
-		<s:NavigatorContent >
-			<s:VGroup id="gamePage" width="100%" height="100%">
-				<!--头部模块-->
-				<s:ModuleLoader id="HeadModule" autoLayout="true" width="100%" height="100" progress="main.Module_progressHandler(event)" ready="main.Module_readyHandler(event)"/>
-				<!--游戏大厅模块-->
-				<s:ModuleLoader id="MainModule" autoLayout="true" width="100%" height="100%" progress="main.Module_progressHandler(event)" ready="main.Module_readyHandler(event)"/>
-				<!--脚部模块-->
-				<s:ModuleLoader id="FootModule" autoLayout="true" width="100%" height="50" progress="main.Module_progressHandler(event)" ready="main.Module_readyHandler(event)"/>
-			</s:VGroup>
+		<s:NavigatorContent>
+			<s:HGroup width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
+				<s:Group width="1024" height="740" >
+					<s:Image width="100%" height="100%" id="gameBg" />
+					<s:VGroup id="gamePage" width="100%" height="100%">
+						<!--头部模块-->
+						<s:ModuleLoader id="HeadModule" autoLayout="true" progress="main.Module_progressHandler(event)" ready="main.Module_readyHandler(event)"/>
+						<!--游戏大厅模块-->
+						<s:ModuleLoader id="MainModule" autoLayout="true" progress="main.Module_progressHandler(event)" ready="main.Module_readyHandler(event)"/>
+					</s:VGroup>
+				</s:Group>
+			</s:HGroup>
 		</s:NavigatorContent>
 		<s:NavigatorContent >
 			<s:ModuleLoader id="GameModule" autoLayout="true" width="100%" height="100" progress="main.Module_progressHandler(event)" ready="main.Module_readyHandler(event)"/>
