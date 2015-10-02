@@ -1,4 +1,4 @@
-package view.ddz
+package business.ddz
 {
 	/**
 	 * 斗地主游戏逻辑

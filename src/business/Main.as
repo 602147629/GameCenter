@@ -12,7 +12,7 @@ package business
 	
 	import assets.ImageLoader;
 	
-	import view.ddz.GameInfo;
+	import business.ddz.GameInfo;
 	
 	
 	public class Main
