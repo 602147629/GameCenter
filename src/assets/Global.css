@@ -1,0 +1,13 @@
+/**
+	 * 全局CSS样式
+	 * 2015/10/1
+	 * James
+	 */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+@namespace spark "spark.skins.spark.*";
+
+*{
+	fontFamily: "微软雅黑";
+	fontSize: 12;
+}
