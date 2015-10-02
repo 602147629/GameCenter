@@ -12,7 +12,6 @@
 		<![CDATA[
 			import mx.core.FlexGlobals;
 			import mx.events.FlexEvent;
-			import business.Main;
 			
 			[Bindable]
 			private var assetsObj:Object;
@@ -32,8 +31,8 @@
 			/*登录按钮*/
 			private function loginEvent():void
 			{
-				var main:Main = new Main();
-				main.init("assetsList2.xml");
+				/*var main:Main = new Main();
+				main.init("assetsList2.xml");*/
 			}
 			
 			public function setParam(obj:String):void

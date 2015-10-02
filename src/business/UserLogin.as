@@ -39,21 +39,18 @@ package business
 			
 			switch(dataReust.protocol)
 			{
-				case "6619736":
+				case "6619736"://域登录信息发送
 				{
-					//域登录信息发送
 					userLogin("kim","123qwe");
 					break;
 				}
-				case "13173436":
+				case "13173436": //授权成功连接线路
 				{
-					//授权成功连接线路
 					userSuccessful(dataReust.data);
 					break;
 				}
-				case "6685272":
+				case "6685272"://成功连接游戏线路
 				{
-					//成功连接游戏线路
 					trace("成功连接游戏线路");
 					getUserInfo();
 					FlexGlobals.topLevelApplication.pageView.selectedIndex = 1;

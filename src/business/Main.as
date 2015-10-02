@@ -12,6 +12,8 @@ package business
 	
 	import assets.ImageLoader;
 	
+	import model.EventModel;
+	
 	public class Main
 	{
 		
@@ -34,6 +36,10 @@ package business
 			
 			loadedLength = 0;                   //已加载模块数量
 			gameID = 2;                            //游戏ID  斗地主
+			
+			if(EventModel.dis.hasEventListener(EventModel.GAMESOCKETDATA) == false){
+				EventModel.dis.addEventListener(EventModel.GAMESOCKETDATA,socketDataEvent);
+			}
 		}
 		
 		/**
@@ -56,7 +62,7 @@ package business
 		{
 			FlexGlobals.topLevelApplication.assetsObject = assObj;
 			switch(gameID){
-				case 2:
+				case 2: //加载斗地主游戏
 					FlexGlobals.topLevelApplication.HeadModule.loadModule("view/ddz/GameHead.swf");
 					FlexGlobals.topLevelApplication.FootModule.loadModule("view/ddz/GameFoot.swf");
 				break;
@@ -101,5 +107,31 @@ package business
 			var bytesTotal:Number = Math.ceil((bytesTotalObj.HeadModule + bytesTotalObj.FootModule)/1024);
 			tool.updateLoadMsg("加载模块中.." + bytesLoaded + "Kb / " + bytesTotal + "Kb");
 		}
+		
+		/**
+		 * Socket链接数据返回
+		 */
+		private function socketDataEvent(event:EventModel):void
+		{
+			var dataReust:Object = new Object();
+			dataReust = event.data;
+			switch(dataReust.protocol)
+			{
+				case "32899972": 	//日排行榜信息
+					trace("获取到"+ (dataReust.ranking as Array).length + "条排行榜信息！");
+				break;
+				case "32834436": //周排行榜信息
+				break;
+				case "32768900": //房间信息
+				break;
+				default:
+				{
+					//默认事件
+					break;
+				}
+			}
+		}
+		
+		
 	}
 }

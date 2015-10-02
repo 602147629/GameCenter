@@ -36,6 +36,11 @@ package model
 		public static const USERSOCKETDATA:String = "UserSocketData"; 
 		
 		/**
+		 * 游戏数据返回
+		 */
+		public static const GAMESOCKETDATA:String = "GameSocketData"; 
+		
+		/**
 		 * 派发器
 		 */
 		public static const dis:EventDispatcher = new EventDispatcher();
