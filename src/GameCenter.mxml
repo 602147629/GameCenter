@@ -12,7 +12,7 @@
 			import business.Main;
 			
 			private var main:Main = new Main();
-			public var assetsObject:Object;
+			public var assetsObject:Object;        //保存素材
 			
 			/**
 			 * 初始化加载方法
