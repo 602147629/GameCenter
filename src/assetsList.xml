@@ -3,7 +3,7 @@
 	<object assetsName = "game_bg" assetsUrl ="image/game_bg.jpg" />
 	
 	<!--头部 -->
-	<object assetsName = "top_bg" assetsUrl ="image/top-bg.png" />
+	<object assetsName = "top_bg" assetsUrl ="image/top_bg.png" />
 	<object assetsName = "feedback_icon" assetsUrl ="image/feedback_icon.png" />
 	<object assetsName = "voice_icon" assetsUrl ="image/voice_icon.png" />
 	<object assetsName = "message_icon" assetsUrl ="image/message_icon.png" />

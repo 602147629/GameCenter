@@ -4,7 +4,7 @@
         开始时间：2015/7/20
 	   作者：        James 
 -->
-<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" xmlns:mx="library://ns.adobe.com/flex/mx" creationComplete="init()">
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" xmlns:mx="library://ns.adobe.com/flex/mx" creationComplete="init()" width="1024" height="740">
 	
 	<fx:Style source="assets/Global.css" />
 	<fx:Script>
@@ -26,17 +26,19 @@
 		]]>
 	</fx:Script>
 	<fx:Declarations>
+		<mx:Fade id="fadeOut" duration="1000" alphaFrom="1.0" alphaTo="0.0"/>   
+		<mx:Fade id="fadeIn" duration="1000" alphaFrom="0" alphaTo="1.0"/>   
 	</fx:Declarations>
 	
 	<s:VGroup id="warp" width="100%" height="100%">
 		<!--模块页面切换器-->
 		<mx:ViewStack id="pageView" width="100%" height="100%" selectedIndex="0" creationPolicy="all">
-		<s:NavigatorContent >
+		<s:NavigatorContent hideEffect="{fadeOut}" showEffect="{fadeIn}">
 			<s:VGroup id="loadPage" width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
 				<s:Label id="msg" fontSize="20" styleName="loadMsg"/>
 			</s:VGroup>
 		</s:NavigatorContent>
-		<s:NavigatorContent>
+		<s:NavigatorContent hideEffect="{fadeOut}" showEffect="{fadeIn}">
 			<s:HGroup width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
 				<s:Group width="1024" height="740" >
 					<s:Image width="100%" height="100%" id="gameBg" />
@@ -49,7 +51,7 @@
 				</s:Group>
 			</s:HGroup>
 		</s:NavigatorContent>
-		<s:NavigatorContent >
+		<s:NavigatorContent hideEffect="{fadeOut}" showEffect="{fadeIn}">
 			<s:ModuleLoader id="GameModule" autoLayout="true" width="100%" height="100" progress="main.Module_progressHandler(event)" ready="main.Module_readyHandler(event)"/>
 		</s:NavigatorContent>
 		</mx:ViewStack>

@@ -6,6 +6,7 @@ package vo
 	import flash.events.SecurityErrorEvent;
 	import flash.events.TimerEvent;
 	import flash.net.Socket;
+	import flash.system.Security;
 	import flash.utils.ByteArray;
 	import flash.utils.Timer;
 	import mx.utils.ObjectUtil;
@@ -28,6 +29,9 @@ package vo
 		
 		public function Connection()
 		{
+			flash.system.Security.allowDomain("*"); 
+			flash.system.Security.loadPolicyFile("xmlsocket://10.60.22.39:843");                    //策略文件
+			
 			_SOCKET = new Socket();
 			_SOCKET.timeout = 10000;                                                                              //链接超时10秒
 			_SOCKET.addEventListener(Event.CONNECT, SocketConnectEvent);                       //监听是否连接

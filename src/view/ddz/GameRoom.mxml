@@ -21,7 +21,7 @@
 			/*组件加载完成触发*/
 			private function init():void
 			{
-				for(var i:int=1;i<9;i++)
+				for(var i:int=1;i<7;i++)
 				{
 					var but:Button = new Button();
 					but.label = i.toString();
@@ -41,17 +41,17 @@
 		</s:Group>
 		
 		<s:Group width="100%" height="100%">
-			<s:Image id="bsBtn" source="{assetsObj.battle}" mouseOut="{bsBtn.source=assetsObj.battle}" mouseOver="{bsBtn.source=assetsObj.battle_hover}"  x="575" y="0" buttonMode="true"/>
-			<s:Image id="gjBtn" source="{assetsObj.senior}" mouseOut="{gjBtn.source=assetsObj.senior}" mouseOver="{gjBtn.source=assetsObj.senior_hover}" x="435" y="0" buttonMode="true"/>
-			<s:Image id="zjBtn" source="{assetsObj.intermediate}" mouseOut="{zjBtn.source=assetsObj.intermediate}" mouseOver="{zjBtn.source=assetsObj.intermediate_hover}" x="295" y="0" buttonMode="true"/>
-			<s:Image id="cjBtn" source="{assetsObj.primary}" mouseOut="{cjBtn.source=assetsObj.primary}" mouseOver="{cjBtn.source=assetsObj.primary_hover}" x="155" y="0" buttonMode="true"/>
-			<s:Image id="swbtn" source="{assetsObj.trys}" mouseOut="{swbtn.source=assetsObj.trys}" mouseOver="{swbtn.source=assetsObj.try_hover}" x="15" y="0" buttonMode="true"/>
+			<s:Image id="bsBtn" source="{assetsObj.battle}" mouseOut="{bsBtn.source=assetsObj.battle}" mouseOver="{bsBtn.source=assetsObj.battle_hover}"  x="575" y="1" buttonMode="true"/>
+			<s:Image id="gjBtn" source="{assetsObj.senior}" mouseOut="{gjBtn.source=assetsObj.senior}" mouseOver="{gjBtn.source=assetsObj.senior_hover}" x="435" y="1" buttonMode="true"/>
+			<s:Image id="zjBtn" source="{assetsObj.intermediate}" mouseOut="{zjBtn.source=assetsObj.intermediate}" mouseOver="{zjBtn.source=assetsObj.intermediate_hover}" x="295" y="1" buttonMode="true"/>
+			<s:Image id="cjBtn" source="{assetsObj.primary}" mouseOut="{cjBtn.source=assetsObj.primary}" mouseOver="{cjBtn.source=assetsObj.primary_hover}" x="155" y="1" buttonMode="true"/>
+			<s:Image id="swbtn" source="{assetsObj.trys}" mouseOut="{swbtn.source=assetsObj.trys}" mouseOver="{swbtn.source=assetsObj.try_hover}" x="15" y="1" buttonMode="true"/>
 			
 			<s:Image source="{assetsObj.room_bg}"  x="15" y="48"/>
 			<s:Image source="{assetsObj.right_side_bg}"  x="737" y="60"/>
-			<s:Image source="{assetsObj.rank_bg}"  x="757" y="142"/>
-			<s:Image source="{assetsObj.day_rank}"  x="758" y="60" buttonMode="true"/>
-			<s:Image source="{assetsObj.week_rank}"  x="865" y="60" buttonMode="true"/>
+			<s:Image source="{assetsObj.rank_bg}"  x="764" y="142"/>
+			<s:Image source="{assetsObj.day_rank}"  x="765" y="60" buttonMode="true"/>
+			<s:Image source="{assetsObj.week_rank}"  x="872" y="60" buttonMode="true"/>
 			
 			<s:BorderContainer width="717" height="423" borderVisible="false" x="17" y="50" backgroundAlpha="0">
 				<s:Scroller width="100%" height="100%">

@@ -1,8 +1,11 @@
 package business
 {
+	import mx.controls.Alert;
 	import mx.core.FlexGlobals;
+	
 	import events.MainEvent;
 	import events.UserEvent;
+	
 	import model.EventModel;
 	import model.UserInfo;
 
@@ -26,7 +29,7 @@ package business
 			
 			EventModel.dis.addEventListener(EventModel.USERSOCKETDATA,socketDataEvent);
 			
-			mainEvent.initSocket("10.60.22.39",8090);
+			mainEvent.initSocket("10.60.22.39",8090); //网络入口链接 域登录服务器。
 		}
 		
 		/**
@@ -36,7 +39,7 @@ package business
 		{
 			var dataReust:Object = new Object();
 			dataReust = event.data;
-			
+			Alert.show(dataReust.protocol);
 			switch(dataReust.protocol)
 			{
 				case "6619736"://域登录信息发送
@@ -44,7 +47,7 @@ package business
 					userLogin("kim","123qwe");
 					break;
 				}
-				case "13173436": //授权成功连接线路
+				case "13173436": //域授权登录成功
 				{
 					userSuccessful(dataReust.data);
 					break;
@@ -52,6 +55,7 @@ package business
 				case "6685272"://成功连接游戏线路
 				{
 					trace("成功连接游戏线路");
+					tool.updateLoadMsg("正在进入游戏中，请稍后...");
 					getUserInfo();
 					break;
 				}
