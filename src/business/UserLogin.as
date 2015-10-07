@@ -1,10 +1,14 @@
 package business
 {
 	import mx.core.FlexGlobals;
+	
 	import events.MainEvent;
 	import events.UserEvent;
+	
 	import model.EventModel;
 	import model.UserInfo;
+	
+	import vo.LoginConst;
 
 	/**
 	 * 用户登录授权类
@@ -38,24 +42,24 @@ package business
 			dataReust = event.data;
 			switch(dataReust.protocol)
 			{
-				case "6619736"://域登录信息发送
+				case LoginConst.YULOGIN:
 				{
 					userLogin("kim","123qwe");
 					break;
 				}
-				case "13173436": //域授权登录成功
+				case LoginConst.YULOGINSUSSFUL:
 				{
 					userSuccessful(dataReust.data);
 					break;
 				}
-				case "6685272"://成功连接游戏线路
+				case LoginConst.LOGINSUSSFUL:
 				{
 					trace("成功连接游戏线路");
 					tool.updateLoadMsg("正在进入游戏中，请稍后...");
 					getUserInfo();
 					break;
 				}
-				case "19792572": //用户信息返回
+				case LoginConst.USERINFO: 
 				{
 					userInfo.PROTOCOL = 19727036;
 					userInfo.USERNAME = dataReust.userinfo[0].name;

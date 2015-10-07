@@ -39,14 +39,14 @@ package business.ddz
 			dataReust = event.data;
 			switch(dataReust.protocol)
 			{
-				case "33358724": 	//日排行榜信息
+				case SocketConst.DAYRANK: 	//日排行榜信息
 					(FlexGlobals.topLevelApplication.MainModule.child).dayRankArray = dataReust.ranking as Array;
 					setRankData(dataReust.ranking as Array);
 					break;
-				case "33162116": //周排行榜信息
+				case SocketConst.WEEKRANK: //周排行榜信息
 					(FlexGlobals.topLevelApplication.MainModule.child).weekRankArray = dataReust.ranking as Array;
 					break;
-				case "32768900": //房间信息
+				case SocketConst.ROOMLIST: //房间信息
 					(FlexGlobals.topLevelApplication.MainModule.child).roomArray = dataReust.tables as Array;
 					setRoomData(dataReust.tables as Array);
 					break;
