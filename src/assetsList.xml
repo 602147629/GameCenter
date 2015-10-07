@@ -32,5 +32,10 @@
 	<object assetsName = "day_rank_hover" assetsUrl ="image/day_rank_hover.jpg" />
 	<object assetsName = "week_rank" assetsUrl ="image/week_rank.jpg" />
 	<object assetsName = "week_rank_hover" assetsUrl ="image/week_rank_hover.jpg" />
-	
+	<object assetsName = "room_list_bg" assetsUrl ="image/room_list_bg.png" />
+	<object assetsName = "ordinary" assetsUrl ="image/ordinary.png" />
+	<object assetsName = "double" assetsUrl ="image/double.png" />
+	<object assetsName = "icon_01" assetsUrl ="image/icon_01.png" />
+	<object assetsName = "btn_start" assetsUrl ="image/btn_start.jpg" />
+	<object assetsName = "btn_start_hover" assetsUrl ="image/btn_start_hover.jpg" />
 </data>

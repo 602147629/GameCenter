@@ -1,11 +1,8 @@
 package business
 {
-	import mx.controls.Alert;
 	import mx.core.FlexGlobals;
-	
 	import events.MainEvent;
 	import events.UserEvent;
-	
 	import model.EventModel;
 	import model.UserInfo;
 
@@ -39,7 +36,6 @@ package business
 		{
 			var dataReust:Object = new Object();
 			dataReust = event.data;
-			Alert.show(dataReust.protocol);
 			switch(dataReust.protocol)
 			{
 				case "6619736"://域登录信息发送
@@ -59,7 +55,7 @@ package business
 					getUserInfo();
 					break;
 				}
-				case "19727036": //用户信息返回
+				case "19792572": //用户信息返回
 				{
 					userInfo.PROTOCOL = 19727036;
 					userInfo.USERNAME = dataReust.userinfo[0].name;

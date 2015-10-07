@@ -49,7 +49,7 @@ package business
 			FlexGlobals.topLevelApplication.MainModule.unloadModule();
 			
 			IL = new ImageLoader(urlName);
-			tool.updateLoadMsg("加载UI素材中..");
+			tool.updateLoadMsg("加载素材中..");
 		}
 		
 		/**

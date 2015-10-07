@@ -7,7 +7,9 @@ package assets
 	import flash.events.ProgressEvent;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
+	
 	import business.Main;
+	import business.Tools;
 	
 	/**
 	 * 素材加载器
@@ -22,6 +24,7 @@ package assets
 		private var assetslength:int;
 		private var assestObjList:Array;
 		private var main:Main;
+		private var tool:Tools =  new Tools;
 		
 		public function ImageLoader(xmlName:String)
 		{
@@ -52,7 +55,6 @@ package assets
 			var xml:XML=XML(event.target.data);
 			assetslength = xml.object.length();
 			trace("当前加载素材包的长度为："+assetslength);
-			
 			for each( var x:XML in xml.object )
 			{
 				var obj:Object = new Object();
@@ -105,6 +107,7 @@ package assets
 		private function completeHandler(e:Event):void
 		{ 
 			trace("加载完成:"+loader.name);
+			tool.updateLoadMsg("正在加载素材..."+ Number((assestObjList.length - assetslength)/assestObjList.length * 100).toFixed(0) + "%");
 			var bitmap:Bitmap = new Bitmap();
 			bitmap = Bitmap(loader.content); 
 			
@@ -135,6 +138,7 @@ package assets
 		private function IOError(event:IOErrorEvent):void
 		{
 			trace("ioError:" + event.text);
+			tool.updateLoadMsg("加载素材包失败！请重试...");
 		}
 	}
 }
