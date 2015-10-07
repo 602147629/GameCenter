@@ -1,8 +1,13 @@
 package business
 {
+	import flash.display.DisplayObjectContainer;
+	
 	import mx.core.FlexGlobals;
 	import mx.managers.BrowserManager;
 	import mx.managers.IBrowserManager;
+	import mx.managers.PopUpManager;
+	
+	import view.Waiting;
 
 	/**
 	 * 工具类
@@ -69,6 +74,23 @@ package business
 		public function updateLoadMsg(strMsg:String):void
 		{
 			FlexGlobals.topLevelApplication.msg.text = strMsg;
+		}
+		
+		/**
+		 * 修改加载消息
+		 * 消息，弹出窗口，遮罩
+		 */
+		public var childWin:Waiting = new Waiting();
+		public function showWaiting(strMsg:String,modal:Boolean=true,closes:Boolean=false):void
+		{
+			if(closes == true)
+			{
+				childWin.removePop();
+			}else{
+				childWin.setMsg(strMsg);
+				PopUpManager.addPopUp(childWin, FlexGlobals.topLevelApplication.disObj, modal);
+				PopUpManager.centerPopUp(childWin);
+			}
 		}
 	}
 }

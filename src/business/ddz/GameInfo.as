@@ -5,6 +5,8 @@ package business.ddz
 	 * 2015/10/2
 	 * James
 	 */
+	import flash.display.DisplayObject;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
 	import mx.core.FlexGlobals;
@@ -16,10 +18,14 @@ package business.ddz
 	import spark.components.TileGroup;
 	import spark.components.VGroup;
 	
+	import business.Tools;
+	
 	import model.EventModel;
 
 	public class GameInfo
 	{
+		private var tools:Tools = new Tools();
+		
 		/**
 		 * 添加监听
 		 */
@@ -154,8 +160,12 @@ package business.ddz
 				gp.addElement(ulimittxt);
 				gp.addElement(onlinestxt);
 				gp.addElement(imgbtn);
+				gp.addEventListener(Event.ADDED,function (e:Event):void{
+					trace("添加房间成功");
+				});
 				tg.addElement(gp);
 			}
+			tools.showWaiting("",false,true);
 		}
 		
 	}

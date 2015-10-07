@@ -110,6 +110,7 @@ package business
 		 */
 		private function getUserInfo():void
 		{
+			tool.showWaiting("初始化数据中...",false);
 			userInfo.PROTOCOL = 19661500;
 			userEvent.userLoginEvent(userInfo);
 		}

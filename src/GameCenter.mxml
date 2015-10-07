@@ -13,6 +13,7 @@
 			
 			private var main:Main = new Main();
 			public var assetsObject:Object;        //保存素材
+			public var disObj:DisplayObject;
 			
 			/**
 			 * 初始化加载方法
@@ -21,6 +22,9 @@
 			{
 				main.init("assetsList.xml");
 				assetsObject = new Object();
+				
+				//设置父容器
+				disObj = this;
 			}
 			
 		]]>
