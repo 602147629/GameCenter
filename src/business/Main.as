@@ -60,7 +60,7 @@ package business
 			FlexGlobals.topLevelApplication.assetsObject = assObj;
 			switch(gameID){
 				case 2: //加载斗地主游戏
-					FlexGlobals.topLevelApplication.gameBg.source = assObj.game_bg;
+					FlexGlobals.topLevelApplication.roomBg.source = assObj.game_bg;
 					FlexGlobals.topLevelApplication.HeadModule.loadModule("view/ddz/GameHead.swf");
 					FlexGlobals.topLevelApplication.MainModule.loadModule("view/ddz/GameRoom.swf");
 					var ddz:GameInfo = new GameInfo();
@@ -78,11 +78,13 @@ package business
 			tool.updateLoadMsg(loadID + "模块加载完成！" + event.bytesTotal + "字节");
 			
 			loadedLength ++;
-			trace(loadID + "模块加载完成！" + event.bytesTotal + "字节" + "*" + loadedLength);
 			if(loadedLength == 2){
 				initSocket();
-				tool.updateLoadMsg("正在连接游戏服务器...");
 				loadedLength = 0;
+			}
+			if(loadID == "GameModule")
+			{
+				FlexGlobals.topLevelApplication.pageView.selectedIndex = 2;
 			}
 		}
 		
@@ -92,6 +94,7 @@ package business
 		private function initSocket():void
 		{
 			userLogin = new UserLogin();
+			tool.updateLoadMsg("正在连接游戏服务器...");
 		}
 			
 		/**
@@ -99,13 +102,18 @@ package business
 		 */
 		public function Module_progressHandler(event:ModuleEvent):void
 		{
+			FlexGlobals.topLevelApplication.pageView.selectedIndex = 0;
 			var Mid:String = (event.currentTarget as ModuleLoader).id;
 			bytesLoadedObj[Mid] = event.bytesLoaded;
 			bytesTotalObj[Mid] = event.bytesTotal;
 			
 			var bytesLoaded:Number = Math.ceil((bytesLoadedObj.HeadModule  + bytesLoadedObj.MainModule)/1024);
 			var bytesTotal:Number = Math.ceil((bytesTotalObj.HeadModule + bytesTotalObj.MainModule)/1024);
-			tool.updateLoadMsg("加载模块中.." + bytesLoaded + "Kb / " + bytesTotal + "Kb");
+			if(Mid != "GameModule"){
+				tool.updateLoadMsg("加载模块中.." + bytesLoaded + "Kb / " + bytesTotal + "Kb");
+			}else{
+				tool.updateLoadMsg("正在进入房间请稍后.." + event.bytesLoaded + "Kb / " + event.bytesTotal + "Kb");
+			}
 		}
 		
 	}

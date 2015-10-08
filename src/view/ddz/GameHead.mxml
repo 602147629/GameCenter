@@ -12,10 +12,15 @@
 		<![CDATA[
 			import mx.core.FlexGlobals;
 			import mx.events.FlexEvent;
+			
+			import assets.ddz.Images;
+			
 			import model.UserInfo;
 			
 			[Bindable]
 			private var assetsObj:Object;
+			[Bindable]
+			private var images:Images = new Images();
 			
 			/*组件加载之前触发*/
 			private function initView():void
@@ -27,7 +32,12 @@
 			/*组件加载完成触发*/
 			private function init():void
 			{
-				
+				var viewin:Move = new Move();
+				viewin.yFrom = -117;
+				viewin.yTo = 0;
+				viewin.duration = 2000;
+				viewin.target = this;
+				viewin.play();
 			}
 			
 			//事件获取参数
@@ -36,6 +46,18 @@
 				nameTxt.text = user.USERNAME;
 				slTxt.text = "胜率："+ user.USERRATE + "%";
 				amountTxt.text = user.USERMONEY.toFixed(2);
+				
+				var num:String = "5757";
+				for(var i:int=1;i<=5-num.length;i++)
+				{
+					num = "0"+ num;
+				}
+				zx_w.source = "assets/ddz/number_"+ num.substr(0,1) +".png";
+				zx_q.source = "assets/ddz/number_"+ num.substr(1,1) +".png";
+				zx_b.source = "assets/ddz/number_"+ num.substr(2,1) +".png";
+				zx_s.source = "assets/ddz/number_"+ num.substr(3,1) +".png";
+				zx_g.source = "assets/ddz/number_"+ num.substr(4,1) +".png";
+				
 			}
 		]]>
 	</fx:Script>
@@ -48,7 +70,14 @@
 	<s:Group width="100%" height="100%">
 		<s:Image source="{assetsObj.top_bg}" />
 		
-		<s:Label id="zxTxt" text="在线人数：5000人" styleName="zaixian" x="70" y="85"/>
+		<s:Group x="45" y="70">
+			<s:Image id="zxNum" source="{images.number_0}" />
+			<s:Image id="zx_w" x="80" y="4" source="{images.number_0}"/>
+			<s:Image id="zx_q" x="100" y="4" source="{images.number_0}"/>
+			<s:Image id="zx_b" x="120" y="4" source="{images.number_0}"/>
+			<s:Image id="zx_s" x="140" y="4" source="{images.number_0}"/>
+			<s:Image id="zx_g" x="160" y="4" source="{images.number_0}"/>
+		</s:Group>
 		
 		<s:Label id="nameTxt" x="280" y="25" styleName="username" width="160"/>
 		<s:Image source="{assetsObj.amount_bg}"  x="280" y="60"/>

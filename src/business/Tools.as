@@ -6,8 +6,11 @@ package business
 	import mx.managers.BrowserManager;
 	import mx.managers.IBrowserManager;
 	import mx.managers.PopUpManager;
+	import mx.utils.Base64Decoder;
 	
 	import view.Waiting;
+	
+	import vo.json.MYJSON;
 
 	/**
 	 * 工具类
@@ -30,10 +33,12 @@ package business
 			var str:String = browser.url;
 			var index:int;
 			index = str.indexOf(vars);
+			var iend:int;
+			iend = str.indexOf("|");
 			if(index == -1) return null;
 			else
 			{
-				return str.substr(index+1,str.length);
+				return str.substring(index+3,iend);
 			}
 		}
 		
@@ -78,19 +83,40 @@ package business
 		
 		/**
 		 * 修改加载消息
-		 * 消息，弹出窗口，遮罩
+		 * 消息，遮罩，关闭
 		 */
-		public var childWin:Waiting = new Waiting();
 		public function showWaiting(strMsg:String,modal:Boolean=true,closes:Boolean=false):void
 		{
 			if(closes == true)
 			{
-				childWin.removePop();
+				FlexGlobals.topLevelApplication.waitMsg.removePop();
 			}else{
-				childWin.setMsg(strMsg);
-				PopUpManager.addPopUp(childWin, FlexGlobals.topLevelApplication.disObj, modal);
-				PopUpManager.centerPopUp(childWin);
+				FlexGlobals.topLevelApplication.waitMsg.setMsg(strMsg);
+				PopUpManager.addPopUp(FlexGlobals.topLevelApplication.waitMsg, FlexGlobals.topLevelApplication.disObj, modal);
+				PopUpManager.centerPopUp(FlexGlobals.topLevelApplication.waitMsg);
 			}
 		}
+		
+		/**
+		 * 获取浏览器授权信息
+		 */
+		public function getInfo():Object
+		{
+			var userParm:String = getUrl("?p=");
+			//var userParm:String = "eyJkYXRhIjp7InVzZXJpZCI6Ijg4OCIsInVzZXJrZXkiOiI2MGQyZDVlMWZjNmVkNTMyZjE3NWQ2MzMyNDBiMjA3NSIsInNpcCI6IjEwLjYwLjIyLjM5IiwicG9ydCI6IjEyMzQifX0=";
+			if(userParm != ""){
+				var base64_d:Base64Decoder = new Base64Decoder();
+				base64_d.decode(userParm);
+				var Parm:String = base64_d.toByteArray().toString(); 
+				var dataReust:Object = new Object();
+				dataReust = MYJSON.decode(Parm);
+				
+				return dataReust;
+			}else{
+				updateLoadMsg("获取授权信息失败!");
+				return null;
+			}
+		}
+		
 	}
 }

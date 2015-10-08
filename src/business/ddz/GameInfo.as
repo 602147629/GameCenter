@@ -5,18 +5,16 @@ package business.ddz
 	 * 2015/10/2
 	 * James
 	 */
-	import flash.display.DisplayObject;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	
 	import mx.core.FlexGlobals;
-	
 	import spark.components.Group;
 	import spark.components.HGroup;
 	import spark.components.Image;
 	import spark.components.Label;
 	import spark.components.TileGroup;
 	import spark.components.VGroup;
+	import spark.effects.Fade;
 	
 	import business.Tools;
 	
@@ -144,12 +142,14 @@ package business.ddz
 				var imgbtn:Image = new Image();
 				imgbtn.source = assets.btn_start;
 				imgbtn.buttonMode = true;
+				imgbtn.name = item.index;
 				imgbtn.addEventListener(MouseEvent.MOUSE_OVER, function (evt:MouseEvent):void{
 					(evt.currentTarget as Image).source = assets.btn_start_hover;
 				});
 				imgbtn.addEventListener(MouseEvent.MOUSE_OUT, function (evt:MouseEvent):void{
 					(evt.currentTarget as Image).source = assets.btn_start;
 				});
+				imgbtn.addEventListener(MouseEvent.CLICK, selectRoom);
 				imgbtn.x = 125;
 				imgbtn.y = 85;
 				
@@ -160,13 +160,46 @@ package business.ddz
 				gp.addElement(ulimittxt);
 				gp.addElement(onlinestxt);
 				gp.addElement(imgbtn);
-				gp.addEventListener(Event.ADDED,function (e:Event):void{
-					trace("添加房间成功");
+				gp.addEventListener(Event.ADDED_TO_STAGE,function (e:Event):void
+				{
+					var fadein:Fade = new Fade();
+					fadein.alphaFrom = 0;
+					fadein.alphaTo = 1;
+					fadein.duration = 1000;
+					fadein.target = (e.currentTarget as Group);
+					fadein.play();
+				});
+				gp.addEventListener(Event.REMOVED_FROM_STAGE,function (e:Event):void
+				{
+					var fadeout:Fade = new Fade();
+					fadeout.alphaFrom = 1;
+					fadeout.alphaTo = 0;
+					fadeout.duration = 1000;
+					fadeout.target = (e.currentTarget as Group);
+					fadeout.play();
 				});
 				tg.addElement(gp);
 			}
-			tools.showWaiting("",false,true);
 		}
 		
+		/**
+		 * 进入房间
+		 */
+		private function selectRoom(event:MouseEvent):void
+		{
+			FlexGlobals.topLevelApplication.gameBg.source = FlexGlobals.topLevelApplication.assetsObject.game_bg;
+			FlexGlobals.topLevelApplication.GameModule.loadModule("view/ddz/Gameing.swf");
+			trace("选中房间："+ (event.currentTarget as Image).name);
+		}
+		
+		/**
+		 * 返回大厅
+		 */
+		public function backIndex():void
+		{
+			FlexGlobals.topLevelApplication.GameModule.unloadModule();
+			FlexGlobals.topLevelApplication.pageView.selectedIndex = 1;
+		}
+				
 	}
 }

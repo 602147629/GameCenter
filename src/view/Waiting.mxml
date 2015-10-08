@@ -22,7 +22,6 @@
 			
 			public function removePop():void
 			{
-				trace("关闭窗口");
 				PopUpManager.removePopUp(this);
 			}
 		]]>
@@ -31,6 +30,5 @@
 	<fx:Style source="assets/Global.css" />
 	<s:HGroup width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
 		<s:Label id="msg" styleName="waitmsg"/>
-		<s:Button click="removePop()" label="CLOSE"/>
 	</s:HGroup>
 </s:Group>

@@ -5,6 +5,10 @@
 	<fx:Script>
 		<![CDATA[
 			import mx.core.FlexGlobals;
+			
+			import spark.effects.Move;
+			
+			import business.Tools;
 			import business.ddz.GameInfo;
 			
 			[Bindable]
@@ -15,6 +19,7 @@
 			public var weekRankArray:Array = new Array();   //周排行
 			public var roomArray:Array = new Array();         //房间
 			private var GI:GameInfo = new GameInfo();
+			private var tools:Tools = new Tools();
 			
 			/*组件加载之前触发*/
 			private function initView():void
@@ -26,6 +31,12 @@
 			/*组件加载完成触发*/
 			private function init():void
 			{
+				var viewin:Move = new Move();
+				viewin.yFrom = 623;
+				viewin.yTo = 0;
+				viewin.duration = 2000;
+				viewin.target = this;
+				viewin.play();
 			}
 			
 			//排行榜
@@ -80,6 +91,12 @@
 				Btn_3.source = assetsObj.intermediate;
 				Btn_2.source = assetsObj.primary;
 				Btn_1.source = assetsObj.trys;
+				
+				//排序
+				for(var i:int=1; i<=5; i++){
+					roomlist.setElementIndex(roomlist.getChildByName("Btn_"+i) as Image, 6-i);
+				}
+				roomlist.setElementIndex(roomlist.getChildByName(selectRoom) as Image,roomlist.numChildren - 1);
 				
 				roomMouseOverHandler(event);
 			}
@@ -157,24 +174,23 @@
 			//快速游戏
 			private function starGame_Handler():void
 			{
-				gg.text = "游戏玩法正在开发中...";
+				GI.setRoomData(roomArray);
 			}
 			
 		]]>
 	</fx:Script>
 	<fx:Style source="assets/Global.css" />
-	
 	<s:VGroup width="100%" height="100%">
 		<s:Group width="100%" height="60" >
 			<s:Label id="gg" text="S5 世界总决赛开启了！" x="400" y="10" styleName="gonggao"/>
 		</s:Group>
 		
-		<s:Group width="100%" height="100%">
-			<s:Image id="Btn_5" source="{assetsObj.battle}" mouseOver="roomMouseOverHandler(event)" mouseOut="roomMouseOutHandler(event)" x="575" y="1" buttonMode="true" click="getRoomList(event)"/>
-			<s:Image id="Btn_4" source="{assetsObj.senior}" mouseOver="roomMouseOverHandler(event)" mouseOut="roomMouseOutHandler(event)" x="435" y="1" buttonMode="true" click="getRoomList(event)"/>
-			<s:Image id="Btn_3" source="{assetsObj.intermediate}" mouseOver="roomMouseOverHandler(event)" mouseOut="roomMouseOutHandler(event)" x="295" y="1" buttonMode="true" click="getRoomList(event)"/>
-			<s:Image id="Btn_2" source="{assetsObj.primary}" mouseOver="roomMouseOverHandler(event)" mouseOut="roomMouseOutHandler(event)" x="155" y="1" buttonMode="true" click="getRoomList(event)"/>
-			<s:Image id="Btn_1" source="{assetsObj.trys}" mouseOver="roomMouseOverHandler(event)" mouseOut="roomMouseOutHandler(event)" x="15" y="1" buttonMode="true" click="getRoomList(event)"/>
+		<s:Group id="roomlist" width="100%" height="100%">
+			<s:Image id="Btn_5" name="Btn_5" source="{assetsObj.battle}" mouseOver="roomMouseOverHandler(event)" mouseOut="roomMouseOutHandler(event)" x="575" y="1" buttonMode="true" click="getRoomList(event)"/>
+			<s:Image id="Btn_4" name="Btn_4" source="{assetsObj.senior}" mouseOver="roomMouseOverHandler(event)" mouseOut="roomMouseOutHandler(event)" x="435" y="1" buttonMode="true" click="getRoomList(event)"/>
+			<s:Image id="Btn_3" name="Btn_3" source="{assetsObj.intermediate}" mouseOver="roomMouseOverHandler(event)" mouseOut="roomMouseOutHandler(event)" x="295" y="1" buttonMode="true" click="getRoomList(event)"/>
+			<s:Image id="Btn_2" name="Btn_2" source="{assetsObj.primary}" mouseOver="roomMouseOverHandler(event)" mouseOut="roomMouseOutHandler(event)" x="155" y="1" buttonMode="true" click="getRoomList(event)"/>
+			<s:Image id="Btn_1" name="Btn_1" source="{assetsObj.trys}" mouseOver="roomMouseOverHandler(event)" mouseOut="roomMouseOutHandler(event)" x="15" y="1" buttonMode="true" click="getRoomList(event)"/>
 			
 			<s:Image source="{assetsObj.room_bg}"  x="15" y="48"/>
 			<s:Image source="{assetsObj.right_side_bg}"  x="737" y="60"/>
@@ -186,7 +202,7 @@
 			<!--房间-->
 			<s:BorderContainer width="717" height="423" borderVisible="false" x="17" y="50" backgroundAlpha="0">
 				<s:Scroller width="100%" height="100%">
-					<s:TileGroup horizontalGap="15" verticalGap="15" id="room" paddingTop="20" paddingLeft="20" />
+					<s:TileGroup horizontalGap="15" verticalGap="15" id="room" paddingTop="20" paddingLeft="20"/>
 				</s:Scroller>
 			</s:BorderContainer>
 		</s:Group>

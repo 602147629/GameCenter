@@ -12,6 +12,7 @@
 	<object assetsName = "btn_exchange_hover" assetsUrl ="image/btn_exchange_hover.png" />
 	<object assetsName = "btn_exchange" assetsUrl ="image/btn_exchange.png" />
 	<object assetsName = "record" assetsUrl ="image/record.png" />
+	<object assetsName = "online_person_bg" assetsUrl ="image/online_person_bg.png" />
 	
 	<!--房间 -->
 	<object assetsName = "right_side_bg" assetsUrl ="image/right_side_bg.png" />
@@ -38,4 +39,15 @@
 	<object assetsName = "icon_01" assetsUrl ="image/icon_01.png" />
 	<object assetsName = "btn_start" assetsUrl ="image/btn_start.jpg" />
 	<object assetsName = "btn_start_hover" assetsUrl ="image/btn_start_hover.jpg" />
+	
+	<!--游戏 -->
+	<object assetsName = "btn_backLobby" assetsUrl ="image/btn_backLobby.png" />
+	<object assetsName = "bg_3_card" assetsUrl ="image/bg_3_card.png" />
+	<object assetsName = "btn_change" assetsUrl ="image/btn_change.png" />
+	<object assetsName = "btn_start" assetsUrl ="image/btn_start.png" />
+	<object assetsName = "farmers_face" assetsUrl ="image/farmers_face.png" />
+	<object assetsName = "landlord_face" assetsUrl ="image/landlord_face.png" />
+	<object assetsName = "bg_money" assetsUrl ="image/bg_money.png" />
+	<object assetsName = "icon_readying" assetsUrl ="image/icon_readying.png" />
+	
 </data>

@@ -1,6 +1,7 @@
 package business
 {
 	import mx.core.FlexGlobals;
+	import mx.utils.ObjectUtil;
 	
 	import events.MainEvent;
 	import events.UserEvent;
@@ -30,7 +31,21 @@ package business
 			
 			EventModel.dis.addEventListener(EventModel.USERSOCKETDATA,socketDataEvent);
 			
-			mainEvent.initSocket("10.60.22.39",8090); //网络入口链接 域登录服务器。
+			init();
+		}
+		
+		/**
+		 * 确认登录授权
+		 */
+		private function init():void
+		{
+			var userObj:Object = new Object();
+			userObj = tool.getInfo();
+			
+			if(userObj != null){
+				tool.updateLoadMsg("正在进入游戏中，请稍后...");
+				userSuccessful(userObj.data);
+			}
 		}
 		
 		/**
@@ -42,20 +57,9 @@ package business
 			dataReust = event.data;
 			switch(dataReust.protocol)
 			{
-				case LoginConst.YULOGIN:
-				{
-					userLogin("kim","123qwe");
-					break;
-				}
-				case LoginConst.YULOGINSUSSFUL:
-				{
-					userSuccessful(dataReust.data);
-					break;
-				}
 				case LoginConst.LOGINSUSSFUL:
 				{
 					trace("成功连接游戏线路");
-					tool.updateLoadMsg("正在进入游戏中，请稍后...");
 					getUserInfo();
 					break;
 				}
@@ -76,26 +80,13 @@ package business
 			}
 		}
 		
-		/**
-		 * 用户授权事件
-		 */
-		public function userLogin(username:String,userpwd:String):void
-		{
-			userInfo = new UserInfo();
-			userInfo.GAMEID = 2; 
-			userInfo.PROTOCOL = 13107900;
-			userInfo.SSHKEY = "123";
-			userInfo.USERNAME = username;
-			userInfo.PASSWORD = userpwd;
-			
-			userEvent.userLoginEvent(userInfo);
-		}
 		
 		/**
 		 * 用户授权成功连接
 		 */
 		public function userSuccessful(user:Object):void
 		{
+			userInfo = new UserInfo();
 			userInfo.USERID = user.userid;
 			userInfo.USERPORT = user.port;
 			userInfo.USERIP = user.sip;
@@ -110,7 +101,6 @@ package business
 		 */
 		private function getUserInfo():void
 		{
-			tool.showWaiting("初始化数据中...",false);
 			userInfo.PROTOCOL = 19661500;
 			userEvent.userLoginEvent(userInfo);
 		}

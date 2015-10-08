@@ -10,10 +10,12 @@
 	<fx:Script>
 		<![CDATA[
 			import business.Main;
+			import view.Waiting;
 			
 			private var main:Main = new Main();
-			public var assetsObject:Object;        //保存素材
+			public var assetsObject:Object;                 //保存素材
 			public var disObj:DisplayObject;
+			public var waitMsg:Waiting = new Waiting();
 			
 			/**
 			 * 初始化加载方法
@@ -45,17 +47,18 @@
 		<s:NavigatorContent hideEffect="{fadeOut}" showEffect="{fadeIn}">
 			<s:HGroup width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
 				<s:Group width="1024" height="740" >
-					<s:Image width="100%" height="100%" id="gameBg" />
+					<s:Image width="100%" height="100%" id="roomBg" />
 					<s:VGroup id="gamePage" width="100%" height="100%">
 						<!--头部模块-->
-						<s:ModuleLoader id="HeadModule" autoLayout="true" progress="main.Module_progressHandler(event)" ready="main.Module_readyHandler(event)"/>
+						<s:ModuleLoader id="HeadModule" autoLayout="true" progress="main.Module_progressHandler(event)" ready="main.Module_readyHandler(event)" height="117"/>
 						<!--游戏大厅模块-->
 						<s:ModuleLoader id="MainModule" autoLayout="true" progress="main.Module_progressHandler(event)" ready="main.Module_readyHandler(event)"/>
 					</s:VGroup>
 				</s:Group>
 			</s:HGroup>
 		</s:NavigatorContent>
-		<s:NavigatorContent hideEffect="{fadeOut}" showEffect="{fadeIn}">
+		<s:NavigatorContent showEffect="{fadeIn}">
+			<s:Image width="100%" height="100%" id="gameBg" />
 			<s:ModuleLoader id="GameModule" autoLayout="true" width="100%" height="100" progress="main.Module_progressHandler(event)" ready="main.Module_readyHandler(event)"/>
 		</s:NavigatorContent>
 		</mx:ViewStack>
