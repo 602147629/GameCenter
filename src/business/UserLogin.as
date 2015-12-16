@@ -1,7 +1,8 @@
 package business
 {
 	import mx.core.FlexGlobals;
-	import mx.utils.ObjectUtil;
+	
+	import business.ddz.SocketConst;
 	
 	import events.MainEvent;
 	import events.UserEvent;
@@ -37,11 +38,10 @@ package business
 		/**
 		 * 确认登录授权
 		 */
-		private function init():void
+		public function init():void
 		{
 			var userObj:Object = new Object();
 			userObj = tool.getInfo();
-			
 			if(userObj != null){
 				tool.updateLoadMsg("正在进入游戏中，请稍后...");
 				userSuccessful(userObj.data);
@@ -63,12 +63,17 @@ package business
 					getUserInfo();
 					break;
 				}
-				case LoginConst.USERINFO: 
+				case LoginConst.USERINFO: //用户信息
 				{
-					userInfo.PROTOCOL = 19727036;
-					userInfo.USERNAME = dataReust.userinfo[0].name;
-					userInfo.USERMONEY = dataReust.userinfo[0].money;
-					userInfo.USERRATE = dataReust.userinfo[0].rate;
+					trace("成功获取登录用户信息");
+					userInfo.USERID = dataReust.userid;
+					userInfo.PROTOCOL = dataReust.protocol;
+					userInfo.USERNAME = dataReust.data[0].name;
+					userInfo.USERAWAYS = dataReust.data[0].aways;
+					userInfo.USERFAILEDS = dataReust.data[0].faileds;
+					userInfo.USERWONS = dataReust.data[0].wons;
+					userInfo.USERMONEY = dataReust.data[0].points;
+					userInfo.USERRATE = dataReust.data[0].rate;
 					(FlexGlobals.topLevelApplication.HeadModule.child).setUserParam(userInfo);
 					FlexGlobals.topLevelApplication.pageView.selectedIndex = 1;
 				}

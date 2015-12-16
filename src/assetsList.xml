@@ -1,53 +1,57 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <data>
-	<object assetsName = "game_bg" assetsUrl ="image/game_bg.jpg" />
+	<object assetsName = "game_bg" assetsUrl ="http://10.60.22.39/GC/image/game_bg.jpg" />
 	
 	<!--头部 -->
-	<object assetsName = "top_bg" assetsUrl ="image/top_bg.png" />
-	<object assetsName = "feedback_icon" assetsUrl ="image/feedback_icon.png" />
-	<object assetsName = "voice_icon" assetsUrl ="image/voice_icon.png" />
-	<object assetsName = "message_icon" assetsUrl ="image/message_icon.png" />
-	<object assetsName = "help_icon" assetsUrl ="image/help_icon.png" />
-	<object assetsName = "amount_bg" assetsUrl ="image/amount_bg.png" />
-	<object assetsName = "btn_exchange_hover" assetsUrl ="image/btn_exchange_hover.png" />
-	<object assetsName = "btn_exchange" assetsUrl ="image/btn_exchange.png" />
-	<object assetsName = "record" assetsUrl ="image/record.png" />
-	<object assetsName = "online_person_bg" assetsUrl ="image/online_person_bg.png" />
+	<object assetsName = "top_bg" assetsUrl ="http://10.60.22.39/GC/image/top_bg.png" />
+	<object assetsName = "feedback_icon" assetsUrl ="http://10.60.22.39/GC/image/feedback_icon.png" />
+	<object assetsName = "voice_icon" assetsUrl ="http://10.60.22.39/GC/image/voice_icon.png" />
+	<object assetsName = "message_icon" assetsUrl ="http://10.60.22.39/GC/image/message_icon.png" />
+	<object assetsName = "help_icon" assetsUrl ="http://10.60.22.39/GC/image/help_icon.png" />
+	<object assetsName = "amount_bg" assetsUrl ="http://10.60.22.39/GC/image/amount_bg.png" />
+	<object assetsName = "btn_exchange_hover" assetsUrl ="http://10.60.22.39/GC/image/btn_exchange_hover.png" />
+	<object assetsName = "btn_exchange" assetsUrl ="http://10.60.22.39/GC/image/btn_exchange.png" />
+	<object assetsName = "btn_record" assetsUrl ="http://10.60.22.39/GC/image/btn_record.png" />
+	<object assetsName = "odds_bg" assetsUrl ="http://10.60.22.39/GC/image/odds_bg.png" />
+	<object assetsName = "btn_record_hover" assetsUrl ="http://10.60.22.39/GC/image/btn_record_hover.png" />
+	<object assetsName = "online_person_bg" assetsUrl ="http://10.60.22.39/GC/image/online_person_bg.png" />
+	
+	
 	
 	<!--房间 -->
-	<object assetsName = "right_side_bg" assetsUrl ="image/right_side_bg.png" />
-	<object assetsName = "room_bg" assetsUrl ="image/room_bg.jpg" />
-	<object assetsName = "trys" assetsUrl ="image/try.png" />
-	<object assetsName = "try_hover" assetsUrl ="image/try_hover.png" />
-	<object assetsName = "primary" assetsUrl ="image/primary.png" />
-	<object assetsName = "primary_hover" assetsUrl ="image/primary_hover.png" />
-	<object assetsName = "intermediate" assetsUrl ="image/intermediate.png" />
-	<object assetsName = "intermediate_hover" assetsUrl ="image/intermediate_hover.png" />
-	<object assetsName = "senior" assetsUrl ="image/senior.png" />
-	<object assetsName = "senior_hover" assetsUrl ="image/senior_hover.png" />
-	<object assetsName = "battle" assetsUrl ="image/battle.png" />
-	<object assetsName = "battle_hover" assetsUrl ="image/battle_hover.png" />
-	<object assetsName = "game_start" assetsUrl ="image/game_start.png" />
-	<object assetsName = "rank_bg" assetsUrl ="image/rank_bg.jpg" />
-	<object assetsName = "day_rank" assetsUrl ="image/day_rank.jpg" />
-	<object assetsName = "day_rank_hover" assetsUrl ="image/day_rank_hover.jpg" />
-	<object assetsName = "week_rank" assetsUrl ="image/week_rank.jpg" />
-	<object assetsName = "week_rank_hover" assetsUrl ="image/week_rank_hover.jpg" />
-	<object assetsName = "room_list_bg" assetsUrl ="image/room_list_bg.png" />
-	<object assetsName = "ordinary" assetsUrl ="image/ordinary.png" />
-	<object assetsName = "double" assetsUrl ="image/double.png" />
-	<object assetsName = "icon_01" assetsUrl ="image/icon_01.png" />
-	<object assetsName = "btn_start" assetsUrl ="image/btn_start.jpg" />
-	<object assetsName = "btn_start_hover" assetsUrl ="image/btn_start_hover.jpg" />
+	<object assetsName = "right_side_bg" assetsUrl ="http://10.60.22.39/GC/image/right_side_bg.png" />
+	<object assetsName = "room_bg" assetsUrl ="http://10.60.22.39/GC/image/room_bg.jpg" />
+	<object assetsName = "trys" assetsUrl ="http://10.60.22.39/GC/image/try.png" />
+	<object assetsName = "try_hover" assetsUrl ="http://10.60.22.39/GC/image/try_hover.png" />
+	<object assetsName = "primary" assetsUrl ="http://10.60.22.39/GC/image/primary.png" />
+	<object assetsName = "primary_hover" assetsUrl ="http://10.60.22.39/GC/image/primary_hover.png" />
+	<object assetsName = "intermediate" assetsUrl ="http://10.60.22.39/GC/image/intermediate.png" />
+	<object assetsName = "intermediate_hover" assetsUrl ="http://10.60.22.39/GC/image/intermediate_hover.png" />
+	<object assetsName = "senior" assetsUrl ="http://10.60.22.39/GC/image/senior.png" />
+	<object assetsName = "senior_hover" assetsUrl ="http://10.60.22.39/GC/image/senior_hover.png" />
+	<object assetsName = "battle" assetsUrl ="http://10.60.22.39/GC/image/battle.png" />
+	<object assetsName = "battle_hover" assetsUrl ="http://10.60.22.39/GC/image/battle_hover.png" />
+	<object assetsName = "game_start" assetsUrl ="http://10.60.22.39/GC/image/game_start.png" />
+	<object assetsName = "rank_bg" assetsUrl ="http://10.60.22.39/GC/image/rank_bg.jpg" />
+	<object assetsName = "day_rank" assetsUrl ="http://10.60.22.39/GC/image/day_rank.jpg" />
+	<object assetsName = "day_rank_hover" assetsUrl ="http://10.60.22.39/GC/image/day_rank_hover.jpg" />
+	<object assetsName = "week_rank" assetsUrl ="http://10.60.22.39/GC/image/week_rank.jpg" />
+	<object assetsName = "week_rank_hover" assetsUrl ="http://10.60.22.39/GC/image/week_rank_hover.jpg" />
+	<object assetsName = "room_list_bg" assetsUrl ="http://10.60.22.39/GC/image/room_list_bg.png" />
+	<object assetsName = "ordinary" assetsUrl ="http://10.60.22.39/GC/image/ordinary.png" />
+	<object assetsName = "double" assetsUrl ="http://10.60.22.39/GC/image/double.png" />
+	<object assetsName = "icon_01" assetsUrl ="http://10.60.22.39/GC/image/icon_01.png" />
+	<object assetsName = "btn_start" assetsUrl ="http://10.60.22.39/GC/image/btn_start.jpg" />
+	<object assetsName = "btn_start_hover" assetsUrl ="http://10.60.22.39/GC/image/btn_start_hover.jpg" />
 	
 	<!--游戏 -->
-	<object assetsName = "btn_backLobby" assetsUrl ="image/btn_backLobby.png" />
-	<object assetsName = "bg_3_card" assetsUrl ="image/bg_3_card.png" />
-	<object assetsName = "btn_change" assetsUrl ="image/btn_change.png" />
-	<object assetsName = "btn_start" assetsUrl ="image/btn_start.png" />
-	<object assetsName = "farmers_face" assetsUrl ="image/farmers_face.png" />
-	<object assetsName = "landlord_face" assetsUrl ="image/landlord_face.png" />
-	<object assetsName = "bg_money" assetsUrl ="image/bg_money.png" />
-	<object assetsName = "icon_readying" assetsUrl ="image/icon_readying.png" />
+	<object assetsName = "btn_backLobby" assetsUrl ="http://10.60.22.39/GC/image/btn_backLobby.png" />
+	<object assetsName = "bg_3_card" assetsUrl ="http://10.60.22.39/GC/image/bg_3_card.png" />
+	<object assetsName = "btn_change" assetsUrl ="http://10.60.22.39/GC/image/btn_change.png" />
+	<object assetsName = "btn_start" assetsUrl ="http://10.60.22.39/GC/image/btn_start.png" />
+	<object assetsName = "farmers_face" assetsUrl ="http://10.60.22.39/GC/image/farmers_face.png" />
+	<object assetsName = "landlord_face" assetsUrl ="http://10.60.22.39/GC/image/landlord_face.png" />
+	<object assetsName = "bg_money" assetsUrl ="http://10.60.22.39/GC/image/bg_money.png" />
+	<object assetsName = "icon_readying" assetsUrl ="http://10.60.22.39/GC/image/icon_readying.png" />
 	
 </data>

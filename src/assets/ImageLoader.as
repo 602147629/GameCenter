@@ -127,9 +127,10 @@ package assets
 		private function loadImageError(event:IOErrorEvent):void
 		{
 			trace("ioError:" + event.text);
-			assetslength --;  //加载错误 跳过操作
+			//assetslength --;  //加载错误 跳过操作
 			if(assetslength > 0){loadNewImg(assetslength);}
 			//可加触发事件
+			tool.updateLoadMsg("素材:"+loader.name+"加载失败！");
 		}
 		
 		/**

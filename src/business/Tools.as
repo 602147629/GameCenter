@@ -1,14 +1,12 @@
 package business
 {
-	import flash.display.DisplayObjectContainer;
+	import flash.utils.ByteArray;
 	
 	import mx.core.FlexGlobals;
 	import mx.managers.BrowserManager;
 	import mx.managers.IBrowserManager;
 	import mx.managers.PopUpManager;
 	import mx.utils.Base64Decoder;
-	
-	import view.Waiting;
 	
 	import vo.json.MYJSON;
 
@@ -30,7 +28,8 @@ package business
 		{
 			browser = BrowserManager.getInstance();
 			browser.init(); 
-			var str:String = browser.url;
+			var str:String = 'http://10.60.22.39/GC/GameCenter_.html?p=eyJkYXRhIjp7InVzZXJpZCI6Ijg4OCIsInVzZXJrZXkiOiJ1bmRlZmluZWQiLCJzaXAiOiIxMC42MC4yMi4zOSIsInBvcnQiOiIxMjM0In19|#'
+			//var str:String = browser.url;
 			var index:int;
 			index = str.indexOf(vars);
 			var iend:int;
@@ -40,6 +39,20 @@ package business
 			{
 				return str.substring(index+3,iend);
 			}
+		}
+		
+		/**
+		 * 获取socket头信息
+		 */
+		public function decode(h:int, l:int) : int
+		{
+			if (h<0){
+				h = (0xff+h+1);
+			}
+			if (l<0){
+				l = (0xff+l+1);
+			}
+			return (l*(0xff+1)+h);
 		}
 		
 		/**
@@ -82,7 +95,7 @@ package business
 		}
 		
 		/**
-		 * 修改加载消息
+		 * 遮罩窗口
 		 * 消息，遮罩，关闭
 		 */
 		public function showWaiting(strMsg:String,modal:Boolean=true,closes:Boolean=false):void
@@ -103,20 +116,18 @@ package business
 		public function getInfo():Object
 		{
 			var userParm:String = getUrl("?p=");
-			//var userParm:String = "eyJkYXRhIjp7InVzZXJpZCI6Ijg4OCIsInVzZXJrZXkiOiI2MGQyZDVlMWZjNmVkNTMyZjE3NWQ2MzMyNDBiMjA3NSIsInNpcCI6IjEwLjYwLjIyLjM5IiwicG9ydCI6IjEyMzQifX0=";
 			if(userParm != ""){
+				updateLoadMsg("获取授权信息...");
 				var base64_d:Base64Decoder = new Base64Decoder();
 				base64_d.decode(userParm);
 				var Parm:String = base64_d.toByteArray().toString(); 
 				var dataReust:Object = new Object();
 				dataReust = MYJSON.decode(Parm);
-				
 				return dataReust;
 			}else{
 				updateLoadMsg("获取授权信息失败!");
 				return null;
 			}
 		}
-		
 	}
 }

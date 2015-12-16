@@ -9,8 +9,13 @@ package vo
 	import flash.system.Security;
 	import flash.utils.ByteArray;
 	import flash.utils.Timer;
+	
 	import mx.utils.ObjectUtil;
+	
+	import business.Tools;
+	
 	import model.EventModel;
+	
 	
 	
 	/**
@@ -26,6 +31,7 @@ package vo
 		private var _Timer:Timer;
 		
 		private var eventModel:EventModel;                        //事件
+		private var tool:Tools = new Tools();
 		
 		public function Connection()
 		{
@@ -90,15 +96,62 @@ package vo
 		/**
 		 * Socket返回数据事件
 		 */
+		private var vByteArray:ByteArray = new ByteArray();
 		private function SocketDataEvent(event:ProgressEvent):void
 		{
 			var readData:String;
-			while (_SOCKET.bytesAvailable) {
-				readData=_SOCKET.readUTFBytes(_SOCKET.bytesAvailable);
+			_SOCKET.readBytes(vByteArray);
+			var vJsonMsg:Array = GetPacketArray(vByteArray);
+			
+			for each ( var str : String in vJsonMsg)
+			{
+				readData = str.toString();
+				eventModel = new EventModel(EventModel.SOCKETDATA,false,false,readData);
+				EventModel.dis.dispatchEvent(eventModel);
+			}
+		}
+
+		/**
+		 * socket消息队列处理
+		 */
+		public function GetPacketArray( netArray : ByteArray) : Array		
+		{
+			var jsStringArray  : Array = new Array;
+			
+			netArray.position=0;
+			var _vSumLen  : int = 0;
+			var _vBuffLen : int = netArray.length;
+			
+			while (true) 
+			{
+				if ( (netArray.position+2) >= _vBuffLen) {		// 保险-1
+					break;
+				}
+				
+				var vHByte:int = netArray.readByte();
+				var vLByte:int = netArray.readByte();
+				var _vLength :int = tool.decode(vHByte, vLByte);	// 读16位的头
+				
+				_vSumLen += 2;
+				
+				if (_vSumLen>=_vBuffLen) {			   // 保险-2
+					break;
+				}
+				
+				if ((_vSumLen+_vLength)>_vBuffLen) {	// 保险-3
+					break;
+				}
+				
+				var _vSubArray : ByteArray = new ByteArray;			// 取一个串	
+				netArray.readBytes( _vSubArray, 0, _vLength);		// 读字节长度
+				_vSumLen += _vLength;
+				
+				var vText : String = new String;
+				vText = _vSubArray.toString();
+				jsStringArray.push( _vSubArray.toString() );
 			}
 			
-			eventModel = new EventModel(EventModel.SOCKETDATA,false,false,readData);
-			EventModel.dis.dispatchEvent(eventModel);
+			return jsStringArray;
 		}
 		
 		/**
@@ -110,7 +163,7 @@ package vo
 			EventModel.dis.dispatchEvent(eventModel);
 			_Timer.start();
 		}
-		
+
 		/**
 		 * Socket链接ioError事件
 		 */

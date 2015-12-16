@@ -2,8 +2,6 @@ package events
 {
 	import flash.utils.ByteArray;
 	
-	import mx.utils.ObjectUtil;
-	
 	import business.Tools;
 	
 	import model.EventModel;
@@ -53,21 +51,24 @@ package events
 		 */
 		private function socketDataEvent(event:EventModel):void
 		{
-			var dataReust:Object = new Object();
-			trace(ObjectUtil.toString(event.data));
-			dataReust = MYJSON.decode(event.data as String);
-			
-			var prtcol:int = tool.getCode(dataReust.protocol,"L");
-			switch(prtcol){
-				case 600:
-				case 700:
-					eventModel = new EventModel(EventModel.USERSOCKETDATA,false,false,dataReust);
-					break;
-				case 900:
-					eventModel = new EventModel(EventModel.GAMESOCKETDATA,false,false,dataReust);
-					break;
-			}
-			EventModel.dis.dispatchEvent(eventModel);
+				var dataReust:Object = new Object();
+				trace("解析："+event.data as String);
+				dataReust = MYJSON.decode(event.data as String);
+				var prtcol:int = tool.getCode(dataReust.protocol,"L");
+				trace("-------------------------------------------");
+				trace(event.data as String);
+				trace(prtcol);
+				trace("-------------------------------------------");
+				switch(prtcol){
+					case 600:
+					case 700:
+						eventModel = new EventModel(EventModel.USERSOCKETDATA,false,false,dataReust);
+						break;
+					case 900:
+						eventModel = new EventModel(EventModel.GAMESOCKETDATA,false,false,dataReust);
+						break;
+				}
+				EventModel.dis.dispatchEvent(eventModel);
 		}
 		
 		/**

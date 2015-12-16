@@ -14,7 +14,7 @@
 			[Bindable]
 			private var assetsObj:Object;
 			private var selectRank:String = "day";
-			public var selectRoom:String = "";
+			public var selectRoomId:String = "Btn_1";
 			public var dayRankArray:Array = new Array();      //日排行
 			public var weekRankArray:Array = new Array();   //周排行
 			public var roomArray:Array = new Array();         //房间
@@ -84,7 +84,7 @@
 			//房间
 			private function getRoomList(event:MouseEvent):void
 			{
-				selectRoom = (event.currentTarget as Image).id;
+				selectRoomId = (event.currentTarget as Image).id;
 				
 				Btn_5.source = assetsObj.battle;
 				Btn_4.source = assetsObj.senior;
@@ -93,18 +93,17 @@
 				Btn_1.source = assetsObj.trys;
 				
 				//排序
-				for(var i:int=1; i<=5; i++){
-					roomlist.setElementIndex(roomlist.getChildByName("Btn_"+i) as Image, 6-i);
+				for(var i:int=1; i<5; i++){
+					roomtype.setElementIndex(roomtype.getChildByName("Btn_"+i) as Image, 5-i);
 				}
-				roomlist.setElementIndex(roomlist.getChildByName(selectRoom) as Image,roomlist.numChildren - 1);
-				
 				roomMouseOverHandler(event);
+				GI.setRoomData(roomArray);
 			}
 			
 			//改变房间名字图片
 			public function changeSelect(name:String):void
 			{
-				selectRoom = name;
+				selectRoomId = name;
 				if(name == "Btn_2"){
 					Btn_2.source = assetsObj.primary_hover;
 				}
@@ -124,23 +123,23 @@
 			//房间按钮Out
 			private function roomMouseOutHandler(event:MouseEvent):void
 			{
-				if((event.currentTarget as Image).id == "Btn_5" &&  selectRoom != "Btn_5")
+				if((event.currentTarget as Image).id == "Btn_5" &&  selectRoomId != "Btn_5")
 				{
 					Btn_5.source=assetsObj.battle;
 				}
-				else if((event.currentTarget as Image).id == "Btn_4" &&  selectRoom != "Btn_4")
+				else if((event.currentTarget as Image).id == "Btn_4" &&  selectRoomId != "Btn_4")
 				{
 					Btn_4.source = assetsObj.senior;
 				}
-				else if((event.currentTarget as Image).id == "Btn_3" &&  selectRoom != "Btn_3")
+				else if((event.currentTarget as Image).id == "Btn_3" &&  selectRoomId != "Btn_3")
 				{
 					Btn_3.source = assetsObj.intermediate;
 				}
-				else if((event.currentTarget as Image).id == "Btn_2" &&  selectRoom != "Btn_2")
+				else if((event.currentTarget as Image).id == "Btn_2" &&  selectRoomId != "Btn_2")
 				{
 					Btn_2.source = assetsObj.primary;
 				}
-				else if((event.currentTarget as Image).id == "Btn_1" &&  selectRoom != "Btn_1")
+				else if((event.currentTarget as Image).id == "Btn_1" &&  selectRoomId != "Btn_1")
 				{
 					Btn_1.source = assetsObj.trys;
 				}
@@ -181,33 +180,31 @@
 	</fx:Script>
 	<fx:Style source="assets/Global.css" />
 	<s:VGroup width="100%" height="100%">
-		<s:Group width="100%" height="60" >
-			<s:Label id="gg" text="S5 世界总决赛开启了！" x="400" y="10" styleName="gonggao"/>
-		</s:Group>
-		
 		<s:Group id="roomlist" width="100%" height="100%">
-			<s:Image id="Btn_5" name="Btn_5" source="{assetsObj.battle}" mouseOver="roomMouseOverHandler(event)" mouseOut="roomMouseOutHandler(event)" x="575" y="1" buttonMode="true" click="getRoomList(event)"/>
-			<s:Image id="Btn_4" name="Btn_4" source="{assetsObj.senior}" mouseOver="roomMouseOverHandler(event)" mouseOut="roomMouseOutHandler(event)" x="435" y="1" buttonMode="true" click="getRoomList(event)"/>
-			<s:Image id="Btn_3" name="Btn_3" source="{assetsObj.intermediate}" mouseOver="roomMouseOverHandler(event)" mouseOut="roomMouseOutHandler(event)" x="295" y="1" buttonMode="true" click="getRoomList(event)"/>
-			<s:Image id="Btn_2" name="Btn_2" source="{assetsObj.primary}" mouseOver="roomMouseOverHandler(event)" mouseOut="roomMouseOutHandler(event)" x="155" y="1" buttonMode="true" click="getRoomList(event)"/>
-			<s:Image id="Btn_1" name="Btn_1" source="{assetsObj.trys}" mouseOver="roomMouseOverHandler(event)" mouseOut="roomMouseOutHandler(event)" x="15" y="1" buttonMode="true" click="getRoomList(event)"/>
-			
-			<s:Image source="{assetsObj.room_bg}"  x="15" y="48"/>
-			<s:Image source="{assetsObj.right_side_bg}"  x="737" y="60"/>
-			<s:Image source="{assetsObj.rank_bg}"  x="764" y="142"/>
-			<s:Image id="dayRank" source="{assetsObj.day_rank_hover}"  x="765" y="60" />
-			<s:Image id="weekRank" source="{assetsObj.week_rank}"  x="872" y="60"/>
+			<s:HGroup id="roomtype" width="100%" x="19" y="41" gap="-5">
+				<s:Image id="Btn_5" name="Btn_5" source="{assetsObj.battle}" mouseOver="roomMouseOverHandler(event)" mouseOut="roomMouseOutHandler(event)" buttonMode="true" click="getRoomList(event)"/>
+				<s:Image id="Btn_4" name="Btn_4" source="{assetsObj.senior}" mouseOver="roomMouseOverHandler(event)" mouseOut="roomMouseOutHandler(event)" buttonMode="true" click="getRoomList(event)"/>
+				<s:Image id="Btn_3" name="Btn_3" source="{assetsObj.intermediate}" mouseOver="roomMouseOverHandler(event)" mouseOut="roomMouseOutHandler(event)" buttonMode="true" click="getRoomList(event)"/>
+				<s:Image id="Btn_2" name="Btn_2" source="{assetsObj.primary}" mouseOver="roomMouseOverHandler(event)" mouseOut="roomMouseOutHandler(event)" buttonMode="true" click="getRoomList(event)"/>
+				<s:Image id="Btn_1" name="Btn_1" source="{assetsObj.trys}" mouseOver="roomMouseOverHandler(event)" mouseOut="roomMouseOutHandler(event)" buttonMode="true" click="getRoomList(event)"/>
+			</s:HGroup>
+		
+			<s:Image source="{assetsObj.room_bg}"  x="20" y="84"/>
+			<s:Image source="{assetsObj.right_side_bg}"  x="734" y="83"/>
+			<s:Image source="{assetsObj.rank_bg}"  x="755" y="160"/>
+			<s:Image id="dayRank" source="{assetsObj.day_rank_hover}"  x="755" y="82" />
+			<s:Image id="weekRank" source="{assetsObj.week_rank}"  x="857" y="82"/>
 			<!--排行榜数据-->
-			<s:VGroup id="dataRank" width="211" height="311" x="764" y="192" styleName="rank"/>
+			<s:VGroup id="dataRank" width="185" height="235" x="771" y="207" styleName="rank"/>
 			<!--房间-->
-			<s:BorderContainer width="717" height="423" borderVisible="false" x="17" y="50" backgroundAlpha="0">
+			<s:BorderContainer width="717" height="423" borderVisible="false" x="17" y="80" backgroundAlpha="0">
 				<s:Scroller width="100%" height="100%">
 					<s:TileGroup horizontalGap="15" verticalGap="15" id="room" paddingTop="20" paddingLeft="20"/>
 				</s:Scroller>
 			</s:BorderContainer>
 		</s:Group>
 	</s:VGroup>
-	<s:Image source="{assetsObj.game_start}"  x="695" y="40" buttonMode="true" click="starGame_Handler()"/>
-	<mx:Box id="dayBtn" alpha="0" width="100" height="50" buttonMode="true" x="765" y="158" mouseOver="rankMouseOverHandler(event)" mouseOut="rankMouseOutHandler(event)" click="{getRankList('day')}"/>
-	<mx:Box id="weekBtn" alpha="0" width="100" height="50" buttonMode="true" x="874" y="158" mouseOver="rankMouseOverHandler(event)" mouseOut="rankMouseOutHandler(event)" click="{getRankList('week')}"/>
+	<s:Image source="{assetsObj.game_start}"  x="690" y="0" buttonMode="true" click="starGame_Handler()"/>
+	<mx:Box id="dayBtn" alpha="0" width="100" height="50" buttonMode="true" x="755" y="108" mouseOver="rankMouseOverHandler(event)" mouseOut="rankMouseOutHandler(event)" click="{getRankList('day')}" backgroundColor="#ffffff"/>
+	<mx:Box id="weekBtn" alpha="0" width="100" height="50" buttonMode="true" x="857" y="108" mouseOver="rankMouseOverHandler(event)" mouseOut="rankMouseOutHandler(event)" click="{getRankList('week')}" backgroundColor="#ffffff"/>
 </s:Module>

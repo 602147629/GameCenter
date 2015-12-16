@@ -36,7 +36,7 @@ package business
 			bytesTotalObj = new Object();
 			
 			loadedLength = 0;                   //已加载模块数量
-			gameID = 2;                            //游戏ID  斗地主
+			gameID = 2;                           //游戏ID  斗地主
 		}
 		
 		/**
@@ -84,6 +84,7 @@ package business
 			}
 			if(loadID == "GameModule")
 			{
+				loadedLength = 0;
 				FlexGlobals.topLevelApplication.pageView.selectedIndex = 2;
 			}
 		}

@@ -6,21 +6,17 @@
 -->
 <s:Module xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		  xmlns:s="library://ns.adobe.com/flex/spark" 
-		  xmlns:mx="library://ns.adobe.com/flex/mx" initialize="initView()" creationComplete="init()" width="1024" height="117">
+		  xmlns:mx="library://ns.adobe.com/flex/mx" initialize="initView()" creationComplete="init()" width="980" height="117">
 	
 	<fx:Script>
 		<![CDATA[
 			import mx.core.FlexGlobals;
 			import mx.events.FlexEvent;
 			
-			import assets.ddz.Images;
-			
 			import model.UserInfo;
 			
 			[Bindable]
 			private var assetsObj:Object;
-			[Bindable]
-			private var images:Images = new Images();
 			
 			/*组件加载之前触发*/
 			private function initView():void
@@ -44,21 +40,32 @@
 			public function setUserParam(user:UserInfo):void
 			{
 				nameTxt.text = user.USERNAME;
-				slTxt.text = "胜率："+ user.USERRATE + "%";
+				slTxt.text = "胜率:"+ user.USERRATE + "%";
 				amountTxt.text = user.USERMONEY.toFixed(2);
-				
-				var num:String = "5757";
-				for(var i:int=1;i<=5-num.length;i++)
-				{
-					num = "0"+ num;
-				}
-				zx_w.source = "assets/ddz/number_"+ num.substr(0,1) +".png";
-				zx_q.source = "assets/ddz/number_"+ num.substr(1,1) +".png";
-				zx_b.source = "assets/ddz/number_"+ num.substr(2,1) +".png";
-				zx_s.source = "assets/ddz/number_"+ num.substr(3,1) +".png";
-				zx_g.source = "assets/ddz/number_"+ num.substr(4,1) +".png";
-				
 			}
+			
+			//初始化在线人数控件
+			public function initPeople(num:String):void
+			{
+			 	var zeroStr:String = "00000";
+				for(var i:int=0;i<num.length;i++)
+				{
+					var newStr:String = "";
+					for(var j:int=0; j<5; j++){
+						if(j == (4-i)){
+							newStr += num.substr(i,1);
+						}else{
+							newStr += "0";
+						}
+					}
+				}
+				zx_w.source = "assets/ddz/number_"+ newStr.substr(0,1) +".png";
+				zx_q.source = "assets/ddz/number_"+ newStr.substr(1,1) +".png";
+				zx_b.source = "assets/ddz/number_"+ newStr.substr(2,1) +".png";
+				zx_s.source = "assets/ddz/number_"+ newStr.substr(3,1) +".png";
+				zx_g.source = "assets/ddz/number_"+ newStr.substr(4,1) +".png";
+			}
+				
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -71,20 +78,22 @@
 		<s:Image source="{assetsObj.top_bg}" />
 		
 		<s:Group x="45" y="70">
-			<s:Image id="zxNum" source="{images.number_0}" />
-			<s:Image id="zx_w" x="80" y="4" source="{images.number_0}"/>
-			<s:Image id="zx_q" x="100" y="4" source="{images.number_0}"/>
-			<s:Image id="zx_b" x="120" y="4" source="{images.number_0}"/>
-			<s:Image id="zx_s" x="140" y="4" source="{images.number_0}"/>
-			<s:Image id="zx_g" x="160" y="4" source="{images.number_0}"/>
+			<s:Image id="zxNum" source="{assetsObj.online_person_bg}" />
+			<s:Image id="zx_w" x="80" y="4" />
+			<s:Image id="zx_q" x="100" y="4" />
+			<s:Image id="zx_b" x="120" y="4" />
+			<s:Image id="zx_s" x="140" y="4" />
+			<s:Image id="zx_g" x="160" y="4" />
 		</s:Group>
 		
-		<s:Label id="nameTxt" x="280" y="25" styleName="username" width="160"/>
-		<s:Image source="{assetsObj.amount_bg}"  x="280" y="60"/>
+		<s:Label id="nameTxt" x="288" y="25" styleName="username" width="160"/>
+		<s:Image source="{assetsObj.amount_bg}"  x="280" y="65"/>
 		<s:Label id="amountTxt" x="320" y="71" width="90" styleName="amount"/> 
-		<s:Image id="czBtn" source="{assetsObj.btn_exchange}" mouseOver="{czBtn.source = assetsObj.btn_exchange_hover}" mouseOut="{czBtn.source = assetsObj.btn_exchange}" x="422" y="66" buttonMode="true"/>
-		<s:Label id="slTxt" x="480" y="70" styleName="shenglv"/>
-		<s:Image source="{assetsObj.record}" x="570" y="65" buttonMode="true"/>
+		<s:Image id="czBtn" x="400" y="66" source="{assetsObj.btn_exchange}" mouseOver="{czBtn.source = assetsObj.btn_exchange_hover}" mouseOut="{czBtn.source = assetsObj.btn_exchange}"  buttonMode="true"/>
+		<s:Image source="{assetsObj.odds_bg}" x="454" y="62" />
+		<s:Label id="slTxt" x="489" y="72" styleName="shenglv"/>
+		<s:Image id="btn_record" source="{assetsObj.btn_record}" x="580" y="62" buttonMode="true" mouseOver="{btn_record.source = assetsObj.btn_record_hover}" mouseOut="{btn_record.source = assetsObj.btn_record}"/>
+	
 		
 		<s:Image source="{assetsObj.feedback_icon}" x="725" y="17" buttonMode="true" rollOverEffect="{MoveUp}" rollOutEffect="{MoveDown}"/>
 		<s:Image source="{assetsObj.help_icon}" x="785" y="17" buttonMode="true" rollOverEffect="{MoveUp}" rollOutEffect="{MoveDown}"/>
