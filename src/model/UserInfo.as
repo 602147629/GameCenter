@@ -13,7 +13,7 @@ package model
 		
 		public var  GAMEID:int;     //游戏入口标识
 		
-		public var  USERID:int;     //游戏入口标识
+		public var  USERID:int;     //用户ID
 		
 		public var USERPORT:int;  // 备用方法表示
 		

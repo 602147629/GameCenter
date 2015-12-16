@@ -1,12 +1,8 @@
 package business
 {
 	import mx.core.FlexGlobals;
-	
-	import business.ddz.SocketConst;
-	
 	import events.MainEvent;
 	import events.UserEvent;
-	
 	import model.EventModel;
 	import model.UserInfo;
 	

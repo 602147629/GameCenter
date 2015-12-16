@@ -1,8 +1,10 @@
 package events
 {
 	import flash.utils.ByteArray;
+	
 	import model.EventModel;
 	import model.UserInfo;
+	
 	import vo.json.MYJSON;
 
 	/**
@@ -19,16 +21,14 @@ package events
 		 */
 		public function userLoginEvent(user:UserInfo):void
 		{
-			var message:ByteArray=new ByteArray(); 
-			message.writeUTFBytes(MYJSON.encode(user));
-			writeSocket(message);
+			writeSocket(user);
 		}
 		
 		/**
 		 * 用户类专用写入事件
 		 * 参数：ByteArray
 		 */
-		private function writeSocket(data:ByteArray):void
+		private function writeSocket(data:Object):void
 		{
 			eventModel = new EventModel(EventModel.WRITESOCKET,false,false, data);
 			EventModel.dis.dispatchEvent(eventModel);

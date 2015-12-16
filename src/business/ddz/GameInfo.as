@@ -7,8 +7,11 @@ package business.ddz
 	 */
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.utils.ByteArray;
 	
 	import mx.core.FlexGlobals;
+	import mx.utils.ObjectUtil;
+	
 	import spark.components.Group;
 	import spark.components.HGroup;
 	import spark.components.Image;
@@ -21,10 +24,12 @@ package business.ddz
 	
 	import model.EventModel;
 	
+	import vo.json.MYJSON;
+	
 	public class GameInfo
 	{
 		private var tools:Tools = new Tools();
-		
+		private var eventModel:EventModel;                        //事件
 		/**
 		 * 添加监听
 		 */
@@ -117,10 +122,10 @@ package business.ddz
 			var assets:Object = FlexGlobals.topLevelApplication.assetsObject;
 			tg.removeAllElements();
 			var sr:String = (FlexGlobals.topLevelApplication.MainModule.child).selectRoomId;
-			
+			(FlexGlobals.topLevelApplication.MainModule.child).changeSelect(sr);
 			for each(var item:Object in dataArray)
 			{
-				if("Btn_"+item.roomid == sr)
+				if(item.roomid == sr)
 				{
 					var gp:Group = new Group();
 					var imgbg:Image = new Image();
@@ -203,7 +208,16 @@ package business.ddz
 		{
 			FlexGlobals.topLevelApplication.gameBg.source = FlexGlobals.topLevelApplication.assetsObject.game_bg;
 			FlexGlobals.topLevelApplication.GameModule.loadModule("view/ddz/Gameing.swf");
-			trace("选中房间："+ (event.currentTarget as Image).name);
+			var obj:Object = new Object();
+			obj.protocol = 131859232;
+			obj.userid = (FlexGlobals.topLevelApplication.HeadModule.child).userInfo.USERID;
+			obj.roomid = (FlexGlobals.topLevelApplication.MainModule.child).selectRoomId;
+			obj.tableid = (event.currentTarget as Image).name;
+			
+			trace(ObjectUtil.toString(obj));
+			
+			eventModel = new EventModel(EventModel.WRITESOCKET,false,false,obj);
+			EventModel.dis.dispatchEvent(eventModel);
 		}
 		
 		/**

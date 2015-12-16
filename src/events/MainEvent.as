@@ -93,8 +93,9 @@ package events
 		 */
 		public function socketWriteEvent(event:EventModel):void
 		{
-			var msg:ByteArray = event.data as ByteArray;
-			connection.SendData(msg);
+			var message:ByteArray=new ByteArray(); 
+			message.writeUTFBytes(MYJSON.encode(event.data));
+			connection.SendData(message);
 		}
 	}
 }

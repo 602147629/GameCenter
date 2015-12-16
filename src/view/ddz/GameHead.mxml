@@ -17,6 +17,8 @@
 			
 			[Bindable]
 			private var assetsObj:Object;
+			[Bindable]
+			public var userInfo:UserInfo;
 			
 			/*组件加载之前触发*/
 			private function initView():void
@@ -39,6 +41,8 @@
 			//事件获取参数
 			public function setUserParam(user:UserInfo):void
 			{
+				userInfo = new UserInfo();
+				userInfo = user;
 				nameTxt.text = user.USERNAME;
 				slTxt.text = "胜率:"+ user.USERRATE + "%";
 				amountTxt.text = user.USERMONEY.toFixed(2);
