@@ -24,7 +24,6 @@
 			{
 				main.init("assetsList.xml");
 				assetsObject = new Object();
-				
 				//设置父容器
 				disObj = this;
 			}

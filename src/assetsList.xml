@@ -48,10 +48,11 @@
 	<object assetsName = "btn_backLobby" assetsUrl ="http://10.60.22.39/GC/image/btn_backLobby.png" />
 	<object assetsName = "bg_3_card" assetsUrl ="http://10.60.22.39/GC/image/bg_3_card.png" />
 	<object assetsName = "btn_change" assetsUrl ="http://10.60.22.39/GC/image/btn_change.png" />
-	<object assetsName = "btn_start" assetsUrl ="http://10.60.22.39/GC/image/btn_start.png" />
+	<object assetsName = "btn_startGame" assetsUrl ="http://10.60.22.39/GC/image/btn_start.png" />
 	<object assetsName = "farmers_face" assetsUrl ="http://10.60.22.39/GC/image/farmers_face.png" />
 	<object assetsName = "landlord_face" assetsUrl ="http://10.60.22.39/GC/image/landlord_face.png" />
 	<object assetsName = "bg_money" assetsUrl ="http://10.60.22.39/GC/image/bg_money.png" />
 	<object assetsName = "icon_readying" assetsUrl ="http://10.60.22.39/GC/image/icon_readying.png" />
+	
 	
 </data>

@@ -2,6 +2,8 @@ package events
 {
 	import flash.utils.ByteArray;
 	
+	import mx.utils.ObjectUtil;
+	
 	import business.Tools;
 	
 	import model.EventModel;
@@ -64,6 +66,7 @@ package events
 					case 700:
 						eventModel = new EventModel(EventModel.USERSOCKETDATA,false,false,dataReust);
 						break;
+					case 800:
 					case 900:
 						eventModel = new EventModel(EventModel.GAMESOCKETDATA,false,false,dataReust);
 						break;
@@ -93,6 +96,7 @@ package events
 		 */
 		public function socketWriteEvent(event:EventModel):void
 		{
+			trace("发送消息:" + ObjectUtil.toString(event.data));
 			var message:ByteArray=new ByteArray(); 
 			message.writeUTFBytes(MYJSON.encode(event.data));
 			connection.SendData(message);

@@ -1,12 +1,8 @@
 package events
 {
-	import flash.utils.ByteArray;
-	
 	import model.EventModel;
 	import model.UserInfo;
 	
-	import vo.json.MYJSON;
-
 	/**
 	 * 用户事件类
 	 * 2015/9/10

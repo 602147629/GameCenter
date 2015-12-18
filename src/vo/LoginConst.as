@@ -15,14 +15,20 @@ package vo
 		
 		/**
 		 * 域授权登录成功
-		 *  { "userid" : 888, "userkey" : 10, "agentkey" : 1, "protocol": 19792572, "errmsg": 999 } 
+		 *  { "userid" : 888, "userkey" : 10, "agentkey" : 1, "protocol": 6685372, "errmsg": 999 } 
 		 */
-		public static const YULOGINSUSSFUL:String = "19792572";  
+		public static const YULOGINSUSSFUL:String = "6685372";  
 		
 		/**
 		 * 用户信息返回
-		 *{"protocol":"33883012","agentkey":"1","userkey":"3","userid":"888","data":[{"points":"0","wons":"0","faileds":"0","aways":"0","name":"james"}]}
+		 *{"protocol":"8651452","agentkey":"1","userkey":"3","userid":"888","data":[{"points":"0","wons":"0","faileds":"0","aways":"0","name":"james"}]}
 		 */
-		public static const USERINFO:String = "20644540";  
+		public static const USERINFO:String = "8651452";  
+		
+		/**
+		 * 发送用户信息
+		 * （写入）
+		 */
+		public static const SENDUSERINFO:int = 6554300;  
 	}
 }

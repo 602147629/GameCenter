@@ -10,6 +10,7 @@
 *{
 	fontFamily: "微软雅黑";
 	fontSize: 12;
+	modalTransparency: 0;
 }
 
 .loadMsg{
@@ -65,4 +66,19 @@
 .waitmsg{
 	color: #ffffff;
 	fontSize: 20;
+}
+
+.tableinfo{
+	color: #ffffff;
+	fontSize: 12;
+}
+
+.tableuserinfo{
+	color: #ffffff;
+	fontSize: 20;
+}
+
+.tableinfodata{
+	color: #fff000;
+	fontSize: 12;
 }

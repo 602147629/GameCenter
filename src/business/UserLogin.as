@@ -1,8 +1,10 @@
 package business
 {
 	import mx.core.FlexGlobals;
+	
 	import events.MainEvent;
 	import events.UserEvent;
+	
 	import model.EventModel;
 	import model.UserInfo;
 	
@@ -102,7 +104,7 @@ package business
 		 */
 		private function getUserInfo():void
 		{
-			userInfo.PROTOCOL = 19661500;
+			userInfo.PROTOCOL = LoginConst.SENDUSERINFO;
 			userEvent.userLoginEvent(userInfo);
 		}
 	}

@@ -1,7 +1,5 @@
 package business
 {
-	import flash.utils.ByteArray;
-	
 	import mx.core.FlexGlobals;
 	import mx.managers.BrowserManager;
 	import mx.managers.IBrowserManager;

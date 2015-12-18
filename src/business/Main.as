@@ -59,7 +59,8 @@ package business
 		{
 			FlexGlobals.topLevelApplication.assetsObject = assObj;
 			switch(gameID){
-				case 2: //加载斗地主游戏
+				case 2: 
+					trace("加载斗地主游戏");//
 					FlexGlobals.topLevelApplication.roomBg.source = assObj.game_bg;
 					FlexGlobals.topLevelApplication.HeadModule.loadModule("view/ddz/GameHead.swf");
 					FlexGlobals.topLevelApplication.MainModule.loadModule("view/ddz/GameRoom.swf");

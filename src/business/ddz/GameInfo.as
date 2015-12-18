@@ -7,10 +7,8 @@ package business.ddz
 	 */
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import flash.utils.ByteArray;
 	
 	import mx.core.FlexGlobals;
-	import mx.utils.ObjectUtil;
 	
 	import spark.components.Group;
 	import spark.components.HGroup;
@@ -23,13 +21,13 @@ package business.ddz
 	import business.Tools;
 	
 	import model.EventModel;
-	
-	import vo.json.MYJSON;
+	import model.Tables;
 	
 	public class GameInfo
 	{
 		private var tools:Tools = new Tools();
 		private var eventModel:EventModel;                        //事件
+		private var tableInfo:Tables = new Tables();         //游戏副本信息
 		/**
 		 * 添加监听
 		 */
@@ -64,6 +62,12 @@ package business.ddz
 				case SocketConst.ONLINES: //在线信息
 					(FlexGlobals.topLevelApplication.HeadModule.child).initPeople(dataReust.Onlines);
 					break;
+				case SocketConst.JOINGAME: //加入游戏
+					tableInfo.DATA = dataReust.data;
+					tableInfo.PROTOCOL = dataReust.protocol;
+					initTable(tableInfo);
+					break;
+				
 				default:
 				{
 					//默认事件
@@ -206,18 +210,27 @@ package business.ddz
 		 */
 		private function joinRoom(event:MouseEvent):void
 		{
-			FlexGlobals.topLevelApplication.gameBg.source = FlexGlobals.topLevelApplication.assetsObject.game_bg;
-			FlexGlobals.topLevelApplication.GameModule.loadModule("view/ddz/Gameing.swf");
 			var obj:Object = new Object();
-			obj.protocol = 131859232;
+			obj.protocol = SocketConst.SENDJOIN;
 			obj.userid = (FlexGlobals.topLevelApplication.HeadModule.child).userInfo.USERID;
 			obj.roomid = (FlexGlobals.topLevelApplication.MainModule.child).selectRoomId;
 			obj.tableid = (event.currentTarget as Image).name;
 			
-			trace(ObjectUtil.toString(obj));
-			
 			eventModel = new EventModel(EventModel.WRITESOCKET,false,false,obj);
 			EventModel.dis.dispatchEvent(eventModel);
+			
+			//等待
+			tools.showWaiting("正在进入游戏中...");
+		}
+		
+		/**
+		 * 初始化副本
+		 */
+		private function initTable(table:Tables):void
+		{
+			tools.showWaiting("",true,true);
+			FlexGlobals.topLevelApplication.gameBg.source = FlexGlobals.topLevelApplication.assetsObject.game_bg;
+			FlexGlobals.topLevelApplication.GameModule.loadModule("view/ddz/Gameing.swf");
 		}
 		
 		/**
