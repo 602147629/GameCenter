@@ -87,6 +87,7 @@ package business
 			{
 				loadedLength = 0;
 				FlexGlobals.topLevelApplication.pageView.selectedIndex = 2;
+				FlexGlobals.topLevelApplication.GameModule.initTableInfo();
 			}
 		}
 		

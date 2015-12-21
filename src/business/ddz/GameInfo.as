@@ -27,7 +27,7 @@ package business.ddz
 	{
 		private var tools:Tools = new Tools();
 		private var eventModel:EventModel;                        //事件
-		private var tableInfo:Tables = new Tables();         //游戏副本信息
+		public var tableInfo:Tables = new Tables();         //游戏副本信息
 		/**
 		 * 添加监听
 		 */

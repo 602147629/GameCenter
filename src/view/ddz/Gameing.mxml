@@ -9,10 +9,7 @@
 	<fx:Script>
 		<![CDATA[
 			import mx.core.FlexGlobals;
-			
 			import business.ddz.GameInfo;
-			
-			import model.Tables;
 			
 			[Bindable]
 			private var assetsObj:Object;
@@ -26,9 +23,9 @@
 			}
 			
 			//初始化游戏副本界面
-			public function initTableInfo(table:Tables):void
+			public function initTableInfo():void
 			{
-				
+				//GI.tableInfo
 			}
 		]]>
 	</fx:Script>
