@@ -1,13 +1,12 @@
 package events
 {
+	import flash.events.TimerEvent;
 	import flash.utils.ByteArray;
-	
+	import flash.utils.Timer;
+	import mx.core.FlexGlobals;
 	import mx.utils.ObjectUtil;
-	
 	import business.Tools;
-	
 	import model.EventModel;
-	
 	import vo.Connection;
 	import vo.json.MYJSON;
 
@@ -21,6 +20,7 @@ package events
 		private var connection:Connection = new Connection();
 		private var eventModel:EventModel;                        //事件
 		private var tool:Tools = new Tools;
+		private var timer:Timer;
 		
 		public function MainEvent()
 		{
@@ -88,6 +88,7 @@ package events
 		private function socketCloseEvent(event:EventModel):void
 		{
 			trace("链接关闭");
+			ServerClose();
 			tool.updateLoadMsg("游戏服务器已经关闭！");
 		}
 		
@@ -100,6 +101,31 @@ package events
 			var message:ByteArray=new ByteArray(); 
 			message.writeUTFBytes(MYJSON.encode(event.data));
 			connection.SendData(message);
+		}
+		
+		/**
+		 * 服务器关闭
+		 */
+		private function ServerClose():void
+		{
+			tool.showWaiting('',false,true);
+			FlexGlobals.topLevelApplication.pageView.selectedIndex = 0;
+			FlexGlobals.topLevelApplication.HeadModule.unloadModule();
+			FlexGlobals.topLevelApplication.MainModule.unloadModule();
+			FlexGlobals.topLevelApplication.GameModule.url = null;
+			FlexGlobals.topLevelApplication.GameModule.unloadModule();
+			timer = new Timer(10000,1);
+			timer.addEventListener(TimerEvent.TIMER,timerEvent);
+			timer.start();
+		}
+		
+		/**
+		 * 定时重试
+		 */
+		private function timerEvent(evt:TimerEvent):void
+		{
+			tool.updateLoadMsg("重新尝试连接服务器！");
+			connection.conn(); 
 		}
 	}
 }

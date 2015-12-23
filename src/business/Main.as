@@ -7,12 +7,12 @@ package business
 	 */
 	import mx.core.FlexGlobals;
 	import mx.events.ModuleEvent;
-	
 	import spark.modules.ModuleLoader;
-	
 	import assets.ImageLoader;
 	
 	import business.ddz.GameInfo;
+	
+	import model.EventModel;
 	
 	
 	public class Main
@@ -26,6 +26,7 @@ package business
 		private var userLogin:UserLogin;
 		private var gameID:int;
 		private var tool:Tools =  new Tools;
+		private var eventModel:EventModel;
 		
 		/**
 		 * 初始化
@@ -76,25 +77,25 @@ package business
 		public function Module_readyHandler(event:ModuleEvent):void
 		{
 			var loadID:String = (event.currentTarget as ModuleLoader).id;
+			trace(loadID + "模块加载完成！" + event.bytesTotal + "字节");
 			tool.updateLoadMsg(loadID + "模块加载完成！" + event.bytesTotal + "字节");
 			
 			loadedLength ++;
 			if(loadedLength == 2){
-				initSocket();
 				loadedLength = 0;
+				userLogin.getUserInfo();
 			}
 			if(loadID == "GameModule")
 			{
 				loadedLength = 0;
 				FlexGlobals.topLevelApplication.pageView.selectedIndex = 2;
-				FlexGlobals.topLevelApplication.GameModule.initTableInfo();
 			}
 		}
 		
 		/**
 		 * 初始化用户授权类 
 		 */
-		private function initSocket():void
+		public function initSocket():void
 		{
 			userLogin = new UserLogin();
 			tool.updateLoadMsg("正在连接游戏服务器...");
@@ -118,6 +119,5 @@ package business
 				tool.updateLoadMsg("正在进入房间请稍后.." + event.bytesLoaded + "Kb / " + event.bytesTotal + "Kb");
 			}
 		}
-		
 	}
 }

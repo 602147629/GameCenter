@@ -43,5 +43,17 @@ package business.ddz
 		 * （写入）
 		 */
 		public static const SENDJOIN:int = 22283040; 
+		
+		/**
+		 * 发送准备消息
+		 * （写入）
+		 */
+		public static const BEREADY:int = 19661600; 
+		
+		/**
+		 * 获取牌信息
+		 *{"protocol":"23659296", "data":{"battleid":"4","count":"3","poker":[-1],"seatid":"0","pokerinfo":[{"show":true,"name":"james","count":17,"poker":[4,7,9,10,13,15,17,21,26,27,29,30,32,33,40,45,47]},{"show":false,"name":"-","count":17,"poker":[-1]},{"show":false,"name":"-","count":17,"poker":[-1]}]}}
+		 */
+		public static const GETPOKER:String = '23659296'; 
 	}
 }

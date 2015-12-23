@@ -21,9 +21,11 @@ package business
 		private var userEvent:UserEvent;
 		private var mainEvent:MainEvent;
 		private var tool:Tools;
+		private var main:Main;
 		
 		public function UserLogin():void
 		{
+			main = new Main();
 			mainEvent = new MainEvent();
 			userEvent = new UserEvent();
 			tool = new Tools();
@@ -41,7 +43,7 @@ package business
 			var userObj:Object = new Object();
 			userObj = tool.getInfo();
 			if(userObj != null){
-				tool.updateLoadMsg("正在进入游戏中，请稍后...");
+				tool.updateLoadMsg("正在解析数据包，请稍后...");
 				userSuccessful(userObj.data);
 			}
 		}
@@ -58,7 +60,7 @@ package business
 				case LoginConst.LOGINSUSSFUL:
 				{
 					trace("成功连接游戏线路");
-					getUserInfo();
+					main.init("assetsList.xml");
 					break;
 				}
 				case LoginConst.USERINFO: //用户信息
@@ -73,6 +75,7 @@ package business
 					userInfo.USERMONEY = dataReust.data[0].points;
 					userInfo.USERRATE = dataReust.data[0].rate;
 					(FlexGlobals.topLevelApplication.HeadModule.child).setUserParam(userInfo);
+					FlexGlobals.topLevelApplication.myInfo = userInfo;
 					FlexGlobals.topLevelApplication.pageView.selectedIndex = 1;
 				}
 				default:
@@ -102,7 +105,7 @@ package business
 		/**
 		 * 初次登陆用户信息
 		 */
-		private function getUserInfo():void
+		public function getUserInfo():void
 		{
 			userInfo.PROTOCOL = LoginConst.SENDUSERINFO;
 			userEvent.userLoginEvent(userInfo);

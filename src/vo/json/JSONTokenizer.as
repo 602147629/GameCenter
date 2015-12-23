@@ -664,7 +664,6 @@ package vo.json
 		/**
 		 * Raises a parsing error with a specified message, tacking
 		 * on the error location and the original string.
-		 *
 		 * @param message The message indicating why the error occurred
 		 */
 		public final function parseError( message:String ):void

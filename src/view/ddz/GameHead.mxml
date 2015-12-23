@@ -90,6 +90,7 @@
 			<s:Image id="zx_g" x="160" y="4" />
 		</s:Group>
 		
+		<s:Image id="logo" source="{assetsObj.bg_time}" x="58" y="2"/>
 		<s:Label id="nameTxt" x="288" y="25" styleName="username" width="160"/>
 		<s:Image source="{assetsObj.amount_bg}"  x="280" y="65"/>
 		<s:Label id="amountTxt" x="320" y="71" width="90" styleName="amount"/> 
@@ -98,7 +99,6 @@
 		<s:Label id="slTxt" x="489" y="72" styleName="shenglv"/>
 		<s:Image id="btn_record" source="{assetsObj.btn_record}" x="580" y="62" buttonMode="true" mouseOver="{btn_record.source = assetsObj.btn_record_hover}" mouseOut="{btn_record.source = assetsObj.btn_record}"/>
 	
-		
 		<s:Image source="{assetsObj.feedback_icon}" x="725" y="17" buttonMode="true" rollOverEffect="{MoveUp}" rollOutEffect="{MoveDown}"/>
 		<s:Image source="{assetsObj.help_icon}" x="785" y="17" buttonMode="true" rollOverEffect="{MoveUp}" rollOutEffect="{MoveDown}"/>
 		<s:Image source="{assetsObj.voice_icon}" x="845" y="17" buttonMode="true" rollOverEffect="{MoveUp}" rollOutEffect="{MoveDown}"/>

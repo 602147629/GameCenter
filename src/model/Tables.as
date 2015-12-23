@@ -9,9 +9,6 @@ package model
 	{
 		public var PROTOCOL:int;
 		
-		public var USERKEY:int;
-		
 		public var DATA:Object;
-		
 	}
 }

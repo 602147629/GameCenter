@@ -10,11 +10,17 @@
 	<fx:Script>
 		<![CDATA[
 			import business.Main;
+			
+			import model.Tables;
+			import model.UserInfo;
+			
 			import view.Waiting;
 			
 			private var main:Main = new Main();
 			public var assetsObject:Object;                 //保存素材
 			public var disObj:DisplayObject;
+			public var tableInfo:Tables;
+			public var myInfo:UserInfo;
 			public var waitMsg:Waiting = new Waiting();
 			
 			/**
@@ -22,8 +28,10 @@
 			 */
 			private function init():void
 			{
-				main.init("assetsList.xml");
+				main.initSocket();
 				assetsObject = new Object();
+				tableInfo = new Tables();
+				myInfo = new UserInfo();
 				//设置父容器
 				disObj = this;
 			}
@@ -49,7 +57,7 @@
 					<s:Image width="100%" height="100%" id="roomBg" />
 					<s:VGroup id="gamePage" width="100%" height="100%">
 						<!--头部模块-->
-						<s:ModuleLoader id="HeadModule" autoLayout="true" progress="main.Module_progressHandler(event)" ready="main.Module_readyHandler(event)" height="117"/>
+						<s:ModuleLoader id="HeadModule" autoLayout="true" progress="main.Module_progressHandler(event)" ready="main.Module_readyHandler(event)" height="117" />
 						<!--游戏大厅模块-->
 						<s:ModuleLoader id="MainModule" autoLayout="true" progress="main.Module_progressHandler(event)" ready="main.Module_readyHandler(event)"/>
 					</s:VGroup>
