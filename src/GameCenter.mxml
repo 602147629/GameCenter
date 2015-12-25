@@ -18,9 +18,9 @@
 			
 			private var main:Main = new Main();
 			public var assetsObject:Object;                 //保存素材
-			public var disObj:DisplayObject;
-			public var tableInfo:Tables;
-			public var myInfo:UserInfo;
+			public var disObj:DisplayObject;                //父容器
+			public var tableInfo:Tables;                      //桌子信息
+			public var myInfo:UserInfo;                      //用户信息
 			public var waitMsg:Waiting = new Waiting();
 			
 			/**

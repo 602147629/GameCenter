@@ -51,9 +51,29 @@ package business.ddz
 		public static const BEREADY:int = 19661600; 
 		
 		/**
+		 * 返回大厅消息
+		 * （写入）
+		 */
+		public static const BACKLOBBY:int = 22938400;
+		
+		/**
 		 * 获取牌信息
 		 *{"protocol":"23659296", "data":{"battleid":"4","count":"3","poker":[-1],"seatid":"0","pokerinfo":[{"show":true,"name":"james","count":17,"poker":[4,7,9,10,13,15,17,21,26,27,29,30,32,33,40,45,47]},{"show":false,"name":"-","count":17,"poker":[-1]},{"show":false,"name":"-","count":17,"poker":[-1]}]}}
 		 */
 		public static const GETPOKER:String = '23659296'; 
+		
+		/**
+		 * 叫地主推送
+		 *{"protocol":"24970016", "data":{"battleid":"1","seatid":"0","multiple":"1","times":"16000","callinfo":[{"show":true},{"show":false},{"show":false}]}}
+		 */
+		public static const CALLBANK:String = "24970016"; 
+		
+		
+		/**
+		 * 叫地主
+		 * （写入）
+		 */
+		public static const JIAODIZHU:int = 24249120;
+		
 	}
 }

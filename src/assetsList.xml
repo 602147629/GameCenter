@@ -55,6 +55,13 @@
 <object assetsName = "btn_hosting" assetsUrl ="http://10.60.22.39/GC/image/btn_hosting.png" />
 <object assetsName = "btn_sorting" assetsUrl ="http://10.60.22.39/GC/image/btn_sorting.png" />
 <object assetsName = "btn_before" assetsUrl ="http://10.60.22.39/GC/image/btn_before.png" />
+<object assetsName = "btn_dun_call" assetsUrl ="http://10.60.22.39/GC/image/btn_dun_call.png" />
+<object assetsName = "btn_dun_cal_BAN" assetsUrl ="http://10.60.22.39/GC/image/btn_dun_cal_BAN.png" />
+<object assetsName = "btn_prompt" assetsUrl ="http://10.60.22.39/GC/image/btn_prompt.png" />
+<object assetsName = "btn_prompt_BAN" assetsUrl ="http://10.60.22.39/GC/image/btn_prompt_BAN.png" />
+<object assetsName = "btn_one" assetsUrl ="http://10.60.22.39/GC/image/btn_one.png" />
+<object assetsName = "btn_two" assetsUrl ="http://10.60.22.39/GC/image/btn_two.png" />
+<object assetsName = "btn_three" assetsUrl ="http://10.60.22.39/GC/image/btn_three.png" />
 
 <!--扑克牌 -->
 <object assetsName = "poker0" assetsUrl ="http://10.60.22.39/GC/image/poker/0.png" />

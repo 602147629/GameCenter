@@ -79,6 +79,10 @@ package business.ddz
 					trace("游戏开始");
 					initMyPoker(dataReust.data);
 					break;
+				case SocketConst.CALLBANK: // 叫地主
+					trace("叫地主");
+					initBank(dataReust.data);
+					break;
 				default:
 				{
 					//默认事件
@@ -258,6 +262,14 @@ package business.ddz
 		 */
 		public function backIndex():void
 		{
+			var obj:Object = new Object();
+			obj.protocol = SocketConst.BACKLOBBY;
+			obj.battleid = FlexGlobals.topLevelApplication.tableInfo.DATA[0].battleid;
+			obj.seatid = FlexGlobals.topLevelApplication.tableInfo.DATA[0].seatid;
+			
+			eventModel = new EventModel(EventModel.WRITESOCKET,false,false,obj);
+			EventModel.dis.dispatchEvent(eventModel);
+			
 			FlexGlobals.topLevelApplication.GameModule.url = null;
 			FlexGlobals.topLevelApplication.GameModule.unloadModule();
 			FlexGlobals.topLevelApplication.pageView.selectedIndex = 1;
@@ -269,6 +281,8 @@ package business.ddz
 		public function initBtns(type:int,myg:HGroup):void
 		{
 			myg.removeAllElements();
+			myg.visible = true;
+			trace("初始化按钮："+type);
 			switch(type)
 			{
 				case 1:
@@ -284,15 +298,52 @@ package business.ddz
 					btn2.addEventListener(MouseEvent.CLICK,readyBtn);
 					myg.addElement(btn1);
 					myg.addElement(btn2);
-					myg.addEventListener(Event.ADDED_TO_STAGE,fadein);
-					myg.addEventListener(Event.REMOVED_FROM_STAGE,fadeout);
 					break;
 				}
-				default:
+				case 2:
 				{
+					//绘画抢地主,不抢按钮
+					var btn3:Image = new Image();
+					btn3.buttonMode = true;
+					btn3.source = assets.btn_dun_call;
+					
+					var btn4:Image = new Image();
+					btn4.buttonMode = true;
+					btn4.source = assets.btn_prompt;
+					
+					myg.addElement(btn3);
+					myg.addElement(btn4);
+					break;
+				}
+				case 4:
+				{
+					//绘画1/2/3 分  不抢按钮
+					var btn5:Image = new Image();
+					btn5.buttonMode = true;
+					btn5.source = assets.btn_one;
+					
+					var btn6:Image = new Image();
+					btn6.buttonMode = true;
+					btn6.source = assets.btn_two;
+					
+					var btn7:Image = new Image();
+					btn7.buttonMode = true;
+					btn7.source = assets.btn_three;
+					
+					var btn8:Image = new Image();
+					btn8.buttonMode = true;
+					btn8.source = assets.btn_dun_call;
+					btn8.addEventListener(MouseEvent.CLICK,buJiaoClick);
+					
+					myg.addElement(btn5);
+					myg.addElement(btn6);
+					myg.addElement(btn7);
+					myg.addElement(btn8);
 					break;
 				}
 			}
+			myg.addEventListener(Event.ADDED_TO_STAGE,fadein);
+			myg.addEventListener(Event.REMOVED_FROM_STAGE,fadeout);
 		}
 		
 		/**
@@ -302,7 +353,7 @@ package business.ddz
 		{
 			var obj:Object = new Object();
 			obj.protocol = SocketConst.BEREADY;
-			obj.status = 0;
+			obj.status = 0;  //是否名牌准备
 			obj.battleid = FlexGlobals.topLevelApplication.tableInfo.DATA[0].battleid;
 			obj.seatid = FlexGlobals.topLevelApplication.tableInfo.DATA[0].seatid;
 				
@@ -377,6 +428,9 @@ package business.ddz
 			(FlexGlobals.topLevelApplication.GameModule.child).my_img.visible = false;
 			(FlexGlobals.topLevelApplication.GameModule.child).left_img.visible = false;
 			(FlexGlobals.topLevelApplication.GameModule.child).right_img.visible = false;
+			
+			(FlexGlobals.topLevelApplication.GameModule.child).gamebtn.visible = true;
+			(FlexGlobals.topLevelApplication.GameModule.child).backLobbyBtn.visible = false;
 		}
 		
 		/**
@@ -414,5 +468,124 @@ package business.ddz
 			movein.yFrom = img.y;
 			movein.play();
 		}
+		
+		/**
+		 * 叫地主
+		 */
+		private function initBank(backInfo:Object):void
+		{
+			var leftindex:int = (backInfo.seatid+2)%3;
+			var rightindex:int = (backInfo.seatid+1)%3;
+			for(var i:int=0; i<3; i++)
+			{
+				trace("第"+i+'号的状态:'+backInfo.callinfo[i].show);
+				if(backInfo.callinfo[i].show == true)
+				{
+					trace("数组："+i +'叫地主');
+					TimerNum = int(backInfo.times);
+					//自己回合叫地主
+					if(int(backInfo.seatid) == i)
+					{
+						if(backInfo.dmodel == false){
+							initBtns(4,(FlexGlobals.topLevelApplication.GameModule.child).mybtns);
+						}else{
+							initBtns(2,(FlexGlobals.topLevelApplication.GameModule.child).mybtns);
+						}
+						newTimer(0);
+					}
+					//上家叫地主
+					else if(leftindex == i)
+					{
+						newTimer(2);
+					}
+					//下家叫地主
+					else if(rightindex == i)
+					{
+						newTimer(1);
+					}
+				}
+			}
+		}
+		
+		/**
+		 * 不叫
+		 */
+		private function buJiaoClick(e:MouseEvent):void
+		{
+			var obj:Object = new Object();
+			obj.protocol = SocketConst.JIAODIZHU;
+			obj.points = 0;  //
+			
+			eventModel = new EventModel(EventModel.WRITESOCKET,false,false,obj);
+			EventModel.dis.dispatchEvent(eventModel);
+		}
+		
+		/**
+		 * 更新定时器
+		 * index 定时器的位置 （0，1，2）
+		 */
+		private var GameTimer:Timer;
+		private var TimerNum:int = 0;
+		private function newTimer(index:int):void
+		{
+			if(TimerNum != 0){
+				GameTimer = new Timer(1000,TimerNum);
+				GameTimer.addEventListener(TimerEvent.TIMER,function (e:TimerEvent):void{
+					TimerNum --;
+					initTimeCheck(TimerNum.toString(),index)
+				});
+				GameTimer.start();
+			}else{
+				trace("时间到..");
+			}
+		}
+		
+		/**
+		 * 绘画等待时间
+		 * index 时钟位置 （0，1，2  自己，右边，左边）
+		 */
+		private function initTimeCheck(times:String,index:int):void
+		{
+			var hg:HGroup = new HGroup();
+			hg.width = 65;
+			hg.height = 65;
+			hg.gap = -3;
+			hg.horizontalAlign = "center";
+			hg.verticalAlign = "middle";
+			
+			for(var i:int=0; i<times.length; i++){
+				var numimg:Image = new Image();
+				numimg.source = "assets/ddz/time_number_"+times.substr(i,1)+".png";
+				hg.addElement(numimg);
+			}
+			
+			var gp:Group = new Group();
+			gp.addElement(hg);
+			switch(index)
+			{
+				case 0:
+				{
+					(FlexGlobals.topLevelApplication.GameModule.child).my_warp.visible = true;
+					(FlexGlobals.topLevelApplication.GameModule.child).my_time.removeAllElements();
+					(FlexGlobals.topLevelApplication.GameModule.child).my_time.addElement(gp);
+					break;
+				}
+				case 1: //右边
+				{
+					(FlexGlobals.topLevelApplication.GameModule.child).right_warp.visible = true;
+					(FlexGlobals.topLevelApplication.GameModule.child).right_time.removeAllElements();
+					(FlexGlobals.topLevelApplication.GameModule.child).right_time.addElement(gp);
+					break;
+				}
+				case 2: //左边
+				{
+					(FlexGlobals.topLevelApplication.GameModule.child).left_warp.visible = true;
+					(FlexGlobals.topLevelApplication.GameModule.child).left_time.removeAllElements();
+					(FlexGlobals.topLevelApplication.GameModule.child).left_time.addElement(gp);
+					break;
+				}
+			}
+		}
+		
 	}
 }
