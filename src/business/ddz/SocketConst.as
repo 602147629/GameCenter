@@ -68,12 +68,17 @@ package business.ddz
 		 */
 		public static const CALLBANK:String = "24970016"; 
 		
-		
 		/**
 		 * 叫地主
 		 * （写入）
 		 */
 		public static const JIAODIZHU:int = 24249120;
+		
+		/**
+		 * 完全版游戏内容信息
+		 *{"protocol":"25625376", "data":{ "seatid":0, "battleid":1, "multiple":3, "dmodel":false, "banker":0, "count":3, "poker":[2,46,0],"bankerinfo":[{"show":true,"name":"james","count":19,"poker":[0,1,2,3,7,15,20,24,25,40,41,42,43,45,46,47,48,49,51]},{"show":false, "name":"17", "count":256, "poker":[-1] },{"show":false, "name":"17", "count":256, "poker":[-1] }]}}
+		 */
+		public static const POKERINFO:String = "25625376"; 
 		
 	}
 }

@@ -13,7 +13,6 @@ package business.ddz
 	import mx.collections.ArrayCollection;
 	import mx.core.FlexGlobals;
 	import mx.effects.Move;
-	import mx.utils.ObjectUtil;
 	
 	import spark.collections.Sort;
 	import spark.collections.SortField;
@@ -34,6 +33,8 @@ package business.ddz
 		private var tools:Tools = new Tools();
 		private var eventModel:EventModel;                        //事件
 		private var assets:Object = FlexGlobals.topLevelApplication.assetsObject;
+		private var GS:GameSupport = new GameSupport();
+		private var banker:int  //地主
 		
 		/**
 		 * 添加监听
@@ -83,9 +84,15 @@ package business.ddz
 					trace("叫地主");
 					initBank(dataReust.data);
 					break;
+				case SocketConst.POKERINFO: // 主底牌确认,初始化底牌
+					trace("地主底牌确认");
+					FlexGlobals.topLevelApplication.tableInfo.DATA = dataReust.data;
+					FlexGlobals.topLevelApplication.tableInfo.PROTOCOL = dataReust.protocol;
+					initBoss(dataReust.data);
+					break;
 				default:
 				{
-					//默认事件
+					trace("未知协议号！");
 					break;
 				}
 			}
@@ -283,67 +290,77 @@ package business.ddz
 			myg.removeAllElements();
 			myg.visible = true;
 			trace("初始化按钮："+type);
-			switch(type)
+			if(type != -1)
 			{
-				case 1:
+				switch(type)
 				{
-					//绘画换桌,准备按钮
-					var btn1:Image = new Image();
-					btn1.buttonMode = true;
-					btn1.source = assets.btn_change;
-					
-					var btn2:Image = new Image();
-					btn2.buttonMode = true;
-					btn2.source = assets.btn_startGame;
-					btn2.addEventListener(MouseEvent.CLICK,readyBtn);
-					myg.addElement(btn1);
-					myg.addElement(btn2);
-					break;
+					case 1:
+					{
+						//绘画换桌,准备按钮
+						var btn1:Image = new Image();
+						btn1.buttonMode = true;
+						btn1.source = assets.btn_change;
+						
+						var btn2:Image = new Image();
+						btn2.buttonMode = true;
+						btn2.source = assets.btn_startGame;
+						btn2.addEventListener(MouseEvent.CLICK,readyBtn);
+						myg.addElement(btn1);
+						myg.addElement(btn2);
+						break;
+					}
+					case 2:
+					{
+						//绘画抢地主,不抢按钮
+						var btn3:Image = new Image();
+						btn3.buttonMode = true;
+						btn3.source = assets.btn_dun_call;
+						
+						var btn4:Image = new Image();
+						btn4.buttonMode = true;
+						btn4.source = assets.btn_prompt;
+						
+						myg.addElement(btn3);
+						myg.addElement(btn4);
+						break;
+					}
+					case 4:
+					{
+						//绘画1/2/3 分  不抢按钮
+						var btn5:Image = new Image();
+						btn5.buttonMode = true;
+						btn5.source = assets.btn_one;
+						btn5.name = '1';
+						btn5.addEventListener(MouseEvent.CLICK,callBankClick);
+						
+						var btn6:Image = new Image();
+						btn6.buttonMode = true;
+						btn6.source = assets.btn_two;
+						btn6.name = '2';
+						btn6.addEventListener(MouseEvent.CLICK,callBankClick);
+						
+						var btn7:Image = new Image();
+						btn7.buttonMode = true;
+						btn7.source = assets.btn_three;
+						btn7.name = '3';
+						btn7.addEventListener(MouseEvent.CLICK,callBankClick);
+						
+						var btn8:Image = new Image();
+						btn8.buttonMode = true;
+						btn8.source = assets.btn_dun_call;
+						btn8.name = '0';
+						btn8.addEventListener(MouseEvent.CLICK,callBankClick);
+						
+						myg.addElement(btn5);
+						myg.addElement(btn6);
+						myg.addElement(btn7);
+						myg.addElement(btn8);
+						break;
+					}
 				}
-				case 2:
-				{
-					//绘画抢地主,不抢按钮
-					var btn3:Image = new Image();
-					btn3.buttonMode = true;
-					btn3.source = assets.btn_dun_call;
-					
-					var btn4:Image = new Image();
-					btn4.buttonMode = true;
-					btn4.source = assets.btn_prompt;
-					
-					myg.addElement(btn3);
-					myg.addElement(btn4);
-					break;
-				}
-				case 4:
-				{
-					//绘画1/2/3 分  不抢按钮
-					var btn5:Image = new Image();
-					btn5.buttonMode = true;
-					btn5.source = assets.btn_one;
-					
-					var btn6:Image = new Image();
-					btn6.buttonMode = true;
-					btn6.source = assets.btn_two;
-					
-					var btn7:Image = new Image();
-					btn7.buttonMode = true;
-					btn7.source = assets.btn_three;
-					
-					var btn8:Image = new Image();
-					btn8.buttonMode = true;
-					btn8.source = assets.btn_dun_call;
-					btn8.addEventListener(MouseEvent.CLICK,buJiaoClick);
-					
-					myg.addElement(btn5);
-					myg.addElement(btn6);
-					myg.addElement(btn7);
-					myg.addElement(btn8);
-					break;
-				}
+				myg.addEventListener(Event.ADDED_TO_STAGE,fadein);
+				myg.addEventListener(Event.REMOVED_FROM_STAGE,fadeout);
 			}
-			myg.addEventListener(Event.ADDED_TO_STAGE,fadein);
-			myg.addEventListener(Event.REMOVED_FROM_STAGE,fadeout);
 		}
 		
 		/**
@@ -369,11 +386,25 @@ package business.ddz
 		private var pokerImg:Array = new Array(assets.poker0,assets.poker1,assets.poker2,assets.poker3,assets.poker4,assets.poker5,assets.poker6,assets.poker7,assets.poker8,assets.poker9,assets.poker10,assets.poker11,assets.poker12,assets.poker13,assets.poker14,assets.poker15,assets.poker16,assets.poker17,assets.poker18,assets.poker19,assets.poker20,assets.poker21,assets.poker22,assets.poker23,assets.poker24,assets.poker25,assets.poker26,assets.poker27,assets.poker28,assets.poker29,assets.poker30,assets.poker31,assets.poker32,assets.poker33,assets.poker34,assets.poker35,assets.poker36,assets.poker37,assets.poker38,assets.poker39,assets.poker40,assets.poker41,assets.poker42,assets.poker43,assets.poker44,assets.poker45,assets.poker46,assets.poker47,assets.poker48,assets.poker49,assets.poker50,assets.poker51,assets.poker52,assets.poker53);
 		public function initMyPoker(pokerObj:Object):void
 		{
-			starGameView();   //开始游戏界面
+			GS.starGameView();   //开始游戏界面
 			selectPoker = new ArrayCollection();
 			var  mySeat:int = pokerObj.seatid;
+			
+			makeMyPoker(pokerObj.pokerinfo[mySeat].poker);
+			//剩余牌数
+			var leftindex:int = (pokerObj.seatid+2)%3;
+			var rightindex:int = (pokerObj.seatid+1)%3;
+			(FlexGlobals.topLevelApplication.GameModule.child).leftgp.addElement(getHasPoker(pokerObj.pokerinfo[leftindex].count));
+			(FlexGlobals.topLevelApplication.GameModule.child).rightgp.addElement(getHasPoker(pokerObj.pokerinfo[rightindex].count));
+		}
+		
+		/**
+		 * 添加牌
+		 */
+		public function makeMyPoker(parr:Array,effect:Boolean=true):void
+		{
 			var myPokerArr:ArrayCollection = new ArrayCollection();
-			for each(var pk:int in pokerObj.pokerinfo[mySeat].poker)
+			for each(var pk:int in parr)
 			{
 				var img:Image = new Image();
 				img.source = pokerImg[pk];
@@ -396,42 +427,9 @@ package business.ddz
 			myPokerArr.sort = sortA;  
 			myPokerArr.refresh(); 
 			
-			addPokerImg(myPokerArr);
-			
-			//剩余牌数
-			var leftindex:int = (pokerObj.seatid+2)%3;
-			var rightindex:int = (pokerObj.seatid+1)%3;
-			(FlexGlobals.topLevelApplication.GameModule.child).leftgp.addElement(getHasPoker(pokerObj.pokerinfo[leftindex].count));
-			(FlexGlobals.topLevelApplication.GameModule.child).rightgp.addElement(getHasPoker(pokerObj.pokerinfo[rightindex].count));
-		}
-		
-		/**
-		 * 节奏生成扑克图
-		 */
-		private function addPokerImg(mpa:ArrayCollection):void
-		{
-			var timer:Timer = new Timer(100,mpa.length);
-			var pi:int = 0;
-			timer.start();
-			timer.addEventListener(TimerEvent.TIMER,function (e:TimerEvent):void
-			{
-				(FlexGlobals.topLevelApplication.GameModule.child).mypoker.addElement(mpa[pi].data);
-				pi++;
-			});
-		}
-		
-		/**
-		 * 开始游戏界面改变
-		 */
-		private function starGameView():void
-		{
-			(FlexGlobals.topLevelApplication.GameModule.child).my_img.visible = false;
-			(FlexGlobals.topLevelApplication.GameModule.child).left_img.visible = false;
-			(FlexGlobals.topLevelApplication.GameModule.child).right_img.visible = false;
-			
-			(FlexGlobals.topLevelApplication.GameModule.child).gamebtn.visible = true;
-			(FlexGlobals.topLevelApplication.GameModule.child).backLobbyBtn.visible = false;
-		}
+			(FlexGlobals.topLevelApplication.GameModule.child).mypoker.removeAllElements();
+			GS.addPokerImg(myPokerArr,effect);
+		} 
 		
 		/**
 		 * 生成剩余牌数
@@ -474,11 +472,11 @@ package business.ddz
 		 */
 		private function initBank(backInfo:Object):void
 		{
+			cleanTable();
 			var leftindex:int = (backInfo.seatid+2)%3;
 			var rightindex:int = (backInfo.seatid+1)%3;
 			for(var i:int=0; i<3; i++)
 			{
-				trace("第"+i+'号的状态:'+backInfo.callinfo[i].show);
 				if(backInfo.callinfo[i].show == true)
 				{
 					trace("数组："+i +'叫地主');
@@ -492,32 +490,56 @@ package business.ddz
 							initBtns(2,(FlexGlobals.topLevelApplication.GameModule.child).mybtns);
 						}
 						newTimer(0);
+						break;
 					}
 					//上家叫地主
-					else if(leftindex == i)
+					if(leftindex == i)
 					{
 						newTimer(2);
+						break;
 					}
 					//下家叫地主
-					else if(rightindex == i)
+					if(rightindex == i)
 					{
 						newTimer(1);
+						break;
 					}
 				}
 			}
 		}
 		
 		/**
-		 * 不叫
+		 * 清理桌面
 		 */
-		private function buJiaoClick(e:MouseEvent):void
+		private function cleanTable():void
 		{
+			trace('清理桌面');
+			TimerNum = 0;
+			if(GameTimer != null){GameTimer.reset();}
+			(FlexGlobals.topLevelApplication.GameModule.child).mybtns.removeAllElements();
+			(FlexGlobals.topLevelApplication.GameModule.child).my_warp.visible = false;
+			(FlexGlobals.topLevelApplication.GameModule.child).my_time.removeAllElements();
+			(FlexGlobals.topLevelApplication.GameModule.child).right_warp.visible = false;
+			(FlexGlobals.topLevelApplication.GameModule.child).right_time.removeAllElements();
+			(FlexGlobals.topLevelApplication.GameModule.child).left_warp.visible = false;
+			(FlexGlobals.topLevelApplication.GameModule.child).left_time.removeAllElements();
+		}
+		
+		/**
+		 * 叫分事件
+		 */
+		private function callBankClick(e:MouseEvent):void
+		{
+			var callStr:String = (e.currentTarget as Image).name;
+			
 			var obj:Object = new Object();
 			obj.protocol = SocketConst.JIAODIZHU;
-			obj.points = 0;  //
+			obj.points = callStr;  //
 			
 			eventModel = new EventModel(EventModel.WRITESOCKET,false,false,obj);
 			EventModel.dis.dispatchEvent(eventModel);
+			
+			GameTimer.reset();
 		}
 		
 		/**
@@ -529,10 +551,11 @@ package business.ddz
 		private function newTimer(index:int):void
 		{
 			if(TimerNum != 0){
+				if(GameTimer != null){GameTimer.reset()};
 				GameTimer = new Timer(1000,TimerNum);
 				GameTimer.addEventListener(TimerEvent.TIMER,function (e:TimerEvent):void{
 					TimerNum --;
-					initTimeCheck(TimerNum.toString(),index)
+					GS.initTimeCheck(TimerNum.toString(),index)
 				});
 				GameTimer.start();
 			}else{
@@ -541,51 +564,47 @@ package business.ddz
 		}
 		
 		/**
-		 * 绘画等待时间
-		 * index 时钟位置 （0，1，2  自己，右边，左边）
+		 * 确认地主，底牌
 		 */
-		private function initTimeCheck(times:String,index:int):void
+		private function initBoss(pokerInfo:Object):void
 		{
-			var hg:HGroup = new HGroup();
-			hg.width = 65;
-			hg.height = 65;
-			hg.gap = -3;
-			hg.horizontalAlign = "center";
-			hg.verticalAlign = "middle";
+			banker = pokerInfo.banker;
+			var leftindex:int = (pokerInfo.seatid+2)%3;
+			var rightindex:int = (pokerInfo.seatid+1)%3;
 			
-			for(var i:int=0; i<times.length; i++){
-				var numimg:Image = new Image();
-				numimg.source = "assets/ddz/time_number_"+times.substr(i,1)+".png";
-				hg.addElement(numimg);
-			}
-			
-			var gp:Group = new Group();
-			gp.addElement(hg);
-			switch(index)
+			if(banker == pokerInfo.seatid)
 			{
-				case 0:
-				{
-					(FlexGlobals.topLevelApplication.GameModule.child).my_warp.visible = true;
-					(FlexGlobals.topLevelApplication.GameModule.child).my_time.removeAllElements();
-					(FlexGlobals.topLevelApplication.GameModule.child).my_time.addElement(gp);
-					break;
-				}
-				case 1: //右边
-				{
-					(FlexGlobals.topLevelApplication.GameModule.child).right_warp.visible = true;
-					(FlexGlobals.topLevelApplication.GameModule.child).right_time.removeAllElements();
-					(FlexGlobals.topLevelApplication.GameModule.child).right_time.addElement(gp);
-					break;
-				}
-				case 2: //左边
-				{
-					(FlexGlobals.topLevelApplication.GameModule.child).left_warp.visible = true;
-					(FlexGlobals.topLevelApplication.GameModule.child).left_time.removeAllElements();
-					(FlexGlobals.topLevelApplication.GameModule.child).left_time.addElement(gp);
-					break;
-				}
+				makeMyPoker(pokerInfo.bankerinfo[pokerInfo.seatid].poker,false);  //给自己加牌
+				initBtns(-1,(FlexGlobals.topLevelApplication.GameModule.child).mybtns);
+			}else
+			{
+				//剩余牌数
+				(FlexGlobals.topLevelApplication.GameModule.child).leftgp.removeAllElements();
+				(FlexGlobals.topLevelApplication.GameModule.child).rightgp.removeAllElements();
+				(FlexGlobals.topLevelApplication.GameModule.child).leftgp.addElement(getHasPoker(pokerInfo.bankerinfo[leftindex].count));
+				(FlexGlobals.topLevelApplication.GameModule.child).rightgp.addElement(getHasPoker(pokerInfo.bankerinfo[rightindex].count));
 			}
+			
+			GS.setBanker(pokerInfo);
+			var warp_:Group = (FlexGlobals.topLevelApplication.GameModule.child).warp;
+			for (var i:int=0; i<3; i++) 	
+			{
+				var cardIndex:int = pokerInfo.poker[i];
+				trace("底牌："+cardIndex);
+				(warp_.getChildByName("top_"+i) as Image).source = pokerImg[cardIndex];
+			}
+			
+			changeMultiple(pokerInfo.multiple);
 		}
+		
+		/**
+		 * 改变倍数
+		 */
+		private function changeMultiple(m:int):void
+		{
+			(FlexGlobals.topLevelApplication.GameModule.child).beishu.text = m.toString();
+		}
+		
 		
 	}
 }
