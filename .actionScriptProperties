@@ -13,10 +13,15 @@
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>
+  <theme themeIsDefault="false" themeIsSDK="true" themeLocation="${SDK_THEMES_DIR}/samples/themes/arcade"/>
   <applications>
     <application path="GameCenter.mxml"/>
   </applications>
-  <modules/>
+  <modules>
+    <module application="src/GameCenter.mxml" destPath="view/ddz/GameRoom.swf" optimize="true" sourcePath="src/view/ddz/GameRoom.mxml"/>
+    <module application="src/GameCenter.mxml" destPath="view/ddz/GameHead.swf" optimize="true" sourcePath="src/view/ddz/GameHead.mxml"/>
+    <module application="src/GameCenter.mxml" destPath="view/ddz/Gameing.swf" optimize="true" sourcePath="src/view/ddz/Gameing.mxml"/>
+  </modules>
   <workers/>
   <buildCSSFiles/>
   <flashCatalyst validateFlashCatalystCompatibility="false"/>
