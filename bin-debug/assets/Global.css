@@ -1,0 +1,84 @@
+/**
+	 * 全局CSS样式
+	 * 2015/10/1
+	 * James
+	 */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+@namespace spark "spark.skins.spark.*";
+
+*{
+	fontFamily: "微软雅黑";
+	fontSize: 12;
+	modalTransparency: 0;
+}
+
+.loadMsg{
+	color: #ffffff;
+	fontSize: 15;
+}
+
+.gonggao{
+	color: #ffffff;
+	fontSize: 15;
+	fontWeight:bold;
+}
+.amount{
+	color: #ffe4a2;
+	fontSize: 15;
+}
+
+.username{
+	color: #ffffff;
+	fontSize: 20;
+}
+
+.shenglv{
+	color: #ffe4a2;
+	fontSize: 15;
+}
+
+.zaixian{
+	color: #ffe4a2;
+	fontSize: 12;
+}
+
+.ranktop{
+	color: #a00b00;
+	fontSize: 12;
+}
+
+.ranknom{
+	color: #482c02;
+	fontSize: 12;
+}
+
+.roomid{
+	color: #fff000;
+	fontSize: 20;
+}
+
+.roominfo{
+	color: #ffffff;
+	fontSize: 12;
+}
+
+.waitmsg{
+	color: #ffffff;
+	fontSize: 20;
+}
+
+.tableinfo{
+	color: #ffffff;
+	fontSize: 12;
+}
+
+.tableuserinfo{
+	color: #ffffff;
+	fontSize: 20;
+}
+
+.tableinfodata{
+	color: #fff000;
+	fontSize: 12;
+}
