@@ -1,0 +1,122 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<data>
+<object assetsName = "game_bg" assetsUrl ="http://10.60.22.39/GC/image/game_bg.jpg" />
+
+<!--头部 -->
+<object assetsName = "top_bg" assetsUrl ="http://10.60.22.39/GC/image/top_bg.png" />
+<object assetsName = "feedback_icon" assetsUrl ="http://10.60.22.39/GC/image/feedback_icon.png" />
+<object assetsName = "voice_icon" assetsUrl ="http://10.60.22.39/GC/image/voice_icon.png" />
+<object assetsName = "message_icon" assetsUrl ="http://10.60.22.39/GC/image/message_icon.png" />
+<object assetsName = "help_icon" assetsUrl ="http://10.60.22.39/GC/image/help_icon.png" />
+<object assetsName = "amount_bg" assetsUrl ="http://10.60.22.39/GC/image/amount_bg.png" />
+<object assetsName = "btn_exchange_hover" assetsUrl ="http://10.60.22.39/GC/image/btn_exchange_hover.png" />
+<object assetsName = "btn_exchange" assetsUrl ="http://10.60.22.39/GC/image/btn_exchange.png" />
+<object assetsName = "btn_record" assetsUrl ="http://10.60.22.39/GC/image/btn_record.png" />
+<object assetsName = "odds_bg" assetsUrl ="http://10.60.22.39/GC/image/odds_bg.png" />
+<object assetsName = "btn_record_hover" assetsUrl ="http://10.60.22.39/GC/image/btn_record_hover.png" />
+<object assetsName = "online_person_bg" assetsUrl ="http://10.60.22.39/GC/image/online_person_bg.png" />
+
+<!--房间 -->
+<object assetsName = "right_side_bg" assetsUrl ="http://10.60.22.39/GC/image/right_side_bg.png" />
+<object assetsName = "room_bg" assetsUrl ="http://10.60.22.39/GC/image/room_bg.jpg" />
+<object assetsName = "trys" assetsUrl ="http://10.60.22.39/GC/image/try.png" />
+<object assetsName = "try_hover" assetsUrl ="http://10.60.22.39/GC/image/try_hover.png" />
+<object assetsName = "primary" assetsUrl ="http://10.60.22.39/GC/image/primary.png" />
+<object assetsName = "primary_hover" assetsUrl ="http://10.60.22.39/GC/image/primary_hover.png" />
+<object assetsName = "intermediate" assetsUrl ="http://10.60.22.39/GC/image/intermediate.png" />
+<object assetsName = "intermediate_hover" assetsUrl ="http://10.60.22.39/GC/image/intermediate_hover.png" />
+<object assetsName = "senior" assetsUrl ="http://10.60.22.39/GC/image/senior.png" />
+<object assetsName = "senior_hover" assetsUrl ="http://10.60.22.39/GC/image/senior_hover.png" />
+<object assetsName = "battle" assetsUrl ="http://10.60.22.39/GC/image/battle.png" />
+<object assetsName = "battle_hover" assetsUrl ="http://10.60.22.39/GC/image/battle_hover.png" />
+<object assetsName = "game_start" assetsUrl ="http://10.60.22.39/GC/image/game_start.png" />
+<object assetsName = "rank_bg" assetsUrl ="http://10.60.22.39/GC/image/rank_bg.jpg" />
+<object assetsName = "day_rank" assetsUrl ="http://10.60.22.39/GC/image/day_rank.jpg" />
+<object assetsName = "day_rank_hover" assetsUrl ="http://10.60.22.39/GC/image/day_rank_hover.jpg" />
+<object assetsName = "week_rank" assetsUrl ="http://10.60.22.39/GC/image/week_rank.jpg" />
+<object assetsName = "week_rank_hover" assetsUrl ="http://10.60.22.39/GC/image/week_rank_hover.jpg" />
+<object assetsName = "room_list_bg" assetsUrl ="http://10.60.22.39/GC/image/room_list_bg.png" />
+<object assetsName = "ordinary" assetsUrl ="http://10.60.22.39/GC/image/ordinary.png" />
+<object assetsName = "double" assetsUrl ="http://10.60.22.39/GC/image/double.png" />
+<object assetsName = "icon_01" assetsUrl ="http://10.60.22.39/GC/image/icon_01.png" />
+<object assetsName = "btn_start" assetsUrl ="http://10.60.22.39/GC/image/btn_start.jpg" />
+<object assetsName = "btn_start_hover" assetsUrl ="http://10.60.22.39/GC/image/btn_start_hover.jpg" />
+
+<!--游戏 -->
+<object assetsName = "btn_backLobby" assetsUrl ="http://10.60.22.39/GC/image/btn_backLobby.png" />
+<object assetsName = "bg_3_card" assetsUrl ="http://10.60.22.39/GC/image/bg_3_card.png" />
+<object assetsName = "btn_change" assetsUrl ="http://10.60.22.39/GC/image/btn_change.png" />
+<object assetsName = "btn_startGame" assetsUrl ="http://10.60.22.39/GC/image/btn_start.png" />
+<object assetsName = "farmers_face" assetsUrl ="http://10.60.22.39/GC/image/farmers_face.png" />
+<object assetsName = "landlord_face" assetsUrl ="http://10.60.22.39/GC/image/landlord_face.png" />
+<object assetsName = "bg_money" assetsUrl ="http://10.60.22.39/GC/image/bg_money.png" />
+<object assetsName = "icon_readying" assetsUrl ="http://10.60.22.39/GC/image/icon_readying.png" />
+<object assetsName = "bg_time" assetsUrl ="http://10.60.22.39/GC/image/bg_time.png" />
+<object assetsName = "btn_hosting" assetsUrl ="http://10.60.22.39/GC/image/btn_hosting.png" />
+<object assetsName = "btn_sorting" assetsUrl ="http://10.60.22.39/GC/image/btn_sorting.png" />
+<object assetsName = "btn_before" assetsUrl ="http://10.60.22.39/GC/image/btn_before.png" />
+<object assetsName = "btn_dun_call" assetsUrl ="http://10.60.22.39/GC/image/btn_dun_call.png" />
+<object assetsName = "btn_dun_cal_BAN" assetsUrl ="http://10.60.22.39/GC/image/btn_dun_cal_BAN.png" />
+<object assetsName = "btn_prompt" assetsUrl ="http://10.60.22.39/GC/image/btn_prompt.png" />
+<object assetsName = "btn_prompt_BAN" assetsUrl ="http://10.60.22.39/GC/image/btn_prompt_BAN.png" />
+<object assetsName = "btn_one" assetsUrl ="http://10.60.22.39/GC/image/btn_one.png" />
+<object assetsName = "btn_two" assetsUrl ="http://10.60.22.39/GC/image/btn_two.png" />
+<object assetsName = "btn_three" assetsUrl ="http://10.60.22.39/GC/image/btn_three.png" />
+
+<!--扑克牌 -->
+<object assetsName = "poker0" assetsUrl ="http://10.60.22.39/GC/image/poker/0.png" />
+<object assetsName = "poker1" assetsUrl ="http://10.60.22.39/GC/image/poker/1.png" />
+<object assetsName = "poker2" assetsUrl ="http://10.60.22.39/GC/image/poker/2.png" />
+<object assetsName = "poker3" assetsUrl ="http://10.60.22.39/GC/image/poker/3.png" />
+<object assetsName = "poker4" assetsUrl ="http://10.60.22.39/GC/image/poker/4.png" />
+<object assetsName = "poker5" assetsUrl ="http://10.60.22.39/GC/image/poker/5.png" />
+<object assetsName = "poker6" assetsUrl ="http://10.60.22.39/GC/image/poker/6.png" />
+<object assetsName = "poker7" assetsUrl ="http://10.60.22.39/GC/image/poker/7.png" />
+<object assetsName = "poker8" assetsUrl ="http://10.60.22.39/GC/image/poker/8.png" />
+<object assetsName = "poker9" assetsUrl ="http://10.60.22.39/GC/image/poker/9.png" />
+<object assetsName = "poker10" assetsUrl ="http://10.60.22.39/GC/image/poker/10.png" />
+<object assetsName = "poker11" assetsUrl ="http://10.60.22.39/GC/image/poker/11.png" />
+<object assetsName = "poker12" assetsUrl ="http://10.60.22.39/GC/image/poker/12.png" />
+<object assetsName = "poker13" assetsUrl ="http://10.60.22.39/GC/image/poker/13.png" />
+<object assetsName = "poker14" assetsUrl ="http://10.60.22.39/GC/image/poker/14.png" />
+<object assetsName = "poker15" assetsUrl ="http://10.60.22.39/GC/image/poker/15.png" />
+<object assetsName = "poker16" assetsUrl ="http://10.60.22.39/GC/image/poker/16.png" />
+<object assetsName = "poker17" assetsUrl ="http://10.60.22.39/GC/image/poker/17.png" />
+<object assetsName = "poker18" assetsUrl ="http://10.60.22.39/GC/image/poker/18.png" />
+<object assetsName = "poker19" assetsUrl ="http://10.60.22.39/GC/image/poker/19.png" />
+<object assetsName = "poker20" assetsUrl ="http://10.60.22.39/GC/image/poker/20.png" />
+<object assetsName = "poker21" assetsUrl ="http://10.60.22.39/GC/image/poker/21.png" />
+<object assetsName = "poker22" assetsUrl ="http://10.60.22.39/GC/image/poker/22.png" />
+<object assetsName = "poker23" assetsUrl ="http://10.60.22.39/GC/image/poker/23.png" />
+<object assetsName = "poker24" assetsUrl ="http://10.60.22.39/GC/image/poker/24.png" />
+<object assetsName = "poker25" assetsUrl ="http://10.60.22.39/GC/image/poker/25.png" />
+<object assetsName = "poker26" assetsUrl ="http://10.60.22.39/GC/image/poker/26.png" />
+<object assetsName = "poker27" assetsUrl ="http://10.60.22.39/GC/image/poker/27.png" />
+<object assetsName = "poker28" assetsUrl ="http://10.60.22.39/GC/image/poker/28.png" />
+<object assetsName = "poker29" assetsUrl ="http://10.60.22.39/GC/image/poker/29.png" />
+<object assetsName = "poker30" assetsUrl ="http://10.60.22.39/GC/image/poker/30.png" />
+<object assetsName = "poker31" assetsUrl ="http://10.60.22.39/GC/image/poker/31.png" />
+<object assetsName = "poker32" assetsUrl ="http://10.60.22.39/GC/image/poker/32.png" />
+<object assetsName = "poker33" assetsUrl ="http://10.60.22.39/GC/image/poker/33.png" />
+<object assetsName = "poker34" assetsUrl ="http://10.60.22.39/GC/image/poker/34.png" />
+<object assetsName = "poker35" assetsUrl ="http://10.60.22.39/GC/image/poker/35.png" />
+<object assetsName = "poker36" assetsUrl ="http://10.60.22.39/GC/image/poker/36.png" />
+<object assetsName = "poker37" assetsUrl ="http://10.60.22.39/GC/image/poker/37.png" />
+<object assetsName = "poker38" assetsUrl ="http://10.60.22.39/GC/image/poker/38.png" />
+<object assetsName = "poker39" assetsUrl ="http://10.60.22.39/GC/image/poker/39.png" />
+<object assetsName = "poker40" assetsUrl ="http://10.60.22.39/GC/image/poker/40.png" />
+<object assetsName = "poker41" assetsUrl ="http://10.60.22.39/GC/image/poker/41.png" />
+<object assetsName = "poker42" assetsUrl ="http://10.60.22.39/GC/image/poker/42.png" />
+<object assetsName = "poker43" assetsUrl ="http://10.60.22.39/GC/image/poker/43.png" />
+<object assetsName = "poker44" assetsUrl ="http://10.60.22.39/GC/image/poker/44.png" />
+<object assetsName = "poker45" assetsUrl ="http://10.60.22.39/GC/image/poker/45.png" />
+<object assetsName = "poker46" assetsUrl ="http://10.60.22.39/GC/image/poker/46.png" />
+<object assetsName = "poker47" assetsUrl ="http://10.60.22.39/GC/image/poker/47.png" />
+<object assetsName = "poker48" assetsUrl ="http://10.60.22.39/GC/image/poker/48.png" />
+<object assetsName = "poker49" assetsUrl ="http://10.60.22.39/GC/image/poker/49.png" />
+<object assetsName = "poker50" assetsUrl ="http://10.60.22.39/GC/image/poker/50.png" />
+<object assetsName = "poker51" assetsUrl ="http://10.60.22.39/GC/image/poker/51.png" />
+<object assetsName = "poker52" assetsUrl ="http://10.60.22.39/GC/image/poker/52.png" />
+<object assetsName = "poker53" assetsUrl ="http://10.60.22.39/GC/image/poker/53.png" />
+
+</data>
