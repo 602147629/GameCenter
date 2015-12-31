@@ -15,4 +15,16 @@
 		<nature>com.adobe.flexbuilder.project.flexnature</nature>
 		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>bin-release</name>
+			<type>2</type>
+			<location>C:/Users/james/Desktop/GC</location>
+		</link>
+		<link>
+			<name>bin-release1</name>
+			<type>2</type>
+			<location>//10.60.22.39/wwwroot/GC</location>
+		</link>
+	</linkedResources>
 </projectDescription>
