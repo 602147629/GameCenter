@@ -583,14 +583,14 @@ package business.ddz
 			}else
 			{
 				//剩余牌数
-				GS.reashPokernum(pokerInfo.seatid,pokerInfo.bankerinfo);
+				GS.reashPokernum(pokerInfo.seatid,pokerInfo.seatinfo);
 			}
 			
 			GS.setBanker(pokerInfo);
 			var warp_:Group = (FlexGlobals.topLevelApplication.GameModule.child).warp;
 			for (var i:int=0; i<3; i++) 	
 			{
-				var cardIndex:int = pokerInfo.poker[i];
+				var cardIndex:int = pokerInfo.pokers[i];
 				trace("底牌："+cardIndex);
 				(warp_.getChildByName("top_"+i) as Image).source = pokerImg[cardIndex];
 			}
@@ -727,7 +727,7 @@ package business.ddz
 				}
 			}
 			//刷新剩余牌数
-			GS.reashPokernum(resultData.seatid,resultData.showinfo);
+			GS.reashPokernum(resultData.seatid,resultData.seatinfo);
 		}
 		
 		/**

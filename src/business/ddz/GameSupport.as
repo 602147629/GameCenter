@@ -150,7 +150,7 @@ package business.ddz
 		/**
 		 * 更新剩余牌数
 		 */
-		public function reashPokernum(seatid:int,poker:Object):void
+		public function reashPokernum(seatid:int,poker:Array):void
 		{
 			var leftindex:int = (seatid+2)%3;
 			var rightindex:int = (seatid+1)%3;
