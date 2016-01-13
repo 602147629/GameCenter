@@ -80,5 +80,22 @@ package business.ddz
 		 */
 		public static const POKERINFO:String = "25625376"; 
 		
+		/**
+		 * 出牌推送
+		 *{"protocol":"26936096", "data":{"seatid":0,"times":18,"basics":0,"multiple":3,"brokerage":500,"showcard":[{"show":false},{"show":true},{"show":false}]}}
+		 */
+		public static const YOURTURN:String = "26936096"; 
+		
+		/**
+		 * 出牌
+		 * （写入）
+		 */
+		public static const OUTCARD:int = 27525920;
+		
+		/**
+		 * 出牌推送
+		 *{"protocol":"27591456", "data":{ "seatid":0,  "battleid":1, "multiple":3, "dmodel":false, "count":3, "poker":[47,23,36], "bankerinfo":[{"show":true,"name":"james","count":20,"poker":[0,5,9,11,13,14,19,23,24,25,26,32,33,36,37,39,40,47,51,53]},{"show":false,"name":"unknow","count":17,"poker":[-1]},{"show":false,"name":"longsir","count":17,"poker":[-1]}] }}
+		 */
+		public static const OUTCARDSUSSFOR:String = "27591456"; 
 	}
 }

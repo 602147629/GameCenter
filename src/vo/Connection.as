@@ -9,14 +9,9 @@ package vo
 	import flash.system.Security;
 	import flash.utils.ByteArray;
 	import flash.utils.Timer;
-	
 	import mx.utils.ObjectUtil;
-	
 	import business.Tools;
-	
 	import model.EventModel;
-	
-	
 	
 	/**
 	 * 服务器链接主类
@@ -102,7 +97,7 @@ package vo
 			var readData:String;
 			_SOCKET.readBytes(vByteArray);
 			var vJsonMsg:Array = GetPacketArray(vByteArray);
-			
+			trace(ObjectUtil.toString(vJsonMsg));
 			for each ( var str : String in vJsonMsg)
 			{
 				readData = str.toString();
@@ -148,7 +143,7 @@ package vo
 				
 				var vText : String = new String;
 				vText = _vSubArray.toString();
-				jsStringArray.push( _vSubArray.toString() );
+				jsStringArray.push( _vSubArray.toString());
 			}
 			
 			return jsStringArray;

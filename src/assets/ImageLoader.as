@@ -107,7 +107,8 @@ package assets
 		private function completeHandler(e:Event):void
 		{ 
 			trace("加载完成:"+loader.name);
-			tool.updateLoadMsg("正在加载素材..."+ Number((assestObjList.length - assetslength)/assestObjList.length * 100).toFixed(0) + "%");
+			tool.updateLoadMsg("正在加载素材...",assestObjList.length - assetslength,assestObjList.length);
+			// Number((assestObjList.length - assetslength)/assestObjList.length * 100).toFixed(0) + "%"
 			var bitmap:Bitmap = new Bitmap();
 			bitmap = Bitmap(loader.content); 
 			

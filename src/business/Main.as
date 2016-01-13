@@ -114,7 +114,7 @@ package business
 			var bytesLoaded:Number = Math.ceil((bytesLoadedObj.HeadModule  + bytesLoadedObj.MainModule)/1024);
 			var bytesTotal:Number = Math.ceil((bytesTotalObj.HeadModule + bytesTotalObj.MainModule)/1024);
 			if(Mid != "GameModule"){
-				tool.updateLoadMsg("加载模块中.." + bytesLoaded + "Kb / " + bytesTotal + "Kb");
+				tool.updateLoadMsg("加载模块中.." + bytesLoaded + "Kb / " + bytesTotal + "Kb",bytesLoaded,bytesTotal);
 			}else{
 				tool.updateLoadMsg("正在进入房间请稍后.." + event.bytesLoaded + "Kb / " + event.bytesTotal + "Kb");
 			}

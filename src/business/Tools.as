@@ -1,10 +1,16 @@
 package business
 {
+	import flash.filters.ColorMatrixFilter;
+	import flash.utils.setTimeout;
+	
 	import mx.core.FlexGlobals;
 	import mx.managers.BrowserManager;
 	import mx.managers.IBrowserManager;
 	import mx.managers.PopUpManager;
 	import mx.utils.Base64Decoder;
+	
+	import spark.components.HGroup;
+	import spark.components.Image;
 	
 	import vo.json.MYJSON;
 
@@ -16,7 +22,10 @@ package business
 	public class Tools
 	{
 		private var browser:IBrowserManager;
-		private var md5:MD5;
+		private var md5:MD5;  
+		//色值设置
+		private var matrix:Array;
+		private var colormat:ColorMatrixFilter;
 	
 		/**
 		 * 获取浏览器URL的KEY值
@@ -27,7 +36,7 @@ package business
 			browser = BrowserManager.getInstance();
 			browser.init(); 
 			var str:String = 'http://10.60.22.39/GC/GameCenter_.html?p=eyJkYXRhIjp7InVzZXJpZCI6Ijg4OCIsInVzZXJrZXkiOiJ1bmRlZmluZWQiLCJzaXAiOiIxMC42MC4yMi4zOSIsInBvcnQiOiIxMjM0In19|#'
-			//var str:String = browser.url;
+//			var str:String = browser.url;
 			var index:int;
 			index = str.indexOf(vars);
 			var iend:int;
@@ -87,9 +96,9 @@ package business
 		/**
 		 * 修改加载消息
 		 */
-		public function updateLoadMsg(strMsg:String):void
+		public function updateLoadMsg(strMsg:String,bytesLoaded:Number=0,bytesTotal:Number=0):void
 		{
-			FlexGlobals.topLevelApplication.msg.text = strMsg;
+			(FlexGlobals.topLevelApplication.loadingTable).loading(strMsg,bytesLoaded,bytesTotal);
 		}
 		
 		/**
@@ -127,5 +136,33 @@ package business
 				return null;
 			}
 		}
+		
+		/**
+		 * 增加颜色
+		 */
+		public function setColor(mc:Image):void
+		{
+			matrix=new Array();
+			matrix=matrix.concat([0,1,0,0,0]);//red
+			matrix=matrix.concat([0,0,1,0,0]);//green
+			matrix=matrix.concat([0,0,0,1,0]);//blue
+			matrix=matrix.concat([0,0,0,1,0]);//alpha
+			colormat = new ColorMatrixFilter(matrix);
+			mc.filters=[colormat];
+		}
+		
+		/**
+		 * 清理颜色
+		 */
+		public function clearColor(mc:HGroup):void
+		{
+			var mcLength:int = mc.numChildren;
+			for (var i:int = 0; i < mcLength; i++) 
+			{
+				var mcImage:Image = mc.getChildAt(i) as Image;
+				mcImage.filters=[];
+			}
+		}
+		
 	}
 }

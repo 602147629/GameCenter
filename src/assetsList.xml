@@ -62,6 +62,10 @@
 <object assetsName = "btn_one" assetsUrl ="http://10.60.22.39/GC/image/btn_one.png" />
 <object assetsName = "btn_two" assetsUrl ="http://10.60.22.39/GC/image/btn_two.png" />
 <object assetsName = "btn_three" assetsUrl ="http://10.60.22.39/GC/image/btn_three.png" />
+<object assetsName = "btn_dont" assetsUrl ="http://10.60.22.39/GC/image/btn_dont.png" />
+<object assetsName = "btn_dont_BAN" assetsUrl ="http://10.60.22.39/GC/image/btn_dont_BAN.png" />
+<object assetsName = "btn_outCard" assetsUrl ="http://10.60.22.39/GC/image/btn_outCard.png" />
+<object assetsName = "btn_outCard_BAN" assetsUrl ="http://10.60.22.39/GC/image/btn_outCard_BAN.png" />
 
 <!--扑克牌 -->
 <object assetsName = "poker0" assetsUrl ="http://10.60.22.39/GC/image/poker/0.png" />

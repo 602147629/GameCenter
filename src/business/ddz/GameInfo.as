@@ -35,6 +35,10 @@ package business.ddz
 		private var assets:Object = FlexGlobals.topLevelApplication.assetsObject;
 		private var GS:GameSupport = new GameSupport();
 		private var banker:int  //地主
+		private var myCards:int //我的牌数
+		private var selectPoker:ArrayCollection;  //选中牌组
+		private var pokerImg:Array = new Array(assets.poker0,assets.poker1,assets.poker2,assets.poker3,assets.poker4,assets.poker5,assets.poker6,assets.poker7,assets.poker8,assets.poker9,assets.poker10,assets.poker11,assets.poker12,assets.poker13,assets.poker14,assets.poker15,assets.poker16,assets.poker17,assets.poker18,assets.poker19,assets.poker20,assets.poker21,assets.poker22,assets.poker23,assets.poker24,assets.poker25,assets.poker26,assets.poker27,assets.poker28,assets.poker29,assets.poker30,assets.poker31,assets.poker32,assets.poker33,assets.poker34,assets.poker35,assets.poker36,assets.poker37,assets.poker38,assets.poker39,assets.poker40,assets.poker41,assets.poker42,assets.poker43,assets.poker44,assets.poker45,assets.poker46,assets.poker47,assets.poker48,assets.poker49,assets.poker50,assets.poker51,assets.poker52,assets.poker53);
+		private var upPokerArr:Array;//牌弹起数组name
 		
 		/**
 		 * 添加监听
@@ -78,17 +82,24 @@ package business.ddz
 					break;
 				case SocketConst.GETPOKER: //获取游戏牌信息 （游戏开始）
 					trace("游戏开始");
-					initMyPoker(dataReust.data);
+					initMyPoker(dataReust.data[0]);
 					break;
 				case SocketConst.CALLBANK: // 叫地主
 					trace("叫地主");
-					initBank(dataReust.data);
+					initBank(dataReust.data[0]);
 					break;
 				case SocketConst.POKERINFO: // 主底牌确认,初始化底牌
 					trace("地主底牌确认");
 					FlexGlobals.topLevelApplication.tableInfo.DATA = dataReust.data;
 					FlexGlobals.topLevelApplication.tableInfo.PROTOCOL = dataReust.protocol;
-					initBoss(dataReust.data);
+					initBoss(dataReust.data[0]);
+					break;
+				case SocketConst.YOURTURN: // 出牌推送
+					trace("出牌推送");
+					yourTurn(dataReust.data);
+					break;
+				case SocketConst.OUTCARDSUSSFOR: // 出牌成功
+					outCardSuss(dataReust.data);
 					break;
 				default:
 				{
@@ -324,37 +335,78 @@ package business.ddz
 						myg.addElement(btn4);
 						break;
 					}
-					case 4:
+					case 3:
 					{
-						//绘画1/2/3 分  不抢按钮
+						//绘画出牌，不出,提示按钮
 						var btn5:Image = new Image();
 						btn5.buttonMode = true;
-						btn5.source = assets.btn_one;
-						btn5.name = '1';
-						btn5.addEventListener(MouseEvent.CLICK,callBankClick);
+						btn5.source = assets.btn_dont;
+						btn5.name = '0';
+						btn5.addEventListener(MouseEvent.CLICK,outCardEvent);
 						
 						var btn6:Image = new Image();
 						btn6.buttonMode = true;
-						btn6.source = assets.btn_two;
-						btn6.name = '2';
-						btn6.addEventListener(MouseEvent.CLICK,callBankClick);
+						btn6.source = assets.btn_outCard;
+						btn6.name = '1';
+						btn6.addEventListener(MouseEvent.CLICK,outCardEvent);
 						
 						var btn7:Image = new Image();
 						btn7.buttonMode = true;
-						btn7.source = assets.btn_three;
-						btn7.name = '3';
-						btn7.addEventListener(MouseEvent.CLICK,callBankClick);
-						
-						var btn8:Image = new Image();
-						btn8.buttonMode = true;
-						btn8.source = assets.btn_dun_call;
-						btn8.name = '0';
-						btn8.addEventListener(MouseEvent.CLICK,callBankClick);
+						btn7.source = assets.btn_prompt;
 						
 						myg.addElement(btn5);
 						myg.addElement(btn6);
 						myg.addElement(btn7);
+						break;
+					}
+					case 4:
+					{
+						//绘画1/2/3 分  不抢按钮
+						var btn8:Image = new Image();
+						btn8.buttonMode = true;
+						btn8.source = assets.btn_one;
+						btn8.name = '1';
+						btn8.addEventListener(MouseEvent.CLICK,callBankClick);
+						
+						var btn9:Image = new Image();
+						btn9.buttonMode = true;
+						btn9.source = assets.btn_two;
+						btn9.name = '2';
+						btn9.addEventListener(MouseEvent.CLICK,callBankClick);
+						
+						var btn10:Image = new Image();
+						btn10.buttonMode = true;
+						btn10.source = assets.btn_three;
+						btn10.name = '3';
+						btn10.addEventListener(MouseEvent.CLICK,callBankClick);
+						
+						var btn11:Image = new Image();
+						btn11.buttonMode = true;
+						btn11.source = assets.btn_dun_call;
+						btn11.name = '0';
+						btn11.addEventListener(MouseEvent.CLICK,callBankClick);
+						
 						myg.addElement(btn8);
+						myg.addElement(btn9);
+						myg.addElement(btn10);
+						myg.addElement(btn11);
+						break;
+					}
+					case 5:
+					{
+						//绘画出牌,提示按钮
+						var btn12:Image = new Image();
+						btn12.buttonMode = true;
+						btn12.source = assets.btn_outCard;
+						btn12.name = '1';
+						btn12.addEventListener(MouseEvent.CLICK,outCardEvent);
+						
+						var btn13:Image = new Image();
+						btn13.buttonMode = true;
+						btn13.source = assets.btn_prompt;
+						
+						myg.addElement(btn12);
+						myg.addElement(btn13);
 						break;
 					}
 				}
@@ -373,7 +425,7 @@ package business.ddz
 			obj.status = 0;  //是否名牌准备
 			obj.battleid = FlexGlobals.topLevelApplication.tableInfo.DATA[0].battleid;
 			obj.seatid = FlexGlobals.topLevelApplication.tableInfo.DATA[0].seatid;
-				
+			
 			eventModel = new EventModel(EventModel.WRITESOCKET,false,false,obj);
 			EventModel.dis.dispatchEvent(eventModel);
 		}
@@ -382,75 +434,27 @@ package business.ddz
 		 * 绘制手牌
 		 * 开始游戏
 		 */
-		private var selectPoker:ArrayCollection;  //选中牌组
-		private var pokerImg:Array = new Array(assets.poker0,assets.poker1,assets.poker2,assets.poker3,assets.poker4,assets.poker5,assets.poker6,assets.poker7,assets.poker8,assets.poker9,assets.poker10,assets.poker11,assets.poker12,assets.poker13,assets.poker14,assets.poker15,assets.poker16,assets.poker17,assets.poker18,assets.poker19,assets.poker20,assets.poker21,assets.poker22,assets.poker23,assets.poker24,assets.poker25,assets.poker26,assets.poker27,assets.poker28,assets.poker29,assets.poker30,assets.poker31,assets.poker32,assets.poker33,assets.poker34,assets.poker35,assets.poker36,assets.poker37,assets.poker38,assets.poker39,assets.poker40,assets.poker41,assets.poker42,assets.poker43,assets.poker44,assets.poker45,assets.poker46,assets.poker47,assets.poker48,assets.poker49,assets.poker50,assets.poker51,assets.poker52,assets.poker53);
 		public function initMyPoker(pokerObj:Object):void
 		{
 			GS.starGameView();   //开始游戏界面
 			selectPoker = new ArrayCollection();
 			var  mySeat:int = pokerObj.seatid;
 			
-			makeMyPoker(pokerObj.pokerinfo[mySeat].poker);
-			//剩余牌数
-			var leftindex:int = (pokerObj.seatid+2)%3;
-			var rightindex:int = (pokerObj.seatid+1)%3;
-			(FlexGlobals.topLevelApplication.GameModule.child).leftgp.addElement(getHasPoker(pokerObj.pokerinfo[leftindex].count));
-			(FlexGlobals.topLevelApplication.GameModule.child).rightgp.addElement(getHasPoker(pokerObj.pokerinfo[rightindex].count));
+			makeMyPoker(pokerObj.seatinfo[mySeat].pokers);
+			
+			GS.reashPokernum(pokerObj.seatid,pokerObj.seatinfo);
 		}
-		
+
 		/**
 		 * 添加牌
 		 */
 		public function makeMyPoker(parr:Array,effect:Boolean=true):void
 		{
 			var myPokerArr:ArrayCollection = new ArrayCollection();
-			for each(var pk:int in parr)
-			{
-				var img:Image = new Image();
-				img.source = pokerImg[pk];
-				img.name = 'poker'+pk;
-				img.width = 70;
-				img.height = 90;
-				img.addEventListener(MouseEvent.CLICK,pokerClick);
-				
-				var obj:Object = new Object();
-				if(pk == 52 || pk == 53){
-					pk = 12.5;
-				}
-				obj.id =  pk > 12.5 ? (pk%13) : pk;
-				obj.data = img;
-				myPokerArr.addItem(obj);
-			}
-			
-			var sortA:Sort = new Sort();  
-			sortA.fields=[new SortField("id")];  
-			myPokerArr.sort = sortA;  
-			myPokerArr.refresh(); 
-			
+			myPokerArr = mackCardOnTable(parr);
 			(FlexGlobals.topLevelApplication.GameModule.child).mypoker.removeAllElements();
 			GS.addPokerImg(myPokerArr,effect);
 		} 
-		
-		/**
-		 * 生成剩余牌数
-		 */
-		private function getHasPoker(num:int):HGroup
-		{
-			var numStr:String = num.toString();
-			var hg:HGroup = new HGroup();
-			hg.width = 100;
-			hg.height = 30;
-			hg.gap = -2;
-			hg.horizontalAlign = "center";
-			
-			for(var i:int=0; i<numStr.length; i++){
-				var img:Image = new Image();
-				img.source = "assets/ddz/card_number_"+numStr.substr(i,1)+".png";
-				hg.addElement(img);
-			}
-			
-			return hg;
-		}
 		
 		/**
 		 * 点击手牌事件
@@ -477,7 +481,7 @@ package business.ddz
 			var rightindex:int = (backInfo.seatid+1)%3;
 			for(var i:int=0; i<3; i++)
 			{
-				if(backInfo.callinfo[i].show == true)
+				if(backInfo.seatinfo[i].called == true)
 				{
 					trace("数组："+i +'叫地主');
 					TimerNum = int(backInfo.times);
@@ -574,15 +578,12 @@ package business.ddz
 			
 			if(banker == pokerInfo.seatid)
 			{
-				makeMyPoker(pokerInfo.bankerinfo[pokerInfo.seatid].poker,false);  //给自己加牌
+				makeMyPoker(pokerInfo.seatinfo[pokerInfo.seatid].pokers,false);  //给自己加牌
 				initBtns(-1,(FlexGlobals.topLevelApplication.GameModule.child).mybtns);
 			}else
 			{
 				//剩余牌数
-				(FlexGlobals.topLevelApplication.GameModule.child).leftgp.removeAllElements();
-				(FlexGlobals.topLevelApplication.GameModule.child).rightgp.removeAllElements();
-				(FlexGlobals.topLevelApplication.GameModule.child).leftgp.addElement(getHasPoker(pokerInfo.bankerinfo[leftindex].count));
-				(FlexGlobals.topLevelApplication.GameModule.child).rightgp.addElement(getHasPoker(pokerInfo.bankerinfo[rightindex].count));
+				GS.reashPokernum(pokerInfo.seatid,pokerInfo.bankerinfo);
 			}
 			
 			GS.setBanker(pokerInfo);
@@ -605,6 +606,191 @@ package business.ddz
 			(FlexGlobals.topLevelApplication.GameModule.child).beishu.text = m.toString();
 		}
 		
+		/**
+		 * 出牌推送
+		 */
+		private function yourTurn(resultData:Object):void
+		{
+			var leftindex:int = (resultData.seatid+2)%3;
+			var rightindex:int = (resultData.seatid+1)%3;
+			
+			if(resultData.first == true){
+				(FlexGlobals.topLevelApplication.GameModule.child).my_card.removeAllElements();
+				(FlexGlobals.topLevelApplication.GameModule.child).outher_card.removeAllElements();
+			}
+			
+			for(var i:int=0; i<3; i++)
+			{
+				if(resultData.seatinfo[i].show == true)
+				{
+					TimerNum = int(resultData.seatinfo[i].times);
+					if(int(resultData.seatid) == i)
+					{
+						if(resultData.first == false){
+							initBtns(3,(FlexGlobals.topLevelApplication.GameModule.child).mybtns);
+						}else{
+							initBtns(5,(FlexGlobals.topLevelApplication.GameModule.child).mybtns);
+						}
+						myCards = resultData.seatinfo[i].count;
+						newTimer(0);
+						break;
+					}
+					//上家
+					if(leftindex == i)
+					{
+						newTimer(2);
+						break;
+					}
+					//下家
+					if(rightindex == i)
+					{
+						newTimer(1);
+						break;
+					}
+				}
+			}
+		}
+		
+		/**
+		 * 出牌事件
+		 * name 0 不出
+		 */
+		private function outCardEvent(e:MouseEvent):void
+		{
+			var type:String = (e.currentTarget as Image).name;
+			
+			var obj:Object = new Object();
+			obj.protocol = SocketConst.OUTCARD;
+			if(type == '0')
+			{
+				obj.count = '0'; 
+				obj.poker = '-1';
+			}
+			else if(type == '1'){
+				var cardArr:Array = GS.getSelectCard(myCards);
+				obj.count = cardArr.length;  
+				obj.poker = String(cardArr);  
+			}
+			eventModel = new EventModel(EventModel.WRITESOCKET,false,false,obj);
+			EventModel.dis.dispatchEvent(eventModel);
+			GameTimer.reset();
+		}
+		
+		/**
+		 * 出牌成功
+		 */
+		private function outCardSuss(resultData:Object):void
+		{
+			cleanTable();
+			initBtns(-1,(FlexGlobals.topLevelApplication.GameModule.child).mybtns);
+			
+			var leftindex:int = (resultData.seatid+2)%3;
+			var rightindex:int = (resultData.seatid+1)%3;
+			var poker:ArrayCollection = mackCardOnTable(resultData.poker,false);
+			
+			if(poker != null){
+				(FlexGlobals.topLevelApplication.GameModule.child).outher_card.removeAllElements();
+				var hg:HGroup = new HGroup();
+				hg.gap = -50;
+				for each (var p:Object in poker) 
+				{
+					hg.addElement(p.data);
+				}
+			}
+			
+			for(var i:int=0; i<3; i++)
+			{
+				if(resultData.showinfo[i].show == true)
+				{
+					if(int(resultData.seatid) == i && poker != null)
+					{
+						(FlexGlobals.topLevelApplication.GameModule.child).my_card.addElement(hg);
+						GS.delectPoker(resultData.poker);
+						break;
+					}else if(int(resultData.seatid) != i && poker != null)
+					{
+						(FlexGlobals.topLevelApplication.GameModule.child).outher_card.addElement(hg);
+						(FlexGlobals.topLevelApplication.GameModule.child).my_card.removeAllElements();
+					}
+					//上家
+					if(leftindex == i && poker != null)
+					{
+						(FlexGlobals.topLevelApplication.GameModule.child).outher_card.horizontalAlign = 'left';
+						break;
+					}
+					//下家
+					if(rightindex == i && poker != null)
+					{
+						(FlexGlobals.topLevelApplication.GameModule.child).outher_card.horizontalAlign = 'right';
+						break;
+					}
+				}
+			}
+			//刷新剩余牌数
+			GS.reashPokernum(resultData.seatid,resultData.showinfo);
+		}
+		
+		/**
+		 * 生成桌面上的牌
+		 */
+		private var isdown:Boolean = false;
+		public function mackCardOnTable(poker:Array,effect:Boolean=true):ArrayCollection
+		{
+			if(poker[0] != -1){
+				var myPokerArr:ArrayCollection = new ArrayCollection();
+				for each(var pk:int in poker)
+				{
+					var img:Image = new Image();
+					img.source = pokerImg[pk];
+					img.name = pk.toString();
+					if(effect == true)
+					{
+						img.addEventListener(MouseEvent.CLICK,pokerClick);
+						img.addEventListener(MouseEvent.MOUSE_OVER,pokerOver);
+						img.addEventListener(MouseEvent.MOUSE_UP,function (e:MouseEvent):void{
+							isdown = false;
+							tools.clearColor((FlexGlobals.topLevelApplication.GameModule.child).mypoker);
+						});
+						img.addEventListener(MouseEvent.MOUSE_DOWN,function (e:MouseEvent):void{isdown = true;});
+					};
+					
+					var obj:Object = new Object();
+					if(pk != 52 && pk != 53){
+						obj.id =  pk > 12.5 ? (pk%13) : pk;
+					}else{
+						obj.id = pk;
+					}
+					obj.data = img;
+					myPokerArr.addItem(obj);
+				}
+				var sortA:Sort = new Sort();  
+				sortA.fields=[new SortField("id")];  
+				myPokerArr.sort = sortA;  
+				myPokerArr.refresh(); 
+				
+				return myPokerArr;
+			}else{return null;}
+		}
+		
+		/**
+		 * 多选牌组
+		 */
+		private function pokerOver(e:MouseEvent):void
+		{
+			var img:Image = e.currentTarget as Image;
+			if(isdown == true)
+			{
+				var ytoNum:Number = img.y == -20 ? 0 : -20;
+				var movein:Move = new Move();
+				movein.target = img;
+				movein.yTo =  ytoNum;
+				movein.duration = 200;
+				movein.yFrom = img.y;
+				movein.play();
+				if(img.filters.length==0)
+					tools.setColor(img);
+			}
+		}
 		
 	}
 }

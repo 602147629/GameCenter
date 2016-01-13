@@ -68,6 +68,7 @@ package business.ddz
 		{
 			if(effect==true)
 			{
+				(FlexGlobals.topLevelApplication.GameModule.child).mybtns.enabled = false;
 				var timer:Timer = new Timer(100,mpa.length);
 				var pi:int = 0;
 				timer.start();
@@ -75,6 +76,9 @@ package business.ddz
 				{
 					(FlexGlobals.topLevelApplication.GameModule.child).mypoker.addElement(mpa[pi].data);
 					pi++;
+					if(pi == mpa.length){
+						(FlexGlobals.topLevelApplication.GameModule.child).mybtns.enabled = true;
+					}
 				});
 			}else{
 				for(var i:int=0; i<mpa.length; i++)
@@ -125,6 +129,70 @@ package business.ddz
 				}
 			}
 		}
+		
+		/**
+		 * 获取选中牌组
+		 */
+		public function getSelectCard(cards:int):Array
+		{
+			var cardArr:Array = new Array();
+			var myHG:HGroup = (FlexGlobals.topLevelApplication.GameModule.child).mypoker;
+			
+			for(var i:int=0; i<cards; i++){
+				if((myHG.getChildAt(i) as Image).y == -20)
+				{
+					cardArr.push((myHG.getChildAt(i) as Image).name);
+				}
+			}
+			return cardArr;
+		}
+		
+		/**
+		 * 更新剩余牌数
+		 */
+		public function reashPokernum(seatid:int,poker:Object):void
+		{
+			var leftindex:int = (seatid+2)%3;
+			var rightindex:int = (seatid+1)%3;
+			(FlexGlobals.topLevelApplication.GameModule.child).leftgp.removeAllElements();
+			(FlexGlobals.topLevelApplication.GameModule.child).rightgp.removeAllElements();
+			(FlexGlobals.topLevelApplication.GameModule.child).leftgp.addElement(getHasPoker(poker[leftindex].count));
+			(FlexGlobals.topLevelApplication.GameModule.child).rightgp.addElement(getHasPoker(poker[rightindex].count));
+		}
+		
+		/**
+		 * 生成剩余牌数
+		 */
+		private function getHasPoker(num:int):HGroup
+		{
+			var numStr:String = num.toString();
+			var hg:HGroup = new HGroup();
+			hg.width = 100;
+			hg.height = 30;
+			hg.gap = -2;
+			hg.horizontalAlign = "center";
+			
+			for(var i:int=0; i<numStr.length; i++){
+				var img:Image = new Image();
+				img.source = "assets/ddz/card_number_"+numStr.substr(i,1)+".png";
+				hg.addElement(img);
+			}
+			return hg;
+		}
+		
+		/**
+		 * 清理手牌
+		 */
+		public function delectPoker(cards:Array):void
+		{
+			var myHG:HGroup = (FlexGlobals.topLevelApplication.GameModule.child).mypoker;
+			for each (var names:int in cards) 
+			{
+				var img:Image = myHG.getChildByName(names.toString()) as Image;
+				myHG.removeElement(img);
+			}
+		}
+		
 		
 	}
 }

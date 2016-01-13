@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="980" height="630">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			[Bindable]
+			private var swfMc:MovieClip;
+			private var isLoad:Boolean=false;
+			
+			//初始化SWF内容
+			public function loading(strMsg:String,bytesLoaded:Number=0,bytesTotal:Number=0):void
+			{
+				if(!isLoad)
+					return;
+				var mcloadE:MovieClip=swfMc.getChildByName("loadEc") as MovieClip;
+				var mcloadM:MovieClip=swfMc.getChildByName("loadMc") as MovieClip;
+				mcloadM.txt.text=strMsg;
+				var num:int=int(bytesLoaded/bytesTotal*100);
+				if(num>0)
+					mcloadE.txt.text=String(num+"%");
+				else
+					mcloadE.txt.text="loading...";
+			}
+			
+			//完成事件
+			private function onComplete():void
+			{
+				isLoad=true;
+				swfMc=loadingTable.content as MovieClip;
+			}
+			
+		]]>
+	</fx:Script>
+	<s:SWFLoader source="assets/ddz/GameLoading.swf" id="loadingTable" complete="onComplete()" width="100%" height="100%"/>
+</s:Group>

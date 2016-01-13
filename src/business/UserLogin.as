@@ -41,6 +41,7 @@ package business
 		public function init():void
 		{
 			var userObj:Object = new Object();
+			
 			userObj = tool.getInfo();
 			if(userObj != null){
 				tool.updateLoadMsg("正在解析数据包，请稍后...");
@@ -60,7 +61,7 @@ package business
 				case LoginConst.LOGINSUSSFUL:
 				{
 					trace("成功连接游戏线路");
-					main.init("assetsList.xml");
+					main.init("assetsList.xml?v1.0");
 					break;
 				}
 				case LoginConst.USERINFO: //用户信息
